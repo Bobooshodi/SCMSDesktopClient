@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!-- MODAL STYLES -->
+
+    <Style x:Key="modal" TargetType="{x:Type Border}">
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="BorderThickness" Value="0, 1, 0, 0"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource MarkerBrush}"></Setter>
+    </Style>
+
+
+    <Style x:Key="modal__header" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="FontSize" Value="20px" />
+        <Setter Property="Padding" Value="20 10" />
+        <Setter Property="Foreground" Value="{DynamicResource MainBrush}"/>
+    </Style>
+
+    <Style x:Key="modal__body" TargetType="Border">
+        <Setter Property="Padding" Value="20 10" />
+        <Setter Property="Background" Value="{DynamicResource MainBrush}"></Setter>
+        <Setter Property="MaxHeight" Value="500"></Setter>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"></Setter>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible"></Setter>
+
+    </Style>
+
+    <Style x:Key="modal__footer" TargetType="Border">
+        <Setter Property="Padding" Value="20 10" />
+        <Setter Property="Background" Value="{DynamicResource AlternativeBrush}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource MouseOverBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="0 0.2 0 0"></Setter>
+    </Style>
+
+
+</ResourceDictionary>
+
+
+

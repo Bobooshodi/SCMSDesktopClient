@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    
+    
+    <!---HEADER BACKGROUND -->
+    <SolidColorBrush x:Key="HeaderBackGround" Color="#0946a1"></SolidColorBrush>
+    <SolidColorBrush x:Key="HeaderForeground" Color="#FFF"></SolidColorBrush>
+
+    <!-- PRIMARY COLUMN -->
+    <SolidColorBrush x:Key="PrimaryColumnBackground" Color="#fff"></SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryColumnForeground" Color="#172B4D"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="ForegroundBrush" Color="#ccc" />
+    
+    <SolidColorBrush x:Key="BackgroundBrush" Color="Red" />
+    <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#CC000000" />
+    <SolidColorBrush x:Key="BorderColor" Color="Red"></SolidColorBrush>
+    <SolidColorBrush x:Key="ErrorColor" Color="Red"></SolidColorBrush>
+
+    
+    <SolidColorBrush x:Key="PageBackground" Color="#ebeef3"></SolidColorBrush>
+    <SolidColorBrush x:Key="LoginBackground" Color="#f3f7f9"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="CardHolderListBackground" Color="#fff"></SolidColorBrush>
+    <SolidColorBrush x:Key="VisitorInfoBackground" Color="#ebeef3"></SolidColorBrush>
+    <SolidColorBrush x:Key="VisitorInfoBackgroundForeground" Color="#ebeef3"></SolidColorBrush>
+
+
+    <SolidColorBrush x:Key="VisitingTransactionBackground" Color="#ebeef3"></SolidColorBrush>
+    <SolidColorBrush x:Key="VisitingTransactionForeGround" Color="#ebeef3"></SolidColorBrush>
+    <SolidColorBrush x:Key="VisitingTransactionBorder" Color="#ebeef3"></SolidColorBrush>
+
+    
+
+
+
+
+
+
+</ResourceDictionary>

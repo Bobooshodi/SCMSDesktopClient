@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:VMSDesktopUI.Styles.Pages">
+
+    <!-- lOGIN STYLES -->
+
+    <Style x:Key="credential-title" TargetType="Label">
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}"></Setter>
+    </Style>
+
+
+</ResourceDictionary>
