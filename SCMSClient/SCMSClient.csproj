@@ -70,7 +70,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Cardholder.cs" />
+    <Compile Include="ViewModel\AccessUnitsVM.cs" />
+    <Compile Include="ViewModel\BusinessUnitsVM.cs" />
+    <Compile Include="ViewModel\CardholdersVM.cs" />
+    <Compile Include="ViewModel\CardInventoryVM.cs" />
+    <Compile Include="ViewModel\CardVendorsVM.cs" />
+    <Compile Include="ViewModel\DashboardVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
+    <Compile Include="ViewModel\RequestsVM.cs" />
+    <Compile Include="ViewModel\SystemOperatorsVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

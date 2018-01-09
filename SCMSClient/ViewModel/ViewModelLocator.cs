@@ -12,7 +12,6 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -42,7 +41,16 @@ namespace SCMSClient.ViewModel
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
 
+            SimpleIoc.Default.Register<RequestsVM>();
+            SimpleIoc.Default.Register<DashboardVM>();
+            SimpleIoc.Default.Register<MainWindowVM>();
+            SimpleIoc.Default.Register<AccessUnitsVM>();
+            SimpleIoc.Default.Register<CardVendorsVM>();
+            SimpleIoc.Default.Register<CardholdersVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<BusinessUnitsVM>();
+            SimpleIoc.Default.Register<CardInventoryVM>();
+            SimpleIoc.Default.Register<SystemOperatorsVM>();
         }
 
         public MainViewModel Main
@@ -52,7 +60,106 @@ namespace SCMSClient.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        /// <summary>
+        /// The DataContext of the MainWindow.Xaml view
+        /// </summary>
+        public MainWindowVM MainWindow
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MainWindowVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Cardholders view
+        /// </summary>
+        public CardholdersVM Cardholders
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CardholdersVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Inventory view
+        /// </summary>
+        public CardInventoryVM CardInventory
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CardInventoryVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Requests view
+        /// </summary>
+        public RequestsVM Requests
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RequestsVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Vendors view
+        /// </summary>
+        public CardVendorsVM CardVendors
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CardVendorsVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Business Units view
+        /// </summary>
+        public BusinessUnitsVM BusinessUnits
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<BusinessUnitsVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the System Operators view
+        /// </summary>
+        public SystemOperatorsVM SystemOperators
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SystemOperatorsVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Access Units view
+        /// </summary>
+        public AccessUnitsVM AccessUnits
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AccessUnitsVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Dashboard view
+        /// </summary>
+        public DashboardVM Dashboard
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DashboardVM>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
