@@ -119,11 +119,33 @@
     <Compile Include="Models\ServerModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\TenantModel.cs" />
+    <Compile Include="Models\ToastNotification\NotificationLifetimeType.cs" />
+    <Compile Include="Models\ToastNotification\PositionProviderType.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\Implementation\HTTPRequestService.cs" />
     <Compile Include="Services\Implementation\SettingsService.cs" />
     <Compile Include="Services\Interfaces\IHTTPService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
+    <Compile Include="ToastNotification\CustomMessageExtensions.cs" />
+    <Compile Include="ToastNotification\EnumBooleanConverter.cs" />
+    <Compile Include="ToastNotification\Error\ErrorNotification.cs" />
+    <Compile Include="ToastNotification\Error\ToasterError.xaml.cs">
+      <DependentUpon>ToasterError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastNotification\Information\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastNotification\Information\InformationNotification.cs" />
+    <Compile Include="ToastNotification\RelayCommand.cs" />
+    <Compile Include="ToastNotification\Success\SuccessNotification.cs" />
+    <Compile Include="ToastNotification\Success\ToasterSuccess.xaml.cs">
+      <DependentUpon>ToasterSuccess.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastNotification\Toaster.cs" />
+    <Compile Include="ToastNotification\Warning\ToasterWarning.xaml.cs">
+      <DependentUpon>ToasterWarning.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ToastNotification\Warning\WarningNotification.cs" />
     <Compile Include="Utilities\ErrorLogger.cs" />
     <Compile Include="Utilities\UnityConfig.cs" />
     <Compile Include="ViewModel\AccessUnitsVM.cs" />
@@ -242,6 +264,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Themes\wrong.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToastNotification\Error\ToasterError.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToastNotification\Information\Information.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToastNotification\Success\ToasterSuccess.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ToastNotification\Warning\ToasterWarning.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
