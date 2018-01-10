@@ -4,7 +4,8 @@ namespace SCMSClient.Models
 {
     public class Card : BaseModel
     {
-        private string mifareId, cin, accessControlNumber;
+        private string mifareId, accessControlNumber;
+        private CIN cin;
         private DateTime dateCreated;
         private CardType cardType;
         private CardVendor vendor;
@@ -13,7 +14,7 @@ namespace SCMSClient.Models
 
         public string MifareId
         {
-            get { return mifareId; }
+            get => mifareId;
             set
             {
                 Set(ref mifareId, value);
@@ -21,9 +22,9 @@ namespace SCMSClient.Models
             }
         }
 
-        public string CIN
+        public CIN CIN
         {
-            get { return cin; }
+            get => cin;
             set
             {
                 Set(ref cin, value);
@@ -33,7 +34,7 @@ namespace SCMSClient.Models
 
         public string AccessControlNumber
         {
-            get { return accessControlNumber; }
+            get => accessControlNumber;
             set
             {
                 Set(ref accessControlNumber, value);
@@ -41,19 +42,19 @@ namespace SCMSClient.Models
             }
         }
 
-        public DateTime DateCreated
+        public DateTime DateRegistered
         {
-            get { return dateCreated; }
+            get => dateCreated;
             set
             {
                 Set(ref dateCreated, value);
-                RaisePropertyChanged(() => DateCreated);
+                RaisePropertyChanged(() => DateRegistered);
             }
         }
 
         public CardType CardType
         {
-            get { return cardType; }
+            get => cardType;
             set
             {
                 Set(ref cardType, value);
@@ -63,7 +64,7 @@ namespace SCMSClient.Models
 
         public CardVendor Vendor
         {
-            get { return vendor; }
+            get => vendor;
             set
             {
                 Set(ref vendor, value);
@@ -73,7 +74,7 @@ namespace SCMSClient.Models
 
         public BusinessUnit BusinessUnit
         {
-            get { return businessUnit; }
+            get => businessUnit;
             set
             {
                 Set(ref businessUnit, value);
@@ -83,12 +84,18 @@ namespace SCMSClient.Models
 
         public Status Status
         {
-            get { return status; }
+            get => status;
             set
             {
                 Set(ref status, value);
                 RaisePropertyChanged(() => Status);
             }
         }
+    }
+
+    public class CIN
+    {
+        public string InverntoryNumber { get; set; }
+        public DateTime DateGenerated { get; set; }
     }
 }

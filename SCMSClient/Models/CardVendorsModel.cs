@@ -45,7 +45,7 @@ namespace SCMSClient.Models
             get { return emailAddress; }
             set
             {
-                Set(ref address, value);
+                Set(ref emailAddress, value);
                 RaisePropertyChanged(() => EmailAddress);
             }
         }
