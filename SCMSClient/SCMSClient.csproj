@@ -13,6 +13,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +53,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=2.2.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.2.4.0\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -107,21 +112,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Models\Domain\AccessGroupModel.cs" />
+    <Compile Include="Models\Application\ApplicationSettings.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\BusinessUnitModel.cs" />
-    <Compile Include="Models\CardModel.cs" />
-    <Compile Include="Models\CardholderModel.cs" />
-    <Compile Include="Models\CardTypeModel.cs" />
-    <Compile Include="Models\CardVendorsModel.cs" />
-    <Compile Include="Models\Error\BadRequestErrorModel.cs" />
-    <Compile Include="Models\ParkingModel.cs" />
-    <Compile Include="Models\ServerModel.cs" />
-    <Compile Include="Models\StateModel.cs" />
-    <Compile Include="Models\TenantModel.cs" />
-    <Compile Include="Models\ToastNotification\NotificationLifetimeType.cs" />
-    <Compile Include="Models\ToastNotification\PositionProviderType.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\Domain\BuildingModel.cs" />
+    <Compile Include="Models\Domain\BusinessUnitModel.cs" />
+    <Compile Include="Models\Domain\CardDetailModel.cs" />
+    <Compile Include="Models\Domain\CardModel.cs" />
+    <Compile Include="Models\Domain\CardholderModel.cs" />
+    <Compile Include="Models\Domain\SHCCardTypeModel.cs" />
+    <Compile Include="Models\Domain\CardVendorsModel.cs" />
+    <Compile Include="Models\Domain\CarpackModel.cs" />
+    <Compile Include="Models\Domain\CompanyModel.cs" />
+    <Compile Include="Models\Domain\EmployeeModel.cs" />
+    <Compile Include="Models\Application\Error\BadRequestErrorModel.cs" />
+    <Compile Include="Models\Domain\ParkingModel.cs" />
+    <Compile Include="Models\Application\ServerModel.cs" />
+    <Compile Include="Models\Domain\SHCTenantModel.cs" />
+    <Compile Include="Models\Domain\TenantModel.cs" />
+    <Compile Include="Models\Application\ToastNotification\NotificationLifetimeType.cs" />
+    <Compile Include="Models\Application\ToastNotification\PositionProviderType.cs" />
+    <Compile Include="Models\Domain\UserModel.cs" />
+    <Compile Include="Models\Domain\VehicleModel.cs" />
     <Compile Include="Services\Implementation\HTTPRequestService.cs" />
     <Compile Include="Services\Implementation\SettingsService.cs" />
     <Compile Include="Services\Interfaces\IHTTPService.cs" />
@@ -319,5 +331,15 @@
     <Folder Include="Views\" />
     <Folder Include="Windows\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('..\packages\Fody.2.3.18\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.3.18\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.3.18\build\Fody.targets'))" />
+  </Target>
 </Project>

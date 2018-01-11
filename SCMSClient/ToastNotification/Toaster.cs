@@ -1,4 +1,4 @@
-﻿using SCMSClient.Models.ToastNotification;
+﻿using SCMSClient.Models;
 using System;
 using System.ComponentModel;
 using System.Windows;

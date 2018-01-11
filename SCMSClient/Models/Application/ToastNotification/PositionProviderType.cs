@@ -1,4 +1,4 @@
-﻿namespace SCMSClient.Models.ToastNotification
+﻿namespace SCMSClient.Models
 {
     public enum PositionProviderType
     {

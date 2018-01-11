@@ -1,5 +1,4 @@
 ﻿using SCMSClient.Models;
-using SCMSClient.Models.Error;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
 using System;

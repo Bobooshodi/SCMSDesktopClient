@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace SCMSClient.Models.Error
+namespace SCMSClient.Models
 {
     public class BadRequestError
     {
