@@ -4,6 +4,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- cOMPONENT STYLES-->
                 <ResourceDictionary Source="Styles/Themes/LightTheme.xaml" />
+
                 <ResourceDictionary Source="Styles/components/_button.xaml" />
                 <ResourceDictionary Source="Styles/components/_calendar.xaml" />
                 <ResourceDictionary Source="Styles/components/_checkbox.xaml" />
@@ -18,10 +19,12 @@
                 <ResourceDictionary Source="Styles/components/_toaster.xaml" />
 
                 <!-- LAYOUT STYLES-->
+
                 <ResourceDictionary Source="Styles/layout/_base.xaml" />
                 <ResourceDictionary Source="Styles/layout/_header.xaml" />
 
                 <!-- PAGES STYLES-->
+
                 <ResourceDictionary Source="Styles/Pages/_cardholder.xaml" />
                 <ResourceDictionary Source="Styles/Pages/_login.xaml" />
                 <ResourceDictionary Source="Styles/Pages/_visitorinfo.xaml" />

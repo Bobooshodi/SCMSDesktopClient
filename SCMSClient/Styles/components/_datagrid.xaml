@@ -22,7 +22,8 @@
     <Style x:Key="DataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="Height" Value="auto"/>
         <Setter Property="Margin" Value="10 14 0 14" />
-        
+        <Setter Property="Foreground" Value="{DynamicResource MarkerInvertedBrush}" />
+
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -38,7 +39,6 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"></Setter>
@@ -55,6 +55,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"></Setter>
         <Setter Property="BorderThickness" Value='0, 1, 0, 1'></Setter>
         <Setter Property="Padding" Value="12"/>
+        <Setter Property="Background" Value="{StaticResource MarkerBrush}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource MarkerInvertedBrush}" />
         
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Style.Triggers>
@@ -84,7 +86,7 @@
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}"/>
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeader}"/>
-        <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
         
     </Style>
 
@@ -97,7 +99,7 @@
         <Setter Property="GridLinesVisibility" Value="None"/>
         <Setter Property="CellStyle" Value="{StaticResource DataGridCell}"/>
         <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}"/>
-        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Background" Value="#394758"></Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="Transparent"/>
@@ -111,34 +113,51 @@
     </Style>
 
 
+    
+    <!-- CUSTOME GRID DESIGN -->
+
+    <Style x:Key="GridHeader" TargetType="Border">
+        <Setter Property="BorderBrush" Value="Red"></Setter>
+        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+        <Setter Property="Background" Value="#394758"></Setter>
+        <Setter Property="CornerRadius" Value="3 3 0 0"></Setter>
+        <Setter Property="Padding" Value="20 10"></Setter>
+    </Style>
 
     <Style x:Key="GridRow" TargetType="Border">
         <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"></Setter>
-        <Setter Property="Padding" Value="10 15"></Setter>
+        <Setter Property="Padding" Value="0 15"></Setter>
     </Style>
 
 
     
 
     <Style x:Key="GridHeaderColumn" TargetType="TextBlock">
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        
         <Setter Property="Foreground" Value="{StaticResource MainBrush}"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
     </Style>
 
 
     <Style x:Key="GridColumn" TargetType="Border">
-        <Setter Property="Padding" Value="26 0"></Setter>
+        <Setter Property="Padding" Value="20 0"></Setter>
     </Style>
 
+    <Style x:Key="GridColumn__Text" TargetType="TextBlock">
+        <Setter Property="Padding" Value="0 0"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+
+    </Style> 
+
     <Style x:Key="GridStatus" TargetType="Border">
-        <Setter Property="Padding" Value="0"></Setter>
+        
         <Setter Property="Background" Value="{StaticResource SuccessColor}"></Setter>
         <Setter Property="Width" Value="72"></Setter>
         <Setter Property="Height" Value="20"></Setter>
         <Setter Property="CornerRadius" Value="4"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
     </Style>
 
     <Style x:Key="GridStatus__Text" TargetType="TextBlock">

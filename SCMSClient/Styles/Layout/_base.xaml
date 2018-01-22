@@ -25,6 +25,12 @@
         <Setter Property="CornerRadius" Value="4"></Setter>
     </Style>
 
+    <Style x:Key="page-title" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="FontWeight" Value="Light"></Setter>
+    </Style>
+
      
 
 

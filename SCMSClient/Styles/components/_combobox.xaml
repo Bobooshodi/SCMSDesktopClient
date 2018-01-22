@@ -16,7 +16,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="Height" Value="30"></Setter>
-        <Setter Property="Margin" Value="10 0"></Setter>
+        
         <Setter Property="MinWidth" Value="200"></Setter>
         
         

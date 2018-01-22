@@ -9,14 +9,14 @@
 
     <SolidColorBrush x:Key="BorderColor" Color="#FFE2E3E4"></SolidColorBrush>
     <SolidColorBrush x:Key="ErrorColor" Color="#FFD50000"></SolidColorBrush>
-    <SolidColorBrush x:Key="SuccessColor" Color="#51c07d"></SolidColorBrush>
+    <SolidColorBrush x:Key="SuccessColor" Color="#00b333"></SolidColorBrush>
     <SolidColorBrush x:Key="WarningColor" Color="#FFFF9100"></SolidColorBrush>
     <SolidColorBrush x:Key="MainBrush" Color="#FFFFFFFF"></SolidColorBrush>
     <SolidColorBrush x:Key="PrimaryBrush" Color="#FFE6E6E6"></SolidColorBrush>
-    <SolidColorBrush x:Key="ComplementaryBrush" Color="#FFE1E1E1"></SolidColorBrush>
+    <SolidColorBrush x:Key="ComplementaryBrush" Color="#41a5e0"></SolidColorBrush>
     <SolidColorBrush x:Key="AlternativeBrush" Color="#FFF1F1F1"></SolidColorBrush>
     <SolidColorBrush x:Key="BasicBrush" Color="#FFABABAB"></SolidColorBrush>
-    <SolidColorBrush x:Key="MarkerBrush" Color="#FF444444"></SolidColorBrush>
+    <SolidColorBrush x:Key="MarkerBrush" Color="#485569"></SolidColorBrush>
     <SolidColorBrush x:Key="MarkerInvertedBrush" Color="#FFF9F9F9"></SolidColorBrush>
     <SolidColorBrush x:Key="IconBrush" Color="#FF444444"></SolidColorBrush>
     <SolidColorBrush x:Key="ValidationBrush" Color="#ea4949"></SolidColorBrush>

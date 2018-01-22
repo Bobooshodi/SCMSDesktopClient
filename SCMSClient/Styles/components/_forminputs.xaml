@@ -50,14 +50,15 @@
 
     <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
         <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}" />
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="TextBlock.LineHeight" Value="2"></Setter>
         <Setter Property="FontWeight" Value="Regular" />
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Padding" Value="6"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}" />
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="MinHeight" Value="35"></Setter>
+        <Setter Property="Background" Value="{DynamicResource InputBackground}" />
+        <Setter Property="Height" Value="30"></Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
 
@@ -84,7 +85,7 @@
 
     <Style x:Key="FormLabel" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}" />
-        <Setter Property="Margin" Value="-5 0 0 0"></Setter>
+        
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
     
@@ -93,7 +94,7 @@
     <!-- FORM GROUP -->
     <Style x:Key="FormGroup" TargetType="{x:Type Grid}">
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
-        <Setter Property="Margin" Value="5,10,5,0"></Setter>
+        <Setter Property="Margin" Value="5,10,5,15"></Setter>
     </Style>
 
 

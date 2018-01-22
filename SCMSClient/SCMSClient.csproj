@@ -112,6 +112,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modals\BlacklistCardholders.xaml.cs">
+      <DependentUpon>BlacklistCardholders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\CardRegistration.xaml.cs">
+      <DependentUpon>CardRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\DistributeCards.xaml.cs">
+      <DependentUpon>DistributeCards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\PersonaliseCard.xaml.cs">
+      <DependentUpon>PersonaliseCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\ReplaceCard.xaml.cs">
+      <DependentUpon>ReplaceCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\VerifyCard.xaml.cs">
+      <DependentUpon>VerifyCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\WarningModal.xaml.cs">
+      <DependentUpon>WarningModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Domain\AccessGroupModel.cs" />
     <Compile Include="Models\Application\ApplicationSettings.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -134,9 +155,13 @@
     <Compile Include="Models\Application\ToastNotification\PositionProviderType.cs" />
     <Compile Include="Models\Domain\UserModel.cs" />
     <Compile Include="Models\Domain\VehicleModel.cs" />
-    <Compile Include="Services\Implementation\HTTPRequestService.cs" />
+    <Compile Include="Services\Implementation\CardService.cs" />
+    <Compile Include="Services\Implementation\Common\AbstractService.cs" />
+    <Compile Include="Services\Implementation\Common\HTTPRequestService.cs" />
     <Compile Include="Services\Implementation\SettingsService.cs" />
-    <Compile Include="Services\Interfaces\IHTTPService.cs" />
+    <Compile Include="Services\Interfaces\Common\IAbstractService.cs" />
+    <Compile Include="Services\Interfaces\Common\IHTTPService.cs" />
+    <Compile Include="Services\Interfaces\ICardService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="ToastNotification\CustomMessageExtensions.cs" />
     <Compile Include="ToastNotification\EnumBooleanConverter.cs" />
@@ -171,6 +196,36 @@
     <Compile Include="ViewModel\RequestsVM.cs" />
     <Compile Include="ViewModel\SystemOperatorsVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\BlacklistRequest.xaml.cs">
+      <DependentUpon>BlacklistRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardholderDetails.xaml.cs">
+      <DependentUpon>CardholderDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardholderList.xaml.cs">
+      <DependentUpon>CardholderList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardInventory.xaml.cs">
+      <DependentUpon>CardInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CardRequest.xaml.cs">
+      <DependentUpon>CardRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InventoryHistory.xaml.cs">
+      <DependentUpon>InventoryHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonalizationRequest.xaml.cs">
+      <DependentUpon>PersonalizationRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReplaceCard.xaml.cs">
+      <DependentUpon>ReplaceCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,6 +238,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modals\BlacklistCardholders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\CardRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\DistributeCards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\PersonaliseCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\ReplaceCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\VerifyCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\WarningModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\components\_button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -295,6 +378,46 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\BlacklistRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardholderDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardholderList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CardRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InventoryHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonalizationRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReplaceCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -326,13 +449,12 @@
   <ItemGroup>
     <Resource Include="Images\background.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modals\" />
-    <Folder Include="Views\" />
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Starling.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('..\packages\Fody.2.3.18\build\Fody.targets')" />

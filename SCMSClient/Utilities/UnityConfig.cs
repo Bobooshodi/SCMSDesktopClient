@@ -20,7 +20,9 @@ namespace SCMSClient.Utilities
 
         private static void RegisterTypes(IUnityContainer container)
         {
+            container.RegisterType<ICardService, CardService>();
             container.RegisterType<IHTTPService, HTTPRequestService>();
+            container.RegisterType<ISettingsService, SettingsService>();
         }
 
         public static T ResolveObject<T>(string name = null)

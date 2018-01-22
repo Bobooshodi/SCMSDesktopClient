@@ -1,0 +1,78 @@
+﻿<Window x:Class="SCMSClient.Windows.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SCMSClient.Windows"
+        mc:Ignorable="d"
+        Title="Login">
+
+    <Grid Background="#000">
+        <Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4"/>
+        <Grid Style="{StaticResource login-wrapper}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border  Style="{StaticResource credential-container}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource credential__title}" >Login To Your Account</TextBlock>
+                    <Border  Grid.Row="1" Style="{StaticResource credential__form}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Style="{DynamicResource FormGroup}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Style="{DynamicResource FormLabel}">Operator Name</Label>
+                                <Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+                                    <TextBox Style="{DynamicResource FlatTextBox}" />
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Style="{DynamicResource FormLabel}">Operator Password</Label>
+                                <Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+                                    <PasswordBox Style="{DynamicResource PasswordBox}" />
+                                </Border>
+                            </Grid>
+
+                            <Button Grid.Row="2" Template="{StaticResource ButtonPrimary}">Login Me In</Button>
+
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Column="1" Style="{StaticResource welcome}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Style="{StaticResource welcome__title}">Your Space To A Smart Connected World.</TextBlock>
+                <TextBlock Grid.Row="1" Style="{StaticResource welcome__message}" >Welcome! We are happy to see you again. Enjoy the benefits of a smart connected world.</TextBlock>
+
+            </Grid>
+
+        </Grid>
+
+
+    </Grid>
+
+</Window>

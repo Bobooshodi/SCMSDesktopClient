@@ -6,7 +6,57 @@
                      TargetType="{x:Type Button}">
             <Border x:Name="Border"
                 BorderThickness="0"
-                TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
+                TextBlock.Foreground="{DynamicResource MarkerBrush}"
+                TextBlock.FontWeight="Regular"
+                TextBlock.FontSize="14px"
+                Padding="16, 0"
+                Height="auto">
+
+            <Border.Background>
+                <SolidColorBrush Color="Transparent"/>
+            </Border.Background>
+
+            <ContentPresenter RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter  Property="Cursor"
+                         Value="Hand"
+                         />
+                <Setter Property="Opacity" Value="0.6"></Setter>
+            </Trigger>
+
+            <Trigger Property="IsPressed"
+                     Value="True">
+
+
+
+            </Trigger>
+
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter TargetName="Border"
+                        Property="Opacity"
+                        Value="0.15" />
+                <!--<Setter TargetName="Border"
+                        Property="Background"
+                        Value="#000000" />-->
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ButtonNavEmpty"
+                     TargetType="{x:Type Button}">
+        <Border x:Name="Border"
+                BorderThickness="0"
+                
                 TextBlock.FontWeight="Regular"
                 TextBlock.FontSize="14px"
                 Padding="16, 0"
@@ -53,16 +103,120 @@
     </ControlTemplate>
 
 
+    <ControlTemplate x:Key="ButtonSubNavEmpty"
+                     TargetType="{x:Type Button}">
+        <Border x:Name="Border"
+                BorderThickness="0"
+                TextBlock.Foreground="{DynamicResource MarkerBrush}"
+                TextBlock.FontWeight="Regular"
+                TextBlock.FontSize="14px"
+                Padding="14, 8"
+                Height="auto">
+
+            <Border.Background>
+                <SolidColorBrush Color="Transparent"/>
+            </Border.Background>
+
+            <ContentPresenter RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter  Property="Cursor"
+                         Value="Hand"
+                         />
+                <Setter Property="Opacity" Value="0.6"></Setter>
+            </Trigger>
+
+            <Trigger Property="IsPressed"
+                     Value="True">
+
+
+
+            </Trigger>
+
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter TargetName="Border"
+                        Property="Opacity"
+                        Value="0.15" />
+                <!--<Setter TargetName="Border"
+                        Property="Background"
+                        Value="#000000" />-->
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="ButtonEmptyActive"
+                     TargetType="{x:Type Button}">
+        <Border x:Name="Border"
+                BorderThickness="0"
+                TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
+                TextBlock.FontWeight="Regular"
+                TextBlock.FontSize="14px"
+                Background="Red"
+                Padding="16, 0"
+                Height="auto">
+
+            <!--<Border.Background>
+                <SolidColorBrush Color="Transparent"/>
+            </Border.Background>-->
+
+            <ContentPresenter RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter  Property="Cursor"
+                         Value="Hand"
+                         />
+                <Setter Property="Opacity" Value="0.6"></Setter>
+            </Trigger>
+
+            <Trigger Property="IsPressed"
+                     Value="True">
+
+
+
+            </Trigger>
+
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter TargetName="Border"
+                        Property="Opacity"
+                        Value="0.15" />
+                <!--<Setter TargetName="Border"
+                        Property="Background"
+                        Value="#000000" />-->
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
     <ControlTemplate x:Key="ButtonPrimary"
                      TargetType="{x:Type Button}">
         <Border x:Name="Border"
         TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
          Background="{StaticResource SuccessColor}"     
          Height="30" 
-                BorderBrush="#47a76d"
+                BorderBrush="{DynamicResource SuccessColor}"
                 BorderThickness="0 0 0 3"
          Padding="10 0"       
                 CornerRadius="2"
+                Opacity="0.8"
             Margin="5 8 5 8">
         <ContentPresenter RecognizesAccessKey="True"
                               Margin="{TemplateBinding Padding}"
@@ -78,16 +232,16 @@
                          Value="Hand"
                          />
                 <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource AccentMouseOverBrush}" />
+                        Property="Opacity"
+                        Value="0.9" />
             </Trigger>
 
             <Trigger Property="IsPressed"
                      Value="True">
                 
                 <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource AccentPressedBrush}" />
+                        Property="Opacity"
+                        Value="1" />
                 
             </Trigger>
 
@@ -112,7 +266,7 @@
                 TextBlock.Foreground="#757a7e"
                 TextBlock.FontWeight="Regular"
                 TextBlock.FontSize="14px"
-                Padding="16, 12"
+                Padding="5, 0"
                 Height="auto">
 
             <Border.Background>
@@ -498,7 +652,7 @@
                      TargetType="{x:Type Button}">
         <Border x:Name="Border"
              
-                TextBlock.Foreground="{DynamicResource MarkerBrush}"
+                TextBlock.Foreground="{DynamicResource ComplementaryBrush}"
                 TextBlock.FontWeight="Regular"
                 TextBlock.FontSize="14px"
                 Padding="20, 9"
