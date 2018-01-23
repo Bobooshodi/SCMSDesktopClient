@@ -18,7 +18,7 @@ namespace SCMSClient.Services.Implementation
 
         #region Private Members
 
-        private readonly IHTTPService httpService;
+        protected readonly IHTTPService httpService;
 
         #endregion
 
@@ -48,9 +48,16 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public Model Delete(string parameter)
         {
-            var url = deleteUrl + parameter;
+            try
+            {
+                var url = deleteUrl + parameter;
 
-            return httpService.Delete<Model>(url);
+                return httpService.Delete<Model>(url);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -66,8 +73,15 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public Model Get(string parameter)
         {
-            var url = getUrl + parameter;
-            return httpService.Get<Model>(url);
+            try
+            {
+                var url = getUrl + parameter;
+                return httpService.Get<Model>(url);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -80,7 +94,14 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public List<Model> GetAll()
         {
-            return httpService.GetAll<Model>(getAllUrl);
+            try
+            {
+                return httpService.GetAll<Model>(getAllUrl);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -96,7 +117,14 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public Model Create(Model model)
         {
-            return httpService.Post(model, createUrl);
+            try
+            {
+                return httpService.Post(model, createUrl);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -112,7 +140,14 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public Model Update(Model model)
         {
-            return httpService.Put(model, updateUrl);
+            try
+            {
+                return httpService.Put(model, updateUrl);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         #endregion

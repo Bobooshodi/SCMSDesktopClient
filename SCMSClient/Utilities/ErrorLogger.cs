@@ -8,7 +8,7 @@ namespace SCMSClient.Utilities
     {
         #region Constant Declarations
 
-        private const string baseErrorFolderName = "VMS Error Logs";
+        private const string baseErrorFolderName = "SCMS Error Logs";
         private const string applicationErrorFile = "Application Error Logs.txt";
         private const string deviceFailureErrorFile = "Device Failure Error Logs.txt";
         private const string serverErrorFile = "Server Error Logs.txt";

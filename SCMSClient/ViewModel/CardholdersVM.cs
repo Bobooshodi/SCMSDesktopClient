@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using SCMSClient.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
@@ -10,8 +11,11 @@ namespace SCMSClient.ViewModel
     public class CardholdersVM : ViewModelBase
     {
         #region Private Members
-        private ObservableCollection<Cardholder> cardholders;
+
+        private ObservableCollection<Cardholder> allCardholders;
+        private ObservableCollection<Cardholder> filteredCardholders;
         private Cardholder selectedCardholder;
+
         #endregion
 
         #region Constructors
@@ -22,6 +26,7 @@ namespace SCMSClient.ViewModel
         public CardholdersVM()
         {
             CreateCommand = new RelayCommand(CreateCardholder);
+            ViewCardholderCommand = new RelayCommand(ViewCardholder);
         }
 
         #endregion
@@ -33,19 +38,31 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public Cardholder SelectedCardholder
         {
-            get { return selectedCardholder; }
-            set { Set(ref selectedCardholder, value, true); }
+            get => selectedCardholder;
+            set => Set(ref selectedCardholder, value, true);
         }
-
 
         /// <summary>
         /// Public Collection of Cardholders to bind to the view
         /// </summary>
-        public ObservableCollection<Cardholder> Cardholders
+        public ObservableCollection<Cardholder> AllCardholders
         {
-            get { return cardholders; }
-            set { Set(ref cardholders, value, true); }
+            get => allCardholders;
+            set => Set(ref allCardholders, value, true);
         }
+
+        /// <summary>
+        /// holds the Cardholders filtered from the original list
+        /// </summary>
+        public ObservableCollection<Cardholder> FilteredCardholders
+        {
+            get => filteredCardholders;
+            set => Set(ref filteredCardholders, value, true);
+        }
+
+        #endregion
+
+        #region Dummy Data
 
         #endregion
 
@@ -55,6 +72,13 @@ namespace SCMSClient.ViewModel
         /// Command to create new Cardholder
         /// </summary>
         public ICommand CreateCommand { get; set; }
+        public ICommand ViewCardholderCommand { get; set; }
+
+        #endregion
+
+        #region ICollectionViews
+
+        private ICollectionView CardholdersCollection;
 
         #endregion
 
@@ -67,6 +91,11 @@ namespace SCMSClient.ViewModel
         private void CreateCardholder()
         {
             throw new NotImplementedException();
+        }
+
+        private void ViewCardholder()
+        {
+
         }
 
         #endregion

@@ -14,6 +14,8 @@
 
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using SCMSClient.Services.Implementation;
+using SCMSClient.Services.Interfaces;
 
 namespace SCMSClient.ViewModel
 {
@@ -30,16 +32,24 @@ namespace SCMSClient.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            {
+                // Create design time view services and models
+                SimpleIoc.Default.Register<IUserService, UserService>();
+                SimpleIoc.Default.Register<ICardService, CardService>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+                SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+                SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
+            }
+            else
+            {
+                // Create run time view services and models
+                SimpleIoc.Default.Register<IUserService, UserService>();
+                SimpleIoc.Default.Register<ICardService, CardService>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+                SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+                SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
+            }
 
             SimpleIoc.Default.Register<RequestsVM>();
             SimpleIoc.Default.Register<DashboardVM>();
@@ -48,6 +58,7 @@ namespace SCMSClient.ViewModel
             SimpleIoc.Default.Register<CardVendorsVM>();
             SimpleIoc.Default.Register<CardholdersVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<BusinessUnitsVM>();
             SimpleIoc.Default.Register<CardInventoryVM>();
             SimpleIoc.Default.Register<SystemOperatorsVM>();
@@ -157,6 +168,17 @@ namespace SCMSClient.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<DashboardVM>();
+            }
+        }
+
+        /// <summary>
+        /// The DataContext of the Login Window
+        /// </summary>
+        public LoginViewModel Login
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
             }
         }
 

@@ -39,11 +39,9 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
-
                     </Grid.ColumnDefinitions>
 
-                    <Button Template="{StaticResource ButtonEmpty}" >
-
+                    <Button Template="{StaticResource ButtonEmpty}">
 
                         <TextBlock Grid.Column="1" Style="{StaticResource ButtonNav__Text}" VerticalAlignment="Center" Foreground="{StaticResource MarkerInvertedBrush}"> SCMS
                         </TextBlock>
@@ -64,7 +62,7 @@
                         <Border Width="30" HorizontalAlignment="Left" Height="10" CornerRadius="6" Background="{StaticResource ValidationBrush}"></Border>
                     </Border>
 
-                    <Button Template="{StaticResource ButtonNav}" Grid.Column="7">
+                    <Button Template="{StaticResource ButtonNav}" Grid.Column="7" Command="{Binding NavigationCommand}" CommandParameter="dashboard">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -72,7 +70,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Width="29" Height="15" >
+                            <Viewbox Width="29" Height="15">
                                 <Canvas Width="24" Height="24">
                                     <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"  Fill="{StaticResource MarkerInvertedBrush}" />
                                 </Canvas>
@@ -81,14 +79,11 @@
                             <Grid Grid.Column="1">
 
                                 <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Dashboard</TextBlock>
-
-
                             </Grid>
-
                         </Grid>
                     </Button>
 
-                    <Button Template="{StaticResource ButtonNav}" Grid.Column="8">
+                    <Button Template="{StaticResource ButtonNav}" Grid.Column="8" Command="{Binding NavigationCommand}" CommandParameter="requests">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -96,7 +91,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Width="29" Height="15" >
+                            <Viewbox Width="29" Height="15">
                                 <Canvas Width="24" Height="24">
                                     <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"  Fill="{StaticResource MarkerInvertedBrush}" />
                                 </Canvas>
@@ -105,14 +100,11 @@
                             <Grid Grid.Column="1">
 
                                 <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Request</TextBlock>
-
-
                             </Grid>
-
                         </Grid>
                     </Button>
 
-                    <Button Template="{StaticResource ButtonNav}" Grid.Column="9">
+                    <Button Template="{StaticResource ButtonNav}" Grid.Column="9" Command="{Binding NavigationCommand}" CommandParameter="inventory">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -120,7 +112,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Width="29" Height="15" >
+                            <Viewbox Width="29" Height="15">
                                 <Canvas Width="24" Height="24">
                                     <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"  Fill="{StaticResource MarkerInvertedBrush}" />
                                 </Canvas>
@@ -129,14 +121,11 @@
                             <Grid Grid.Column="1">
 
                                 <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Card Inventory</TextBlock>
-
-
                             </Grid>
-
                         </Grid>
                     </Button>
 
-                    <Button Template="{StaticResource ButtonNav}" Grid.Column="10">
+                    <Button Template="{StaticResource ButtonNav}" Grid.Column="10"  Command="{Binding NavigationCommand}" CommandParameter="cardholders">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -144,7 +133,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Width="29" Height="15" >
+                            <Viewbox Width="29" Height="15">
                                 <Canvas Width="24" Height="24">
                                     <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"  Fill="{StaticResource MarkerInvertedBrush}" />
                                 </Canvas>
@@ -153,14 +142,11 @@
                             <Grid Grid.Column="1">
 
                                 <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Cardholders</TextBlock>
-
-
                             </Grid>
-
                         </Grid>
                     </Button>
 
-                    <Button Template="{StaticResource ButtonNav}" Grid.Column="11" >
+                    <Button Template="{StaticResource ButtonNav}" Grid.Column="11" Command="{Binding NavigationCommand}" CommandParameter="settings">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -168,7 +154,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Width="29" Height="15" >
+                            <Viewbox Width="29" Height="15">
                                 <Canvas Width="24" Height="24">
                                     <Path Data="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"  Fill="{StaticResource MarkerInvertedBrush}" />
                                 </Canvas>
@@ -177,8 +163,6 @@
                             <Grid Grid.Column="1">
 
                                 <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Settings</TextBlock>
-
-
                             </Grid>
 
                             <Viewbox Width="28" Height="25" Grid.Column="2">
@@ -188,7 +172,7 @@
                             </Viewbox>
                         </Grid>
                     </Button>
-                    
+
                     <Border Grid.Column="12" Background="#FF338F46" Padding="0 0 10 0">
                         <Button Template="{StaticResource ButtonNav}">
                             <Grid>
@@ -198,7 +182,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox Width="30" Height="17" >
+                                <Viewbox Width="30" Height="17">
                                     <Canvas Width="24" Height="24">
                                         <Path Data="M12,13C9.33,13 4,14.33 4,17V20H20V17C20,14.33 14.67,13 12,13M12,4A4,4 0 0,0 8,8A4,4 0 0,0 12,12A4,4 0 0,0 16,8A4,4 0 0,0 12,4M12,14.9C14.97,14.9 18.1,16.36 18.1,17V18.1H5.9V17C5.9,16.36 9,14.9 12,14.9M12,5.9A2.1,2.1 0 0,1 14.1,8A2.1,2.1 0 0,1 12,10.1A2.1,2.1 0 0,1 9.9,8A2.1,2.1 0 0,1 12,5.9Z" Fill="{StaticResource MarkerInvertedBrush}" />
                                     </Canvas>
@@ -206,20 +190,16 @@
 
                                 <Grid Grid.Column="1">
 
-                                    <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal">Welcome Kudakwashe</TextBlock>
-
-
+                                    <TextBlock Foreground="{StaticResource MarkerInvertedBrush}" VerticalAlignment="Center" FontSize="13" FontWeight="Normal" 
+                                               Text="{Binding LoggedInUserName}"/>
                                 </Grid>
-
-
                             </Grid>
                         </Button>
                     </Border>
                 </Grid>
             </Border>
 
-            <Frame x:Name="MainNav" Grid.Row="2" NavigationUIVisibility="Hidden">
-
+            <Frame x:Name="MainNav" Grid.Row="2" NavigationUIVisibility="Hidden" Source="{Binding ActivePage}">
             </Frame>
 
             <Canvas x:Name="SettingsDropDown" Visibility="Collapsed">
@@ -239,7 +219,6 @@
                             <Button Template="{StaticResource Buttondrop}" Name="btnShow3">Device Settings
                             </Button>
                             <Canvas>
-
                             </Canvas>
                         </Grid>
 
@@ -261,17 +240,11 @@
                                 </Border.LayoutTransform>
                             </Border>
                         </Canvas>
-
                     </Grid>
                 </Border>
             </Canvas>
-
         </Grid>
         <StackPanel x:Name="ModalContainer" Height="auto">
-
-
         </StackPanel>
     </Grid>
-
-
 </Window>

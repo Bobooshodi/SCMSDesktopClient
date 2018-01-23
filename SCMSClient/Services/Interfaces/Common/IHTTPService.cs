@@ -26,6 +26,8 @@ namespace SCMSClient.Services.Interfaces
 
         T Delete<T>(string url, object parameter);
 
+        T RefreshAccessToken<T>(string token, string grantType, string clientId);
+
         Exception ThrowBaseException(Exception ex);
     }
 }

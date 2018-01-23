@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:SCMSClient.Views"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Cardholders}"
       mc:Ignorable="d"
       Title="CardholderList">
 
@@ -130,12 +131,11 @@
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
 
             <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard">
+                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgCardholderList" ItemsSource="{Binding FilteredCardholders}" SelectedItem="{Binding SelectedCardholder}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Cardholder Details" Width="2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -153,31 +153,16 @@
                                                 <RowDefinition></RowDefinition>
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SuccessColor}">Kudakwashe Appolo Shamu</TextBlock>
+                                            <TextBlock FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SuccessColor}" Text="{Binding Path=FullName}" />
                                             <Grid Grid.Row="1">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition></ColumnDefinition>
                                                     <ColumnDefinition></ColumnDefinition>
                                                 </Grid.ColumnDefinitions>
 
-                                                <TextBlock Foreground="#89949a">National ID: 821124075274</TextBlock>
+                                                <TextBlock Foreground="#89949a" Text="{Binding Path=Identification}" />
                                             </Grid>
                                         </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="User Type" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Foreground="{StaticResource MarkerBrush}">Tenant</TextBlock>
-                                        <TextBlock Grid.Row="1" Foreground="{StaticResource MarkerBrush}">Registerd: 28 Dec 17</TextBlock>
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -191,8 +176,8 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Foreground="{StaticResource MarkerBrush}">Email: apolloshamu@gmail.com</TextBlock>
-                                        <TextBlock Grid.Row="1" Foreground="{StaticResource MarkerBrush}">Phone:  0172045079</TextBlock>
+                                        <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Email}" />
+                                        <TextBlock Grid.Row="1" Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Phone}" />
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -202,7 +187,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
-                                                  Path=DataContext.ViewVisitDetailsCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
+                                                  Path=DataContext.ViewCardholderCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

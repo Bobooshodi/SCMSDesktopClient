@@ -1,5 +1,4 @@
-﻿using SCMSClient.Utilities;
-using System.Threading;
+﻿using System.Threading;
 using System.Windows;
 
 namespace SCMSClient
@@ -20,8 +19,6 @@ namespace SCMSClient
         {
             _mutex = new Mutex(true, MutexName, out createdNew);
 
-            UnityConfig.Initialize();
-
             if (!createdNew)
             {
                 // if the mutex already exists, notify and quit
@@ -35,7 +32,7 @@ namespace SCMSClient
             if (!createdNew) return;
             // overload the OnStartup so that the main window
             // is constructed and visible
-            var window = new MainWindow
+            var window = new Windows.Login
             {
                 WindowState = WindowState.Maximized
             };

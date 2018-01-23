@@ -4,6 +4,7 @@ using SCMSClient.Services.Interfaces;
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Windows;
 
 namespace SCMSClient.Services.Implementation
 {
@@ -302,6 +303,20 @@ namespace SCMSClient.Services.Implementation
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Clears all Settings and configuration held in Memory and
+        /// Closes the Application and displays the Login Page
+        /// </summary>
+        public void LogOutUser()
+        {
+            Application.Current.Properties.Clear();
+
+            var loginPage = new Windows.Login();
+            loginPage.Show();
+
+            Application.Current.MainWindow.Close();
         }
 
         #endregion

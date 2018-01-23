@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight;
+using SCMSClient.Models;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -11,13 +12,18 @@ using ToastNotifications.Position;
 
 namespace SCMSClient.ToastNotification
 {
-    public class Toaster : INotifyPropertyChanged
+    public sealed class Toaster : ViewModelBase
     {
         #region notifier configuration
 
+        private static readonly Lazy<Toaster> lazy =
+        new Lazy<Toaster>(() => new Toaster());
+
+        public static Toaster Instance => lazy.Value;
+
         private static Notifier _notifier;
 
-        public Toaster()
+        private Toaster()
         {
             _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
             Application.Current.MainWindow.Closing += MainWindowOnClosing;
@@ -160,7 +166,7 @@ namespace SCMSClient.ToastNotification
             set
             {
                 _corner = value;
-                OnPropertyChanged("Corner");
+                RaisePropertyChanged(() => Corner);
                 ChangePosition(_corner, _positionProviderType, _lifetime);
             }
         }
@@ -173,7 +179,7 @@ namespace SCMSClient.ToastNotification
             set
             {
                 _positionProviderType = value;
-                OnPropertyChanged("PositionProviderType");
+                RaisePropertyChanged(() => PositionProviderType);
                 ChangePosition(_corner, _positionProviderType, _lifetime);
             }
         }
@@ -189,21 +195,13 @@ namespace SCMSClient.ToastNotification
             set
             {
                 _lifetime = value;
-                OnPropertyChanged("Lifetime");
+                RaisePropertyChanged(() => Lifetime);
                 ChangePosition(_corner, _positionProviderType, _lifetime);
             }
         }
 
         public bool? FreezeOnMouseEnter { get; set; } = true;
         public bool? ShowCloseButton { get; set; } = false;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         #endregion example settings
     }

@@ -4,8 +4,11 @@ using SCMSClient.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 
 namespace SCMSClient.Services.Implementation
@@ -27,7 +30,11 @@ namespace SCMSClient.Services.Implementation
         public HTTPRequestService(ISettingsService sSettings)
         {
             _sSettings = sSettings;
+            //userService = _userService;
 
+            //TODO: Uncomment Later
+
+            /**
             try
             {
                 if (appSettings == null)
@@ -42,6 +49,7 @@ namespace SCMSClient.Services.Implementation
 
                 throw;
             }
+    */
 
             InitialiseClient();
         }
@@ -65,9 +73,9 @@ namespace SCMSClient.Services.Implementation
                 }
 
                 client.Timeout = new TimeSpan(0, 10, 0);
-                client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
+                // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //client.BaseAddress = new Uri("http://198.38.92.177:10001/");
+                client.BaseAddress = new Uri("http://192.168.0.33:10001/");
             }
             catch
             {
@@ -96,6 +104,7 @@ namespace SCMSClient.Services.Implementation
             {
                 if (!response.IsSuccessStatusCode)
                 {
+                    ErrorLogger.LogError(response.ToString(), ErrorType.SERVER_ERROR);
                     var obj = response.Content.ReadAsAsync<object>().Result;
                     ThrowExceptionMessage(obj);
                 }
@@ -133,6 +142,44 @@ namespace SCMSClient.Services.Implementation
                 throw new Exception(badError.GetErrorMessage());
         }
 
+        private async Task RefreshClient()
+        {
+            const string grantType = "password";
+            const string clientId = "desktop";
+
+            try
+            {
+                var newUserDetails = await Task.Run(() => RefreshAccessToken<User>(appUser.Refresh_token, grantType, clientId));
+
+                if (newUserDetails != null)
+                {
+                    Application.Current.Properties["loggedInUser"] = null;
+                    Application.Current.Properties["loggedInUser"] = newUserDetails;
+                    appUser = newUserDetails;
+                }
+                else
+                {
+                    throw new RefreshTokenException("Unable to get New access Token \r\n you will be logged out now, please login again to begin a new Session");
+                }
+
+                client = new HttpClient();
+
+                if (appUser != null)
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", appUser.Access_token);
+                }
+
+                client.Timeout = new TimeSpan(0, 10, 0);
+                // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.BaseAddress = new Uri("http://192.168.0.33:10001/");
+            }
+            catch (Exception e)
+            {
+                throw new RefreshTokenException("Unable to get New access Token \r\n you will be logged out now, please login again to begin a new Session", e);
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -158,6 +205,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.PutAsJsonAsync(url, model).Result;
 
                 return ReturnResult<T>(response);
@@ -192,6 +244,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.PutAsJsonAsync(url, model).Result;
 
                 return ReturnResult<Tresult>(response);
@@ -223,6 +280,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.PostAsJsonAsync(url, model).Result;
 
                 return ReturnResult<T>(response);
@@ -257,6 +319,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.PostAsJsonAsync(url, model).Result;
 
                 return ReturnResult<Tresult>(response);
@@ -337,6 +404,11 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -364,6 +436,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -394,6 +471,11 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<List<T>>(response);
@@ -428,6 +510,11 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<List<T>>(response);
@@ -456,6 +543,11 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.DeleteAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -489,6 +581,11 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
+                if (UserClaimsExpired())
+                {
+                    Task.Run(RefreshClient);
+                }
+
                 HttpResponseMessage response = client.DeleteAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -496,6 +593,49 @@ namespace SCMSClient.Services.Implementation
             catch (Exception ex)
             {
                 throw ThrowBaseException(ex.GetBaseException());
+            }
+        }
+
+        public bool UserClaimsExpired()
+        {
+            var activeUser = Application.Current.Properties["loggedInUser"] as User;
+            try
+            {
+                if (activeUser.Access_token != null)
+                {
+                    var jwthandler = new JwtSecurityTokenHandler();
+                    var jwttoken = jwthandler.ReadToken(activeUser.Access_token);
+                    var expDate = jwttoken.ValidTo;
+                    if (expDate < DateTime.UtcNow.AddMinutes(1))
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                throw new RefreshTokenException("Can't retrieve User's Access token, \r\n you will be logged out now, please login again to begin a new Session");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public T RefreshAccessToken<T>(string token, string grantType, string clientId)
+        {
+            try
+            {
+                var content = HttpUtility.ParseQueryString(string.Empty);
+                content.Add("refresh_token", token);
+                content.Add("grant_type", grantType);
+                content.Add("client_id", clientId);
+
+                return PostForm<T>(content, ApiEndpoints.login);
+            }
+            catch
+            {
+                throw;
             }
         }
 
@@ -511,6 +651,12 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public Exception ThrowBaseException(Exception ex)
         {
+            if (ex is RefreshTokenException)
+            {
+                MessageBox.Show(ex.Message);
+                _sSettings.LogOutUser();
+            }
+
             throw ex.GetBaseException();
         }
 

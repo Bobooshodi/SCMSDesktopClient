@@ -21,6 +21,12 @@ namespace SCMSClient.Models
                     errorMsg.AppendLine(Error_description);
             }
 
+            if (Error != null && !string.IsNullOrEmpty(Error))
+            {
+                if (!Error.Contains("The request is invalid."))
+                    errorMsg.AppendLine(Error);
+            }
+
             if (Message != null && !string.IsNullOrEmpty(Message))
             {
                 if (!Message.Contains("The request is invalid."))
