@@ -2,16 +2,16 @@
 
 namespace SCMSClient.Models
 {
-    public class SHCCardType : BaseModel
+    public class CardType : BaseModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsPermanent { get; set; }
-        public CardType CardType { get; set; }
+        public SHCCardType SHCCardType { get; set; }
         public List<BusinessUnit> BusinessUnits { get; set; }
     }
 
-    public enum CardType
+    public enum SHCCardType
     {
         Individual = 0,
         Tenant = 1,

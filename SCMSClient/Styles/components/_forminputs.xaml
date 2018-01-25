@@ -142,7 +142,8 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Background" Value="{DynamicResource InputBackground}" />
         <Setter Property="Height" Value="30"></Setter>
-        
+
+        <Setter Property="utilities:MonitorPasswordProperty.Value" Value="True" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -175,8 +176,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <Setter Property="utilities:MonitorPasswordProperty.Value" Value="True" />
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">

@@ -29,7 +29,8 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonNavEmpty}">
+                <Button Template="{StaticResource ButtonNavEmpty}" Command="{Binding FilterCardholderCommand}"
+                        CommandParameter="">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -50,7 +51,8 @@
                     </Grid>
                 </Button>
 
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1">
+                <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1" Command="{Binding FilterCardholderCommand}"
+                        CommandParameter="tenants">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -71,7 +73,8 @@
                     </Grid>
                 </Button>
 
-                <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4">
+                <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4" Command="{Binding FilterCardholderCommand}"
+                        CommandParameter="employees">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -92,7 +95,8 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e">
+                <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e" Command="{Binding FilterCardholderCommand}"
+                        CommandParameter="strata">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -124,7 +128,7 @@
             <TextBlock Style="{StaticResource page-title}">Cardholders</TextBlock>
 
             <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CardholderFilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </Grid>
         </Grid>
 

@@ -16,7 +16,6 @@ namespace SCMSClient.ViewModel
         #region Private Members
 
         private string username;
-        private SecureString password;
         private readonly Toaster toastManager = Toaster.Instance;
         private readonly IAuthenticationService authService;
         private bool CanLogin => !string.IsNullOrEmpty(Username);

@@ -10,8 +10,9 @@ namespace SCMSClient.ViewModel
     public class MainWindowVM : ViewModelBase
     {
         #region Private Members
-        private Uri activePage;
 
+        private Uri activePage;
+        private UIElement activeModal;
         private User loggedInUser =
             Application.Current.Properties["loggedInUser"] as User;
 
@@ -22,7 +23,7 @@ namespace SCMSClient.ViewModel
 
         public MainWindowVM()
         {
-            ActivePage = new Uri("/Views/Dashboard.xaml", UriKind.RelativeOrAbsolute);
+            MessengerInstance.Register<UIElement>(this, ChangeModal);
 
             NavigationCommand = new RelayCommand<object>(Navigate);
         }
@@ -43,10 +44,15 @@ namespace SCMSClient.ViewModel
 
         public Uri ActivePage
         {
-            get => activePage;
+            get => activePage ?? new Uri("/Views/Dashboard.xaml", UriKind.RelativeOrAbsolute);
             set => Set(ref activePage, value, true);
         }
 
+        public UIElement ActiveModal
+        {
+            get => activeModal;
+            set => Set(ref activeModal, value, true);
+        }
 
         #endregion
 
@@ -61,7 +67,7 @@ namespace SCMSClient.ViewModel
                     ActivePage = new Uri("/Views/Dashboard.xaml", UriKind.RelativeOrAbsolute);
                     break;
                 case "requests":
-                    ActivePage = new Uri("/Views/CardRequest.xaml", UriKind.RelativeOrAbsolute);
+                    ActivePage = new Uri("/Views/MainRequestPage.xaml", UriKind.RelativeOrAbsolute);
                     break;
                 case "inventory":
                     ActivePage = new Uri("/Views/CardInventory.xaml", UriKind.RelativeOrAbsolute);
@@ -72,6 +78,16 @@ namespace SCMSClient.ViewModel
                 case "settings":
                     break;
             }
+        }
+
+        #endregion
+
+
+        #region Messenger Methods
+
+        private void ChangeModal(UIElement modal)
+        {
+            ActiveModal = modal;
         }
 
         #endregion

@@ -6,11 +6,9 @@
 			 xmlns:local="clr-namespace:SCMSClient.Modals"
 			 mc:Ignorable="d"
 			 HorizontalAlignment="Stretch"
-	         VerticalAlignment="Bottom"
-	         HorizontalContentAlignment="Stretch"
-	         VerticalContentAlignment="Stretch"
-	         Height="1999"
-	         Width="auto">
+			 VerticalAlignment="Stretch"
+			 HorizontalContentAlignment="Stretch"
+			 VerticalContentAlignment="Stretch">
 	<StackPanel x:Name="ModalContainer">
 		<StackPanel.Background>
 			<SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
@@ -49,8 +47,7 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Card Inventory Number</Label>
-								<TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}">
-								</TextBox>
+								<TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedCard.CardInventoryNo}" />
 							</Grid>
 
 							<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
@@ -59,12 +56,8 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Card Type</Label>
-								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}">
-									<ComboBoxItem>Employee</ComboBoxItem>
-									<ComboBoxItem>Individual</ComboBoxItem>
-									<ComboBoxItem>Tenant</ComboBoxItem>
-									<ComboBoxItem>Strata</ComboBoxItem>
-								</ComboBox>
+								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardTypes}" DisplayMemberPath="Name" 
+										  SelectedItem="{Binding SelectedCardType}"/>
 							</Grid>
 
 							<Grid Grid.Row="2" Style="{StaticResource FormGroup}">
@@ -73,10 +66,8 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Card Vendor</Label>
-								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}">
-									<ComboBoxItem>IQL</ComboBoxItem>
-									<ComboBoxItem>SHC</ComboBoxItem>
-								</ComboBox>
+								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardVendors}" DisplayMemberPath="Name" 
+										  SelectedItem="{Binding SelectedCardVendor}"/>
 							</Grid>
 
 							<Grid Grid.Row="3" Margin="4" Style="{StaticResource feedback}">
@@ -117,8 +108,8 @@
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button Name="btnShow" Template="{StaticResource ButtonEmpty}">Cancel</Button>
-						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}">Register Card</Button>
+						<Button Template="{StaticResource ButtonEmpty}" Command="{Binding CancelCommand}">Cancel</Button>
+						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding RegisterCommand}">Register Card</Button>
 					</Grid>
 				</Border>
 			</Grid>

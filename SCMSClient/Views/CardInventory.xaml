@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:SCMSClient.Views"
+      DataContext="{Binding Source={StaticResource Locator}, Path=CardInventory}"
       mc:Ignorable="d"
       Title="CardInventory">
 
@@ -28,25 +29,29 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}">
+                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCardsCommand}" CommandParameter="">
 
                     Cards
                 </Button>
 
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1">
+                <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" 
+                        Command="{Binding FilterCardsCommand}" CommandParameter="tenant">
 
                     Tenant CIN
                 </Button>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4">
+                <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" 
+                        Command="{Binding FilterCardsCommand}" CommandParameter="employee">
                     Employee CIN
                 </Button>
 
-                <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}">
+                <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" 
+                        Command="{Binding FilterCardsCommand}" CommandParameter="strata">
                     Strata CIN
                 </Button>
 
-                <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}">
+                <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}" 
+                        Command="{Binding FilterCardsCommand}" CommandParameter="individual">
                     Individual CIN
                 </Button>
             </Grid>
@@ -61,19 +66,19 @@
             <TextBlock Style="{StaticResource page-title}">Card Inventory</TextBlock>
 
             <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CardFilterText, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Grid>
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
             <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard">
+                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCards}" SelectedItem="{Binding SelectedCard}">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Card Inventory Number"  Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="15" FontWeight="Light"  Foreground="{StaticResource MarkerBrush}">6361517435241</TextBlock>
+                                    <TextBlock FontSize="15" FontWeight="Light"  Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=CardInventoryNo}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -82,7 +87,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
 
-                                    <TextBlock Foreground="{StaticResource MarkerBrush}">Requested: 28 Dec 17 2:00PM</TextBlock>
+                                    <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=StartDate, StringFormat='{}{0:dd MMMM yy h:mm tt}'}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -90,7 +95,7 @@
                         <DataGridTemplateColumn Header="Registration Date" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Foreground="{StaticResource MarkerBrush}">Requested: 28 Dec 17 2:00PM</TextBlock>
+                                    <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=RegisteredDate, StringFormat='{}{0:dd MMMM yy h:mm tt}'}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -98,7 +103,8 @@
                         <DataGridTemplateColumn Header="" Width="160">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Template="{StaticResource ButtonPrimary}">Register CIN To Card</Button>
+                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
+                                                  Path=DataContext.RegisterCommand}" Template="{StaticResource ButtonPrimary}">Register CIN To Card</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

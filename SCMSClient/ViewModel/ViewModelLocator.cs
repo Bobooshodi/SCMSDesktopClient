@@ -54,22 +54,20 @@ namespace SCMSClient.ViewModel
             SimpleIoc.Default.Register<RequestsVM>();
             SimpleIoc.Default.Register<DashboardVM>();
             SimpleIoc.Default.Register<MainWindowVM>();
-            SimpleIoc.Default.Register<AccessUnitsVM>();
-            SimpleIoc.Default.Register<CardVendorsVM>();
             SimpleIoc.Default.Register<CardholdersVM>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CardRequestsVM>();
             SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<BusinessUnitsVM>();
             SimpleIoc.Default.Register<CardInventoryVM>();
             SimpleIoc.Default.Register<SystemOperatorsVM>();
+            SimpleIoc.Default.Register<CardRegistrationVM>();
+            SimpleIoc.Default.Register<ReplaceCardRequestVM>();
+            SimpleIoc.Default.Register<PersonalizationRequestVM>();
         }
 
         public MainViewModel Main
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
+            get => ServiceLocator.Current.GetInstance<MainViewModel>();
         }
 
         /// <summary>
@@ -77,10 +75,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public MainWindowVM MainWindow
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainWindowVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<MainWindowVM>();
         }
 
         /// <summary>
@@ -88,10 +83,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public CardholdersVM Cardholders
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CardholdersVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<CardholdersVM>();
         }
 
         /// <summary>
@@ -99,10 +91,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public CardInventoryVM CardInventory
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CardInventoryVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<CardInventoryVM>();
         }
 
         /// <summary>
@@ -110,32 +99,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public RequestsVM Requests
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<RequestsVM>();
-            }
-        }
-
-        /// <summary>
-        /// The DataContext of the Card Vendors view
-        /// </summary>
-        public CardVendorsVM CardVendors
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CardVendorsVM>();
-            }
-        }
-
-        /// <summary>
-        /// The DataContext of the Business Units view
-        /// </summary>
-        public BusinessUnitsVM BusinessUnits
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<BusinessUnitsVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<RequestsVM>();
         }
 
         /// <summary>
@@ -143,21 +107,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public SystemOperatorsVM SystemOperators
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<SystemOperatorsVM>();
-            }
-        }
-
-        /// <summary>
-        /// The DataContext of the Access Units view
-        /// </summary>
-        public AccessUnitsVM AccessUnits
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<AccessUnitsVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<SystemOperatorsVM>();
         }
 
         /// <summary>
@@ -165,10 +115,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public DashboardVM Dashboard
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<DashboardVM>();
-            }
+            get => ServiceLocator.Current.GetInstance<DashboardVM>();
         }
 
         /// <summary>
@@ -176,15 +123,44 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public LoginViewModel Login
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<LoginViewModel>();
-            }
+            get => ServiceLocator.Current.GetInstance<LoginViewModel>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Registration Page
+        /// </summary>
+        public CardRegistrationVM CardRegistration
+        {
+            get => ServiceLocator.Current.GetInstance<CardRegistrationVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Personalization Request Page
+        /// </summary>
+        public PersonalizationRequestVM PersonalizationRequest
+        {
+            get => ServiceLocator.Current.GetInstance<PersonalizationRequestVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Request Page
+        /// </summary>
+        public CardRequestsVM CardRequest
+        {
+            get => ServiceLocator.Current.GetInstance<CardRequestsVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Card Request Page
+        /// </summary>
+        public ReplaceCardRequestVM ReplaceCardRequest
+        {
+            get => ServiceLocator.Current.GetInstance<ReplaceCardRequestVM>();
         }
 
         public static void Cleanup()
         {
-            // TODO Clear the ViewModels
+            SimpleIoc.Default.Reset();
         }
     }
 }

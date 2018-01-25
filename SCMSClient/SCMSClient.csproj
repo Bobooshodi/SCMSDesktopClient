@@ -141,6 +141,9 @@
     <Compile Include="Models\Domain\ParkingModel.cs" />
     <Compile Include="Models\Application\ServerModel.cs" />
     <Compile Include="Models\Domain\SHCTenantModel.cs" />
+    <Compile Include="Models\Domain\SOACardRequest.cs" />
+    <Compile Include="Models\Domain\SOAPersonalizationRequest.cs" />
+    <Compile Include="Models\Domain\SOAReplaceCardRequest.cs" />
     <Compile Include="Models\Domain\TenantModel.cs" />
     <Compile Include="Models\Application\ToastNotification\NotificationLifetimeType.cs" />
     <Compile Include="Models\Application\ToastNotification\PositionProviderType.cs" />
@@ -189,15 +192,16 @@
     <Compile Include="Utilities\SecureStringUtility.cs" />
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
     <Compile Include="Utilities\ValueConverters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="ViewModel\AccessUnitsVM.cs" />
-    <Compile Include="ViewModel\BusinessUnitsVM.cs" />
     <Compile Include="ViewModel\CardholdersVM.cs" />
     <Compile Include="ViewModel\CardInventoryVM.cs" />
-    <Compile Include="ViewModel\CardVendorsVM.cs" />
+    <Compile Include="ViewModel\CardRegistrationVM.cs" />
+    <Compile Include="ViewModel\CardRequestsVM.cs" />
     <Compile Include="ViewModel\DashboardVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
+    <Compile Include="ViewModel\PersonalizationRequestVM.cs" />
+    <Compile Include="ViewModel\ReplaceCardRequestVM.cs" />
     <Compile Include="ViewModel\RequestsVM.cs" />
     <Compile Include="ViewModel\SystemOperatorsVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -221,6 +225,9 @@
     </Compile>
     <Compile Include="Views\InventoryHistory.xaml.cs">
       <DependentUpon>InventoryHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainRequestPage.xaml.cs">
+      <DependentUpon>MainRequestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonalizationRequest.xaml.cs">
       <DependentUpon>PersonalizationRequest.xaml</DependentUpon>
@@ -408,6 +415,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InventoryHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainRequestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

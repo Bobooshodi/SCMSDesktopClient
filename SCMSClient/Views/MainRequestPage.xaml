@@ -1,0 +1,66 @@
+﻿<Page x:Class="SCMSClient.Views.MainRequestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SCMSClient.Views"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Requests}"
+      mc:Ignorable="d" 
+      Title="MainRequestPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Style="{StaticResource SubMenu}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" CommandParameter="personalization">
+                    Personalization
+                </Button>
+
+                <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" Command="{Binding NavigationCommand}" 
+                        CommandParameter="replacement">
+
+                    Code Replacement
+                </Button>
+
+                <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" Command="{Binding NavigationCommand}" 
+                        CommandParameter="blacklist">
+                    Blacklist
+                </Button>
+
+                <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" 
+                        CommandParameter="distribution">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="1">
+
+                            <TextBlock Foreground="{StaticResource MarkerBrush}" VerticalAlignment="Center" FontSize="14" >Card Distribution</TextBlock>
+                        </Grid>
+                    </Grid>
+                </Button>
+            </Grid>
+        </Border>
+
+        <Frame x:Name="MainNav" Grid.Row="1" NavigationUIVisibility="Hidden" Source="{Binding ActivePage}" />
+
+    </Grid>
+</Page>
