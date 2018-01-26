@@ -72,7 +72,8 @@
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
             <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCards}" SelectedItem="{Binding SelectedCard}">
+                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCards}" SelectedItem="{Binding SelectedCard}"
+                          VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Card Inventory Number"  Width="*">

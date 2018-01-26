@@ -6,11 +6,9 @@
 			 xmlns:local="clr-namespace:SCMSClient.Modals"
 			 mc:Ignorable="d"
 			 HorizontalAlignment="Stretch"
-	         VerticalAlignment="Bottom"
-	         HorizontalContentAlignment="Stretch"
-	         VerticalContentAlignment="Stretch"
-	         Height="1999"
-	         Width="auto">
+			 VerticalAlignment="Stretch"
+			 HorizontalContentAlignment="Stretch"
+			 VerticalContentAlignment="Stretch">
 	<StackPanel x:Name="ModalContainer">
 		<StackPanel.Background>
 			<SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
@@ -49,11 +47,11 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Cardholder Name</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}">
+								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.Cardholder}">
 								</TextBox>
 							</Grid>
 
-							<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
+							<!--<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="140" ></ColumnDefinition>
 									<ColumnDefinition></ColumnDefinition>
@@ -61,7 +59,7 @@
 								<Label Style="{StaticResource FormLabel}">Cardholder Type</Label>
 								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}">
 								</TextBox>
-							</Grid>
+							</Grid>-->
 
 							<Grid Grid.Row="2" Style="{StaticResource FormGroup}">
 								<Grid.ColumnDefinitions>
@@ -69,7 +67,7 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Card Type</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}">
+								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.CardType.Name}">
 								</TextBox>
 							</Grid>
 
@@ -111,8 +109,8 @@
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button Name="btnShow" Template="{StaticResource ButtonEmpty}">Cancel</Button>
-						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}">Replace Card</Button>
+						<Button Name="btnShow" Template="{StaticResource ButtonEmpty}" Command="{Binding CloseCommand}">Cancel</Button>
+						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Replace Card</Button>
 					</Grid>
 				</Border>
 			</Grid>

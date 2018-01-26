@@ -47,7 +47,7 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Card Inventory Number</Label>
-								<TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedCard.CardInventoryNo}" />
+								<TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.CardInventoryNo}" />
 							</Grid>
 
 							<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
@@ -108,8 +108,8 @@
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button Template="{StaticResource ButtonEmpty}" Command="{Binding CancelCommand}">Cancel</Button>
-						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding RegisterCommand}">Register Card</Button>
+						<Button Template="{StaticResource ButtonEmpty}" Command="{Binding CloseCommand}">Cancel</Button>
+						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Register Card</Button>
 					</Grid>
 				</Border>
 			</Grid>

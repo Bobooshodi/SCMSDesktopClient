@@ -35,7 +35,7 @@ namespace SCMSClient.ViewModel
 
         public Uri ActivePage
         {
-            get => activePage ?? new Uri("/Views/CardRequest.xaml", UriKind.RelativeOrAbsolute);
+            get => activePage ?? (activePage = new Uri("/Views/PersonalizationRequest.xaml", UriKind.RelativeOrAbsolute));
             set => Set(ref activePage, value, true);
         }
 

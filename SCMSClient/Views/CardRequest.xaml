@@ -17,19 +17,17 @@
 
         <Grid Margin="30 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition MaxWidth="400"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource page-title}">Card Request</TextBlock>
-
-            <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding RequestsFilterText, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Grid.Column="1" Style="{StaticResource FormGroup}">
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Grid>
         <Border  Grid.Row="1" Style="{StaticResource main_section}">
             <ScrollViewer Grid.Row="3">
-                <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllRequests}" SelectedItem="{Binding SelectedRequest}">
+                <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllRequests}" SelectedItem="{Binding SelectedRequest}" 
+                          VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Card Request ID"  Width="*">

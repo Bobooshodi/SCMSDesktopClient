@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:SCMSClient.Views"
+      xmlns:utilities="clr-namespace:SCMSClient.Utilities"
       DataContext="{Binding Source={StaticResource Locator}, Path=PersonalizationRequest}"
       mc:Ignorable="d"
       Title="PersonalizationRequest">
@@ -18,18 +19,17 @@
 
         <Grid Margin="30 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition MaxWidth="400"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource page-title}">Personalisation Request</TextBlock>
 
-            <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding RequestsFilterText, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Column="1" Style="{StaticResource FormGroup}">
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllRequests}" SelectedItem="{Binding SelectedRequest}" >
+            <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllRequests}" SelectedItem="{Binding SelectedRequest}" 
+                      VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Cardholder Details" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
@@ -59,7 +59,7 @@
                                                 <ColumnDefinition></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Foreground="#89949a" Text="{Binding Path=IdentificationNo}" />
+                                            <TextBlock Foreground="#89949a" Text="{Binding Converter={utilities:IdentificationNumberConverter}}" />
                                         </Grid>
                                     </Grid>
                                 </Grid>

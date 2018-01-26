@@ -6,11 +6,9 @@
 			 xmlns:local="clr-namespace:SCMSClient.Modals"
 			 mc:Ignorable="d"
 			 HorizontalAlignment="Stretch"
-	         VerticalAlignment="Bottom"
-	         HorizontalContentAlignment="Stretch"
-	         VerticalContentAlignment="Stretch"
-	         Height="1999"
-	         Width="auto">
+			 VerticalAlignment="Stretch"
+			 HorizontalContentAlignment="Stretch"
+			 VerticalContentAlignment="Stretch">
 	<StackPanel x:Name="ModalContainer">
 		<StackPanel.Background>
 			<SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
@@ -49,7 +47,7 @@
 									<ColumnDefinition></ColumnDefinition>
 								</Grid.ColumnDefinitions>
 								<Label Style="{StaticResource FormLabel}">Cardholder Name</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}">
+								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.Cardholder}">
 								</TextBox>
 							</Grid>
 
@@ -111,8 +109,8 @@
 							<ColumnDefinition></ColumnDefinition>
 							<ColumnDefinition Width="auto"></ColumnDefinition>
 						</Grid.ColumnDefinitions>
-						<Button Name="btnShow" Template="{StaticResource ButtonEmpty}">Cancel</Button>
-						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}">Replace Card</Button>
+						<Button Command="{Binding CloseCommand}" Name="btnShow" Template="{StaticResource ButtonEmpty}">Cancel</Button>
+						<Button Command="{Binding ProcessCommand}" Grid.Column="2" Template="{StaticResource ButtonPrimary}">Replace Card</Button>
 					</Grid>
 				</Border>
 			</Grid>

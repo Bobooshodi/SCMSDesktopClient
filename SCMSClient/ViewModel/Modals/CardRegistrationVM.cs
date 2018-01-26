@@ -1,21 +1,15 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
-using System;
 using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
 {
-    public class CardRegistrationVM : ViewModelBase
+    public class CardRegistrationVM : BaseModalsVM<Card>
     {
         #region Private Members
 
-        private Card selectedCard;
         private CardType selectedCardType;
         private ObservableCollection<CardType> cardTypes;
         private ObservableCollection<CardVendor> cardVendors;
@@ -27,14 +21,9 @@ namespace SCMSClient.ViewModel
 
         #region Default Constructor
 
-        public CardRegistrationVM(Card _selectedCard)
+        public CardRegistrationVM(Card _selectedCard) : base(_selectedItem: _selectedCard)
         {
             cardService = SimpleIoc.Default.GetInstance<ICardService>();
-
-            SelectedCard = _selectedCard;
-
-            RegisterCommand = new RelayCommand(RegisterCard);
-            CancelCommand = new RelayCommand(CloseModal);
 
             LoadAll();
         }
@@ -42,21 +31,7 @@ namespace SCMSClient.ViewModel
         #endregion
 
 
-        #region Public ICommands
-
-        public ICommand RegisterCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
-
-        #endregion
-
-
         #region Public Properties
-
-        public Card SelectedCard
-        {
-            get => selectedCard;
-            set => Set(ref selectedCard, value, true);
-        }
 
         public CardType SelectedCardType
         {
@@ -95,11 +70,9 @@ namespace SCMSClient.ViewModel
 
         public override void Cleanup()
         {
-            SelectedCard = null;
             SelectedCardType = null;
             SelectedCardVendor = null;
             cardService = null;
-            Application.Current.Properties["selectedCard"] = null;
 
             base.Cleanup();
         }
@@ -109,14 +82,9 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
-        private void RegisterCard()
+        protected override void Process()
         {
-            throw new NotImplementedException();
-        }
-
-        private void CloseModal()
-        {
-            MessengerInstance.Send<UIElement>(null);
+            throw new System.NotImplementedException();
         }
 
         #endregion

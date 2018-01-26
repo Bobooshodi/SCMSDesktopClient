@@ -29,13 +29,7 @@ namespace SCMSClient.Models
         [Required(ErrorMessage = "Please, Enter either a Passport or IC Number for this Cardholder")]
         public string IdentificationNo
         {
-            get
-            {
-                if (IdentificationType == IdentificationType.NRIC)
-                    return $"Passport No: {identificationNumber}";
-
-                return $"National ID: {identificationNumber}";
-            }
+            get => identificationNumber;
             set
             {
                 Set(ref identificationNumber, value);
