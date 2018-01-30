@@ -29,29 +29,29 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCardsCommand}" CommandParameter="">
+                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCollectionsCommand}" CommandParameter="">
 
                     Cards
                 </Button>
 
                 <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" 
-                        Command="{Binding FilterCardsCommand}" CommandParameter="tenant">
+                        Command="{Binding FilterCollectionsCommand}" CommandParameter="tenant">
 
                     Tenant CIN
                 </Button>
 
                 <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" 
-                        Command="{Binding FilterCardsCommand}" CommandParameter="employee">
+                        Command="{Binding FilterCollectionsCommand}" CommandParameter="employee">
                     Employee CIN
                 </Button>
 
                 <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" 
-                        Command="{Binding FilterCardsCommand}" CommandParameter="strata">
+                        Command="{Binding FilterCollectionsCommand}" CommandParameter="strata">
                     Strata CIN
                 </Button>
 
                 <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}" 
-                        Command="{Binding FilterCardsCommand}" CommandParameter="individual">
+                        Command="{Binding FilterCollectionsCommand}" CommandParameter="individual">
                     Individual CIN
                 </Button>
             </Grid>
@@ -66,13 +66,13 @@
             <TextBlock Style="{StaticResource page-title}">Card Inventory</TextBlock>
 
             <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CardFilterText, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Grid>
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
             <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCards}" SelectedItem="{Binding SelectedCard}"
+                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
                           VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                     <DataGrid.Columns>
 
@@ -105,7 +105,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
-                                                  Path=DataContext.RegisterCommand}" Template="{StaticResource ButtonPrimary}">Register CIN To Card</Button>
+                                                  Path=DataContext.ProcessCommand}" Template="{StaticResource ButtonPrimary}">Register CIN To Card</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

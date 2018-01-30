@@ -6,6 +6,9 @@ using System.Collections.ObjectModel;
 
 namespace SCMSClient.ViewModel
 {
+    /// <summary>
+    /// View Model Logic for the Card Registration Modal
+    /// </summary>
     public class CardRegistrationVM : BaseModalsVM<Card>
     {
         #region Private Members
@@ -21,6 +24,12 @@ namespace SCMSClient.ViewModel
 
         #region Default Constructor
 
+        /// <summary>
+        /// This Class' implementation of the Base Class' constructor
+        /// </summary>
+        /// <param name="_selectedCard">
+        /// The Item Selected from the List
+        /// </param>
         public CardRegistrationVM(Card _selectedCard) : base(_selectedItem: _selectedCard)
         {
             cardService = SimpleIoc.Default.GetInstance<ICardService>();
@@ -62,12 +71,19 @@ namespace SCMSClient.ViewModel
 
         #region Private Methods
 
+        /// <summary>
+        /// This Method Loads all the Objects and Collections needed
+        /// </summary>
         private void LoadAll()
         {
             CardVendors = new ObservableCollection<CardVendor>(RandomDataGenerator.CardVendors(4));
             CardTypes = new ObservableCollection<CardType>(RandomDataGenerator.CardTypes());
         }
 
+        /// <summary>
+        /// this funcrion provides a way to release
+        /// memory once the class is destroyed
+        /// </summary>
         public override void Cleanup()
         {
             SelectedCardType = null;
@@ -82,6 +98,9 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
+        /// <summary>
+        /// This Class' Implementation of the Process Logic defined in the Base Class
+        /// </summary>
         protected override void Process()
         {
             throw new System.NotImplementedException();

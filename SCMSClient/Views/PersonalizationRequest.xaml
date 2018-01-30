@@ -28,7 +28,7 @@
             </Grid>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllRequests}" SelectedItem="{Binding SelectedRequest}" 
+            <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllObjects}" SelectedItem="{Binding SelectedObject}" 
                       VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Cardholder Details" Width="2*">

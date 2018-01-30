@@ -30,7 +30,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonNavEmpty}" Command="{Binding FilterCardholderCommand}"
+                <Button Template="{StaticResource ButtonNavEmpty}" Command="{Binding FilterCollectionsCommand}"
                         CommandParameter="">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -52,7 +52,7 @@
                     </Grid>
                 </Button>
 
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1" Command="{Binding FilterCardholderCommand}"
+                <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1" Command="{Binding FilterCollectionsCommand}"
                         CommandParameter="tenants">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -74,7 +74,7 @@
                     </Grid>
                 </Button>
 
-                <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4" Command="{Binding FilterCardholderCommand}"
+                <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4" Command="{Binding FilterCollectionsCommand}"
                         CommandParameter="employees">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
                     </Grid>
                 </Button>
 
-                <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e" Command="{Binding FilterCardholderCommand}"
+                <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e" Command="{Binding FilterCollectionsCommand}"
                         CommandParameter="strata">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -129,14 +129,14 @@
             <TextBlock Style="{StaticResource page-title}">Cardholders</TextBlock>
 
             <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CardholderFilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
             </Grid>
         </Grid>
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
 
             <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgCardholderList" ItemsSource="{Binding FilteredCardholders}" SelectedItem="{Binding SelectedCardholder}"
+                <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
                           VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Cardholder Details" Width="2*">
@@ -193,7 +193,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
-                                                  Path=DataContext.ViewCardholderCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
+                                                  Path=DataContext.ViewObjectCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

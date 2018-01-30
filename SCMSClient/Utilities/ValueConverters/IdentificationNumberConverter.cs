@@ -4,6 +4,10 @@ using System.Globalization;
 
 namespace SCMSClient.Utilities
 {
+    /// <summary>
+    /// Gets a <see cref="Cardholder"/> object and formats the <see cref="Cardholder.IdentificationNo"/>
+    /// based on the <see cref="Cardholder.IdentificationType"/>
+    /// </summary>
     public class IdentificationNumberConverter : BaseValueConverter<IdentificationNumberConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -15,7 +19,7 @@ namespace SCMSClient.Utilities
             {
                 return $"National ID {id}";
             }
-            else if (idType == IdentificationType.Passport)
+            if (idType == IdentificationType.Passport)
             {
                 return $"Passport No: {id}";
             }

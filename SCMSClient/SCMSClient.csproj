@@ -195,12 +195,13 @@
     <Compile Include="Utilities\ValueConverters\IdentificationNumberConverter.cs" />
     <Compile Include="ViewModel\CardholdersVM.cs" />
     <Compile Include="ViewModel\CardInventoryVM.cs" />
-    <Compile Include="ViewModel\Modals\BaseModalsVM.cs" />
+    <Compile Include="ViewModel\Common\BaseModalsVM.cs" />
+    <Compile Include="ViewModel\Common\CollectionsVMWithThreeCommand.cs" />
     <Compile Include="ViewModel\Modals\BlacklistRequestVM.cs" />
     <Compile Include="ViewModel\Modals\CardDistributionVM.cs" />
     <Compile Include="ViewModel\Modals\CardPersonalizationVM.cs" />
     <Compile Include="ViewModel\Modals\CardRegistrationVM.cs" />
-    <Compile Include="ViewModel\Requests\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\Common\CollectionsVMWithOneCommand..cs" />
     <Compile Include="ViewModel\Requests\CardRequestsVM.cs" />
     <Compile Include="ViewModel\DashboardVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />

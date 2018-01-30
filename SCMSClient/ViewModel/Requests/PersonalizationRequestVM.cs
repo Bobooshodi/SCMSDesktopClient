@@ -6,16 +6,32 @@ using System.Windows;
 
 namespace SCMSClient.ViewModel
 {
-    public class PersonalizationRequestVM : BaseRequestVM<SOAPersonalizationRequest>
+    /// <summary>
+    /// ViewModel Logic for the Personalization requests page
+    /// </summary>
+    public class PersonalizationRequestVM : CollectionsVMWithOneCommand<SOAPersonalizationRequest>
     {
         #region Private Methods
 
-        protected override void LoadAllRequests()
+        /// <summary>
+        /// Implementation of the Logic to Load all <see cref="SOAPersonalizationRequest"/>
+        /// </summary>
+        protected override void LoadAll()
         {
-            AllRequests = new ObservableCollection<SOAPersonalizationRequest>(RandomDataGenerator.PersonalizationRequests(10));
+            AllObjects = new ObservableCollection<SOAPersonalizationRequest>(RandomDataGenerator.PersonalizationRequests(10));
         }
 
-        protected override bool RequestSearchFilter(object obj)
+        /// <summary>
+        /// Implementaton of the Logic to filter the Collection
+        /// </summary>
+        /// <param name="obj">
+        /// represents an object in the collection
+        /// </param>
+        /// <returns>
+        /// returns true if the filter condition passes or
+        /// false if the filter condition fails
+        /// </returns>
+        protected override bool SearchFilter(object obj)
         {
             var request = obj as SOAPersonalizationRequest;
 
@@ -31,9 +47,13 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
-        protected override void ProcessRequest()
+        /// <summary>
+        /// Implementation of the Logic to process the
+        /// Selected <see cref="SOAPersonalizationRequest"/> Object
+        /// </summary>
+        protected override void Process()
         {
-            var modal = new Modals.PersonaliseCard(SelectedRequest);
+            var modal = new Modals.PersonaliseCard(SelectedObject);
 
             MessengerInstance.Send<UIElement>(modal);
         }

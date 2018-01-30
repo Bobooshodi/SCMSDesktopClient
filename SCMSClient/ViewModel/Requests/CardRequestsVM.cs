@@ -7,16 +7,32 @@ using System.Windows;
 
 namespace SCMSClient.ViewModel
 {
-    public class CardRequestsVM : BaseRequestVM<SOACardRequest>
+    /// <summary>
+    /// ViewModel Logic for the CardRequest's Page
+    /// </summary>
+    public class CardRequestsVM : CollectionsVMWithOneCommand<SOACardRequest>
     {
         #region Private Methods
 
-        protected override void LoadAllRequests()
+        /// <summary>
+        /// Implementation of the Logic to Load all <see cref="SOACardRequest"/>
+        /// </summary>
+        protected override void LoadAll()
         {
-            AllRequests = new ObservableCollection<SOACardRequest>(RandomDataGenerator.CardRequests(10));
+            AllObjects = new ObservableCollection<SOACardRequest>(RandomDataGenerator.CardRequests(10));
         }
 
-        protected override bool RequestSearchFilter(object obj)
+        /// <summary>
+        /// Implementaton of the Logic to filter the Collection
+        /// </summary>
+        /// <param name="obj">
+        /// represents an object in the collection
+        /// </param>
+        /// <returns>
+        /// returns true if the filter condition passes or
+        /// false if the filter condition fails
+        /// </returns>
+        protected override bool SearchFilter(object obj)
         {
             var request = obj as SOACardRequest;
 
@@ -31,9 +47,13 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
-        protected override void ProcessRequest()
+        /// <summary>
+        /// Implementation of the Logic to process the
+        /// Selected <see cref="SOACardRequest"/> Object
+        /// </summary>
+        protected override void Process()
         {
-            var modal = new DistributeCards(SelectedRequest);
+            var modal = new DistributeCards(SelectedObject);
 
             MessengerInstance.Send<UIElement>(modal);
         }

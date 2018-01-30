@@ -34,7 +34,7 @@
                 <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" Command="{Binding NavigationCommand}" 
                         CommandParameter="replacement">
 
-                    Code Replacement
+                    Card Replacement
                 </Button>
 
                 <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" Command="{Binding NavigationCommand}" 

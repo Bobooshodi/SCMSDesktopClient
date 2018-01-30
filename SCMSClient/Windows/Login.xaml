@@ -56,7 +56,11 @@
                                 <Label Style="{DynamicResource FormLabel}" Content="Operator Password"/>
                                 <Border Grid.Row="1" Style="{DynamicResource InputBorder}">
                                     <PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword"
-                                                 Tag="Password"/>
+                                                 Tag="Password">
+                                        <PasswordBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+                                        </PasswordBox.InputBindings>
+                                    </PasswordBox>
                                 </Border>
                             </Grid>
 
