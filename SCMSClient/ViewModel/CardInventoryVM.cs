@@ -1,9 +1,10 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.Utilities;
+using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
@@ -22,6 +23,8 @@ namespace SCMSClient.ViewModel
         public CardInventoryVM(ICardService _cardService)
         {
             cardService = _cardService;
+
+            LoadAll();
         }
 
         #endregion
@@ -46,8 +49,14 @@ namespace SCMSClient.ViewModel
 
         protected override void LoadAll()
         {
-            AllObjects = FilteredCollection = new ObservableCollection<Card>(RandomDataGenerator.Cards(10));
-
+            try
+            {
+                Task.Run(() => AllObjects = FilteredCollection = new ObservableCollection<Card>(cardService.GetAll()));
+            }
+            catch (Exception e)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
         }
 
         #endregion
@@ -56,7 +65,7 @@ namespace SCMSClient.ViewModel
         #region Command Methods
 
         /// <summary>
-        /// This Method is called when the <see cref="RegisterCommand"/> Action is invoked
+        /// This Method is called when the RegisterCommand Action is invoked
         /// The Method Opens a new page to create the Card
         /// </summary>
         protected override void Process()

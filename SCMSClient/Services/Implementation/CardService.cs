@@ -1,5 +1,6 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using SCMSClient.Utilities;
 
 namespace SCMSClient.Services.Implementation
 {
@@ -7,7 +8,11 @@ namespace SCMSClient.Services.Implementation
     {
         public CardService(IHTTPService httpService) : base(httpService)
         {
-            getAllUrl = string.Empty;
+            getUrl = ApiEndpoints.AllCards;
+            getAllUrl = ApiEndpoints.FindCardById;
+            updateUrl = ApiEndpoints.UpdateCard;
+            createUrl = ApiEndpoints.CreateCard;
+            deleteUrl = ApiEndpoints.DeleteCard;
         }
     }
 }

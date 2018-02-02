@@ -16,14 +16,14 @@ namespace SCMSClient.ToastNotification
     {
         #region notifier configuration
 
-        private static readonly Lazy<Toaster> lazy =
-        new Lazy<Toaster>(() => new Toaster());
+        //private static readonly Lazy<Toaster> lazy =
+        //new Lazy<Toaster>(() => new Toaster());
 
-        public static Toaster Instance => lazy.Value;
+        //public static Toaster Instance => lazy.Value;
 
         private static Notifier _notifier;
 
-        private Toaster()
+        public Toaster()
         {
             _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
             Application.Current.MainWindow.Closing += MainWindowOnClosing;

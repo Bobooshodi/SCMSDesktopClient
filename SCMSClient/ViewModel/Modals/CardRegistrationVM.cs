@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.Utilities;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
@@ -18,6 +18,8 @@ namespace SCMSClient.ViewModel
         private ObservableCollection<CardVendor> cardVendors;
         private CardVendor selectedCardVendor;
         private ICardService cardService;
+        private readonly ICardTypeService cardTypeService;
+        private readonly ICardVendorService cardVendorService;
 
         #endregion
 
@@ -33,6 +35,8 @@ namespace SCMSClient.ViewModel
         public CardRegistrationVM(Card _selectedCard) : base(_selectedItem: _selectedCard)
         {
             cardService = SimpleIoc.Default.GetInstance<ICardService>();
+            cardTypeService = SimpleIoc.Default.GetInstance<ICardTypeService>();
+            cardVendorService = SimpleIoc.Default.GetInstance<ICardVendorService>();
 
             LoadAll();
         }
@@ -76,8 +80,11 @@ namespace SCMSClient.ViewModel
         /// </summary>
         private void LoadAll()
         {
-            CardVendors = new ObservableCollection<CardVendor>(RandomDataGenerator.CardVendors(4));
-            CardTypes = new ObservableCollection<CardType>(RandomDataGenerator.CardTypes());
+            Task.Run(() =>
+                {
+                    CardVendors = new ObservableCollection<CardVendor>(cardVendorService.GetAll());
+                    CardTypes = new ObservableCollection<CardType>(cardTypeService.GetAll());
+                });
         }
 
         /// <summary>

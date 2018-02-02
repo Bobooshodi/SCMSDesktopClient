@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SCMSClient.ToastNotification;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -14,6 +15,7 @@ namespace SCMSClient.ViewModel
         protected string filterText;
         private T selectedObject;
         private ObservableCollection<T> allObjects;
+        protected readonly Toaster toaster = new Toaster();
 
         #endregion
 
@@ -24,7 +26,7 @@ namespace SCMSClient.ViewModel
         {
             ProcessCommand = new RelayCommand(Process);
 
-            LoadAll();
+            // LoadAll();
         }
 
         #endregion
@@ -64,7 +66,7 @@ namespace SCMSClient.ViewModel
         /// filter the Displayed List
         /// </summary>
         /// <param name="obj">
-        /// represents an object in the <see cref="AllRequests"/> List
+        /// represents an object in the <see cref="AllObjects"/> List
         /// </param>
         /// <returns>
         /// returns true if the filter condition passes or
@@ -98,8 +100,11 @@ namespace SCMSClient.ViewModel
         {
             get
             {
-                AllObjectsCollection = CollectionViewSource.GetDefaultView(allObjects);
-                AllObjectsCollection.Filter = SearchFilter;
+                if (allObjects != null)
+                {
+                    AllObjectsCollection = CollectionViewSource.GetDefaultView(allObjects);
+                    AllObjectsCollection.Filter = SearchFilter;
+                }
 
                 return allObjects;
             }

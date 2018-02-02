@@ -96,9 +96,9 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                return httpService.GetAll<Model>(getAllUrl);
+                return httpService.GetAll<Model>(getAllUrl, null);
             }
-            catch
+            catch (System.Exception e)
             {
                 throw;
             }

@@ -37,18 +37,32 @@ namespace SCMSClient.ViewModel
                 // Create design time view services and models
                 SimpleIoc.Default.Register<IUserService, UserService>();
                 SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+                SimpleIoc.Default.Register<ICardService, CardService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+                SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>();
+                SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
+                SimpleIoc.Default.Register<ICardholderService, CardholderService>();
+                SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
                 SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
+                SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
+                SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
             }
             else
             {
                 // Create run time view services and models
                 SimpleIoc.Default.Register<IUserService, UserService>();
                 SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+                SimpleIoc.Default.Register<ICardService, CardService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+                SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>();
+                SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
+                SimpleIoc.Default.Register<ICardholderService, CardholderService>();
+                SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
                 SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
+                SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
+                SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
             }
 
             SimpleIoc.Default.Register<RequestsVM>();

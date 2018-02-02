@@ -1,7 +1,9 @@
 ﻿using SCMSClient.Models;
-using SCMSClient.Utilities;
+using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
@@ -11,6 +13,19 @@ namespace SCMSClient.ViewModel
     /// </summary>
     public class PersonalizationRequestVM : CollectionsVMWithOneCommand<SOAPersonalizationRequest>
     {
+        private readonly IPersonalizationRequestService service;
+
+        #region Default Constructor
+
+        public PersonalizationRequestVM(IPersonalizationRequestService _service)
+        {
+            service = _service;
+
+            Task.Run(() => LoadAll());
+        }
+
+        #endregion
+
         #region Private Methods
 
         /// <summary>
@@ -18,7 +33,14 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override void LoadAll()
         {
-            AllObjects = new ObservableCollection<SOAPersonalizationRequest>(RandomDataGenerator.PersonalizationRequests(10));
+            try
+            {
+                AllObjects = new ObservableCollection<SOAPersonalizationRequest>(service.GetAll());
+            }
+            catch (Exception e)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
         }
 
         /// <summary>

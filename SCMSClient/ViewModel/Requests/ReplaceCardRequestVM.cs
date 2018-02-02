@@ -1,8 +1,10 @@
 ﻿using SCMSClient.Modals;
 using SCMSClient.Models;
-using SCMSClient.Utilities;
+using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
@@ -12,6 +14,20 @@ namespace SCMSClient.ViewModel
     /// </summary>
     public class ReplaceCardRequestVM : CollectionsVMWithOneCommand<SOAReplaceCardRequest>
     {
+        private readonly ICardReplacementService service;
+
+
+        #region Default Constructor
+
+        public ReplaceCardRequestVM(ICardReplacementService _service)
+        {
+            service = _service;
+
+            LoadAll();
+        }
+
+        #endregion
+
         #region Private Methods
 
         /// <summary>
@@ -19,7 +35,14 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override void LoadAll()
         {
-            AllObjects = new ObservableCollection<SOAReplaceCardRequest>(RandomDataGenerator.ReplaceCardRequests(10));
+            try
+            {
+                Task.Run(() => AllObjects = new ObservableCollection<SOAReplaceCardRequest>(service.GetAll()));
+            }
+            catch (Exception e)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
         }
 
         /// <summary>

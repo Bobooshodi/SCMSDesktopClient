@@ -28,8 +28,11 @@ namespace SCMSClient.ViewModel
         {
             get
             {
-                AllObjectsCollection = CollectionViewSource.GetDefaultView(filteredCollection);
-                AllObjectsCollection.Filter = SearchFilter;
+                if (filteredCollection != null)
+                {
+                    AllObjectsCollection = CollectionViewSource.GetDefaultView(filteredCollection);
+                    AllObjectsCollection.Filter = SearchFilter;
+                }
 
                 return filteredCollection;
             }

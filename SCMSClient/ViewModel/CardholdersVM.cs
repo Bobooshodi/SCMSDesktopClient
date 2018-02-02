@@ -1,13 +1,28 @@
 ﻿using SCMSClient.Models;
-using SCMSClient.Utilities;
+using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
     public class CardholdersVM : CollectionsVMWithThreeCommand<Cardholder>
     {
+        private ICardholderService cardholderService;
+
+        #region Default Constructor
+
+        public CardholdersVM(ICardholderService _cardholderService)
+        {
+            cardholderService = _cardholderService;
+
+            LoadAll();
+        }
+
+        #endregion
+
         #region Private Methods
 
         protected override bool SearchFilter(object obj)
@@ -25,7 +40,16 @@ namespace SCMSClient.ViewModel
 
         protected override void LoadAll()
         {
-            AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(RandomDataGenerator.Cardholders(10));
+            try
+            {
+                //AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(RandomDataGenerator.Cardholders(10));
+
+                Task.Run(() => AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(cardholderService.GetAll()));
+            }
+            catch (Exception e)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
         }
 
         #endregion

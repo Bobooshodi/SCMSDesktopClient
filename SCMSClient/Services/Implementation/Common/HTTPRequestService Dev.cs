@@ -13,21 +13,21 @@ using System.Windows;
 
 namespace SCMSClient.Services.Implementation
 {
-    public class HTTPRequestService : IHTTPService
+    public class HTTPRequestServiceDev : IHTTPService
     {
         #region Private Members
 
         private HttpClient client;
-        private ISettingsService _sSettings;
+        private readonly ISettingsService _sSettings;
         private User appUser = (User)Application.Current.Properties["activeUser"];
-        private ApplicationSettings appSettings =
+        private readonly ApplicationSettings appSettings =
             (ApplicationSettings)Application.Current.Properties["appSettings"];
 
         #endregion
 
         #region Default Constructor
 
-        public HTTPRequestService(ISettingsService sSettings)
+        public HTTPRequestServiceDev(ISettingsService sSettings)
         {
             _sSettings = sSettings;
             //userService = _userService;
@@ -210,11 +210,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.PutAsJsonAsync(url, model).Result;
 
                 return ReturnResult<T>(response);
@@ -249,11 +244,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.PutAsJsonAsync(url, model).Result;
 
                 return ReturnResult<Tresult>(response);
@@ -285,11 +275,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.PostAsJsonAsync(url, model).Result;
 
                 return ReturnResult<T>(response);
@@ -324,11 +309,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.PostAsJsonAsync(url, model).Result;
 
                 return ReturnResult<Tresult>(response);
@@ -409,11 +389,6 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -441,11 +416,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -476,11 +446,6 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<List<T>>(response);
@@ -515,11 +480,6 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient).Wait();
-                }
-
                 HttpResponseMessage response = client.GetAsync(url).Result;
 
                 return ReturnResult<List<T>>(response);
@@ -548,11 +508,6 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.DeleteAsync(url).Result;
 
                 return ReturnResult<T>(response);
@@ -586,11 +541,6 @@ namespace SCMSClient.Services.Implementation
 
             try
             {
-                if (UserClaimsExpired())
-                {
-                    Task.Run(RefreshClient);
-                }
-
                 HttpResponseMessage response = client.DeleteAsync(url).Result;
 
                 return ReturnResult<T>(response);
