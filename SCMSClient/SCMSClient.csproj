@@ -199,6 +199,7 @@
     <Compile Include="Utilities\AttachedProperties\PasswordBoxAttachedProperty.cs" />
     <Compile Include="Utilities\Exceptions\RefreshTokenException.cs" />
     <Compile Include="Utilities\ErrorLogger.cs" />
+    <Compile Include="Utilities\ExpressionsUtility.cs" />
     <Compile Include="Utilities\RandomDataGenerator.cs" />
     <Compile Include="Utilities\SecureStringUtility.cs" />
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
@@ -486,7 +487,6 @@
   <ItemGroup>
     <Resource Include="Images\background.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>

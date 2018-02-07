@@ -9,10 +9,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Class' implementation of the Base Class' constructor
         /// </summary>
-        /// <param name="_SelectedRequest">
-        /// The Item Selected from the List
-        /// </param>
-        public CardDistributionVM(SOACardRequest _SelectedRequest) : base(_selectedItem: _SelectedRequest)
+        public CardDistributionVM()
         {
 
         }

@@ -28,13 +28,8 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// The default constructor Inheriteda and implemented by all Child classes
         /// </summary>
-        /// <param name="_selectedItem">
-        /// The Item Selected from the View
-        /// </param>
-        protected BaseModalsVM(T _selectedItem)
+        protected BaseModalsVM()
         {
-            SelectedItem = _selectedItem;
-
             ProcessCommand = new RelayCommand(Process);
             CloseCommand = new RelayCommand(CloseModal);
         }

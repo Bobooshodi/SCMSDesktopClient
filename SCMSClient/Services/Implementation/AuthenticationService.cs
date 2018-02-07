@@ -1,6 +1,7 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
+using System;
 using System.Web;
 
 namespace SCMSClient.Services.Implementation
@@ -26,6 +27,9 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public User Login(string username, string password)
         {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                throw new InvalidOperationException("Username or Password not present");
+
             try
             {
                 const string grantType = "password";
@@ -47,6 +51,9 @@ namespace SCMSClient.Services.Implementation
 
         public User RefreshUserLogin(string token)
         {
+            if (string.IsNullOrEmpty(token))
+                throw new InvalidOperationException("No token was Passed");
+
             try
             {
                 const string grantType = "password";

@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight.Ioc;
+using SCMSClient.Models;
 using SCMSClient.ViewModel;
 using System.Windows.Controls;
 
@@ -13,7 +14,10 @@ namespace SCMSClient.Modals
         {
             InitializeComponent();
 
-            DataContext = new CardRegistrationVM(selectedCard);
+            var dc = SimpleIoc.Default.GetInstance<CardRegistrationVM>();
+            dc.SelectedItem = selectedCard;
+
+            DataContext = dc;
         }
     }
 }

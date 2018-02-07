@@ -12,10 +12,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Class' implementation of the Base Class' constructor
         /// </summary>
-        /// <param name="_selectedRequest">
-        /// The Item Selected from the List
-        /// </param>
-        public CardPersonalizationVM(SOAPersonalizationRequest _selectedRequest) : base(_selectedItem: _selectedRequest)
+        public CardPersonalizationVM()
         {
         }
 

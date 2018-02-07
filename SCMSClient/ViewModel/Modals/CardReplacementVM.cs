@@ -12,7 +12,7 @@ namespace SCMSClient.ViewModel
         /// <param name="_selectedRequest">
         /// The Item Selected from the List
         /// </param>
-        public CardReplacementVM(SOAReplaceCardRequest _selectedRequest) : base(_selectedItem: _selectedRequest)
+        public CardReplacementVM()
         {
 
         }

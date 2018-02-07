@@ -40,7 +40,7 @@ namespace SCMSClient.ViewModel
                 SimpleIoc.Default.Register<ICardService, CardService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
                 SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
                 SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
                 SimpleIoc.Default.Register<ICardholderService, CardholderService>();
                 SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
@@ -56,7 +56,7 @@ namespace SCMSClient.ViewModel
                 SimpleIoc.Default.Register<ICardService, CardService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
                 SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>();
+                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
                 SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
                 SimpleIoc.Default.Register<ICardholderService, CardholderService>();
                 SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
@@ -73,9 +73,13 @@ namespace SCMSClient.ViewModel
             SimpleIoc.Default.Register<CardRequestsVM>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CardInventoryVM>();
+            SimpleIoc.Default.Register<CardReplacementVM>();
             SimpleIoc.Default.Register<SystemOperatorsVM>();
             SimpleIoc.Default.Register<CardRegistrationVM>();
+            SimpleIoc.Default.Register<CardDistributionVM>();
+            SimpleIoc.Default.Register<BlacklistRequestVM>();
             SimpleIoc.Default.Register<ReplaceCardRequestVM>();
+            SimpleIoc.Default.Register<CardPersonalizationVM>();
             SimpleIoc.Default.Register<PersonalizationRequestVM>();
         }
 

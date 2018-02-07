@@ -21,7 +21,7 @@ namespace SCMSClient.ViewModel
         {
             service = _service;
 
-            Task.Run(() => LoadAll());
+            Load();
         }
 
         #endregion
@@ -31,11 +31,11 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// Implementation of the Logic to Load all <see cref="SOAPersonalizationRequest"/>
         /// </summary>
-        protected override void LoadAll()
+        protected async Task Load()
         {
             try
             {
-                AllObjects = new ObservableCollection<SOAPersonalizationRequest>(service.GetAll());
+                await Task.Run(() => AllObjects = new ObservableCollection<SOAPersonalizationRequest>(service.GetAll()));
             }
             catch (Exception e)
             {
@@ -78,6 +78,11 @@ namespace SCMSClient.ViewModel
             var modal = new Modals.PersonaliseCard(SelectedObject);
 
             MessengerInstance.Send<UIElement>(modal);
+        }
+
+        protected override void LoadAll()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

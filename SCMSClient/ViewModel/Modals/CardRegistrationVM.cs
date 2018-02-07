@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Ioc;
-using SCMSClient.Models;
+﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -29,14 +28,15 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Class' implementation of the Base Class' constructor
         /// </summary>
-        /// <param name="_selectedCard">
-        /// The Item Selected from the List
-        /// </param>
-        public CardRegistrationVM(Card _selectedCard) : base(_selectedItem: _selectedCard)
+        /// <param name="_cardService"></param>
+        /// <param name="_cardTypeService"></param>
+        /// <param name="_cardVendorService"></param>
+        public CardRegistrationVM(ICardService _cardService, ICardTypeService _cardTypeService,
+            ICardVendorService _cardVendorService)
         {
-            cardService = SimpleIoc.Default.GetInstance<ICardService>();
-            cardTypeService = SimpleIoc.Default.GetInstance<ICardTypeService>();
-            cardVendorService = SimpleIoc.Default.GetInstance<ICardVendorService>();
+            cardService = _cardService;
+            cardTypeService = _cardTypeService;
+            cardVendorService = _cardVendorService;
 
             LoadAll();
         }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCMSClient", "SCMSClient\SC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLab", "TestLab\TestLab.csproj", "{270F547D-416D-4BB7-8EB9-09E24A5EE687}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCMSClientTests", "SCMSClientTests\SCMSClientTests.csproj", "{829846F9-3000-41C5-A27C-81BC6B52EE04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{270F547D-416D-4BB7-8EB9-09E24A5EE687}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{270F547D-416D-4BB7-8EB9-09E24A5EE687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{270F547D-416D-4BB7-8EB9-09E24A5EE687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829846F9-3000-41C5-A27C-81BC6B52EE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829846F9-3000-41C5-A27C-81BC6B52EE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829846F9-3000-41C5-A27C-81BC6B52EE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829846F9-3000-41C5-A27C-81BC6B52EE04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

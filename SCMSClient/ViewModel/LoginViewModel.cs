@@ -16,7 +16,7 @@ namespace SCMSClient.ViewModel
         #region Private Members
 
         private string username;
-        private readonly Toaster toastManager = new Toaster();
+        private readonly Toaster toastManager;
         private readonly IAuthenticationService authService;
         private bool CanLogin => !string.IsNullOrEmpty(Username);
 
@@ -28,6 +28,15 @@ namespace SCMSClient.ViewModel
         public LoginViewModel(IAuthenticationService _authService)
         {
             authService = _authService;
+
+            try
+            {
+                toastManager = new Toaster();
+            }
+            catch
+            {
+
+            }
 
             LoginCommand = new RelayCommand<object>(async (object obj) => await Login(obj), (obj) => CanLogin);
             NextPageCommand = new RelayCommand<object>(OpenNextPage);
@@ -106,9 +115,6 @@ namespace SCMSClient.ViewModel
             try
             {
                 var loginWindow = obj as IHavePassword;
-
-                if (string.IsNullOrEmpty(Username))
-                    throw new Exception("Please, Enter a Username");
 
                 if (loginWindow.UserPassword.Length < 1)
                     throw new Exception("Please, Enter a Password");
