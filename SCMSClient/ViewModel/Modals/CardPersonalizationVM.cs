@@ -1,4 +1,5 @@
 ﻿using SCMSClient.Models;
+using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
@@ -24,9 +25,8 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Class' Implementation of the Process Logic defined in the Base Class
         /// </summary>
-        protected override void Process()
+        protected override async Task ProcessLogic()
         {
-            throw new System.NotImplementedException();
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using SCMSClient.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace SCMSClient.Services.Implementation
@@ -25,7 +26,7 @@ namespace SCMSClient.Services.Implementation
 
         #region Default Constructor
 
-        public AbstractService(IHTTPService _httpService)
+        protected AbstractService(IHTTPService _httpService)
         {
             httpService = _httpService;
         }
@@ -50,7 +51,13 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                var url = deleteUrl + parameter;
+                if (string.IsNullOrEmpty(deleteUrl))
+                    throw new InvalidOperationException("Please, provide the Endpoint for this request");
+
+                if (string.IsNullOrEmpty(parameter))
+                    throw new InvalidOperationException("Url Parameter not supplied");
+
+                var url = $"{deleteUrl}/{parameter}";
 
                 return httpService.Delete<Model>(url);
             }
@@ -75,7 +82,13 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
-                var url = getUrl + parameter;
+                if (string.IsNullOrEmpty(getUrl))
+                    throw new InvalidOperationException("Please, provide the Endpoint for this request");
+
+                if (string.IsNullOrEmpty(parameter))
+                    throw new InvalidOperationException("Url Parameter not supplied");
+
+                var url = $"{getUrl}/{parameter}";
                 return httpService.Get<Model>(url);
             }
             catch
@@ -96,9 +109,12 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (string.IsNullOrEmpty(getAllUrl))
+                    throw new InvalidOperationException("Please, provide the Endpoint for this request");
+
                 return httpService.GetAll<Model>(getAllUrl, null);
             }
-            catch (System.Exception e)
+            catch
             {
                 throw;
             }
@@ -119,6 +135,12 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (string.IsNullOrEmpty(createUrl))
+                    throw new InvalidOperationException("Please, provide the Endpoint for this request");
+
+                if (EqualityComparer<Model>.Default.Equals(model, default(Model)))
+                    throw new InvalidOperationException("Url Parameter not supplied");
+
                 return httpService.Post(model, createUrl);
             }
             catch
@@ -142,6 +164,12 @@ namespace SCMSClient.Services.Implementation
         {
             try
             {
+                if (string.IsNullOrEmpty(updateUrl))
+                    throw new InvalidOperationException("Please, provide the Endpoint for this request");
+
+                if (EqualityComparer<Model>.Default.Equals(model, default(Model)))
+                    throw new InvalidOperationException("Url Parameter not supplied");
+
                 return httpService.Put(model, updateUrl);
             }
             catch

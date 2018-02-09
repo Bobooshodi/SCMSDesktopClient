@@ -89,10 +89,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationServiceUnitTest.cs" />
+    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\PersonalizationRequests.cs" />
+    <Compile Include="Services\ReplacementRequests.cs" />
+    <Compile Include="Services\CardRequests.cs" />
+    <Compile Include="Services\CardVendors.cs" />
+    <Compile Include="Services\CardTypes.cs" />
+    <Compile Include="Services\Cards.cs" />
+    <Compile Include="Services\Cardholders.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
     <Compile Include="ViewModels\Requests.cs" />
-    <Compile Include="ViewModels\CardInventry.cs" />
+    <Compile Include="ViewModels\CardRegistration.cs" />
+    <Compile Include="ViewModels\CardInventory.cs" />
+    <Compile Include="ViewModels\CardRequests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

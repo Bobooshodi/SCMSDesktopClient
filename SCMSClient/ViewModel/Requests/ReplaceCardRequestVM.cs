@@ -3,6 +3,7 @@ using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,21 +24,27 @@ namespace SCMSClient.ViewModel
         {
             service = _service;
 
-            LoadAll();
+            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
+
 
         #region Private Methods
 
         /// <summary>
         /// Implementation of the Logic to Load all <see cref="SOAReplaceCardRequest"/>
         /// </summary>
-        protected override void LoadAll()
+        protected override async Task LoadAll()
         {
             try
             {
-                Task.Run(() => AllObjects = new ObservableCollection<SOAReplaceCardRequest>(service.GetAll()));
+                await Task.Run(() =>
+                {
+                    var allRequests = service.GetAll() ?? new List<SOAReplaceCardRequest>();
+
+                    AllObjects = new ObservableCollection<SOAReplaceCardRequest>(allRequests);
+                });
             }
             catch (Exception e)
             {

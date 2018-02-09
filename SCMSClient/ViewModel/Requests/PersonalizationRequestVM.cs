@@ -2,6 +2,7 @@
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,21 +22,27 @@ namespace SCMSClient.ViewModel
         {
             service = _service;
 
-            Load();
+            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
+
 
         #region Private Methods
 
         /// <summary>
         /// Implementation of the Logic to Load all <see cref="SOAPersonalizationRequest"/>
         /// </summary>
-        protected async Task Load()
+        protected override async Task LoadAll()
         {
             try
             {
-                await Task.Run(() => AllObjects = new ObservableCollection<SOAPersonalizationRequest>(service.GetAll()));
+                await Task.Run(() =>
+                {
+                    var allRequests = service.GetAll() ?? new List<SOAPersonalizationRequest>();
+
+                    AllObjects = new ObservableCollection<SOAPersonalizationRequest>(allRequests);
+                });
             }
             catch (Exception e)
             {
@@ -78,11 +85,6 @@ namespace SCMSClient.ViewModel
             var modal = new Modals.PersonaliseCard(SelectedObject);
 
             MessengerInstance.Send<UIElement>(modal);
-        }
-
-        protected override void LoadAll()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

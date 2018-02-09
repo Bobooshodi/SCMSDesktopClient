@@ -1,5 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SCMSClient.ToastNotification;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,9 +20,20 @@ namespace SCMSClient.ViewModel
     /// </typeparam>
     public abstract class BaseModalsVM<T> : ViewModelBase
     {
-        #region Private Members
+        #region Members Declaration
 
         private T selectedItem;
+        protected readonly Toaster toastManager = Toaster.Instance;
+        protected virtual bool CanProcess
+        {
+            get
+            {
+                if (IsProcessing)
+                    return false;
+
+                return true;
+            }
+        }
 
         #endregion
 
@@ -30,7 +45,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected BaseModalsVM()
         {
-            ProcessCommand = new RelayCommand(Process);
+            ProcessCommand = new RelayCommand(async () => await Process(), () => CanProcess);
             CloseCommand = new RelayCommand(CloseModal);
         }
 
@@ -54,6 +69,8 @@ namespace SCMSClient.ViewModel
 
         #region Public Properties
 
+        public bool IsProcessing { get; set; }
+
         /// <summary>
         /// The Property to bind to the View
         /// </summary>
@@ -72,7 +89,19 @@ namespace SCMSClient.ViewModel
         /// The Logic that's called when the <see cref="ProcessCommand"/> is invoked
         /// All Child classes must implemen their own logic
         /// </summary>
-        protected abstract void Process();
+        protected virtual async Task Process()
+        {
+            try
+            {
+                await RunCommandAsync(() => ProcessLogic());
+            }
+            catch (Exception e)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
+        }
+
+        protected abstract Task ProcessLogic();
 
         /// <summary>
         /// The Logic that is called when the <see cref="CloseCommand"/> is invoked
@@ -82,6 +111,92 @@ namespace SCMSClient.ViewModel
         protected virtual void CloseModal()
         {
             MessengerInstance.Send<UIElement>(null);
+        }
+
+        #endregion
+
+
+        #region Member Methods
+
+        protected async Task RunCommandAsync(Func<Task> action)
+        {
+            // Check if the flag property is true (meaning the function is already running)
+            if (IsProcessing)
+                throw new InvalidOperationException("Please wait for the current operation to complete before starting another one");
+
+            try
+            {
+                // Set the property flag to true to indicate we are running
+                IsProcessing = true;
+
+                await action();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                IsProcessing = false;
+            }
+        }
+
+        protected async Task RunMethodAsync(Action action)
+        {
+            try
+            {
+                // Set the property flag to true to indicate we are running
+                IsProcessing = true;
+
+                await Task.Run(action);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                IsProcessing = false;
+            }
+        }
+
+        protected async Task RunMethodAsync(List<Action> actions)
+        {
+            try
+            {
+                var caughtExceptions = new List<Exception>();
+
+                // Set the property flag to true to indicate we are running
+                IsProcessing = true;
+
+                foreach (var action in actions)
+                {
+                    try
+                    {
+                        await Task.Run(action);
+                    }
+                    catch (Exception e)
+                    {
+                        caughtExceptions.Add(e);
+                        continue;
+                    }
+                    finally
+                    {
+                        caughtExceptions.ForEach(e => throw e);
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                IsProcessing = false;
+            }
         }
 
         #endregion

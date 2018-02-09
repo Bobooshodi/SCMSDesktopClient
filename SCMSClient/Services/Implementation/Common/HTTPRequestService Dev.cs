@@ -7,7 +7,6 @@ using System.Collections.Specialized;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
 
@@ -20,8 +19,6 @@ namespace SCMSClient.Services.Implementation
         private HttpClient client;
         private readonly ISettingsService _sSettings;
         private User appUser = (User)Application.Current.Properties["activeUser"];
-        private readonly ApplicationSettings appSettings =
-            (ApplicationSettings)Application.Current.Properties["appSettings"];
 
         #endregion
 
@@ -145,44 +142,6 @@ namespace SCMSClient.Services.Implementation
 
             if (processed)
                 throw new Exception(badError.GetErrorMessage());
-        }
-
-        private async Task RefreshClient()
-        {
-            const string grantType = "refresh_token";
-            const string clientId = "desktop";
-
-            try
-            {
-                var newUserDetails = await Task.Run(() => RefreshAccessToken<User>(appUser.Refresh_token, grantType, clientId));
-
-                if (newUserDetails != null)
-                {
-                    Application.Current.Properties["loggedInUser"] = null;
-                    Application.Current.Properties["loggedInUser"] = newUserDetails;
-                    appUser = newUserDetails;
-                }
-                else
-                {
-                    throw new RefreshTokenException("Unable to get New access Token \r\n you will be logged out now, please login again to begin a new Session");
-                }
-
-                client = new HttpClient();
-
-                if (appUser != null)
-                {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", appUser.Access_token);
-                }
-
-                client.Timeout = new TimeSpan(0, 10, 0);
-                // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.BaseAddress = new Uri("http://localhost:2020/");
-            }
-            catch (Exception e)
-            {
-                throw new RefreshTokenException("Unable to get New access Token \r\n you will be logged out now, please login again to begin a new Session", e);
-            }
         }
 
         #endregion

@@ -14,20 +14,33 @@ namespace SCMSClient.ToastNotification
 {
     public sealed class Toaster : ViewModelBase
     {
-        #region notifier configuration
+        #region LazyLoading
 
-        //private static readonly Lazy<Toaster> lazy =
-        //new Lazy<Toaster>(() => new Toaster());
+        private static Lazy<Toaster> lazy;
 
-        //public static Toaster Instance => lazy.Value;
+        public static Toaster Instance => lazy?.Value;
 
         private static Notifier _notifier;
 
-        public Toaster()
+        private Toaster()
         {
-            _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
-            Application.Current.MainWindow.Closing += MainWindowOnClosing;
+            try
+            {
+                lazy = new Lazy<Toaster>(() => new Toaster());
+
+                _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
+                Application.Current.MainWindow.Closing += MainWindowOnClosing;
+            }
+            catch
+            {
+
+            }
+
         }
+
+        #endregion
+
+        #region notifier configuration
 
         public static Notifier CreateNotifier(Corner corner, PositionProviderType relation, NotificationLifetimeType lifetime)
         {
@@ -204,5 +217,16 @@ namespace SCMSClient.ToastNotification
         public bool? ShowCloseButton { get; set; } = false;
 
         #endregion example settings
+
+        #region Public Methods
+
+        public static void Refresh()
+        {
+            lazy = null;
+
+            lazy = new Lazy<Toaster>(() => new Toaster());
+        }
+
+        #endregion
     }
 }

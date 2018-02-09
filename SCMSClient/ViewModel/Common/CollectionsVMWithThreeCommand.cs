@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -19,7 +20,7 @@ namespace SCMSClient.ViewModel
         public ICommand ViewObjectCommand { get; set; }
         public ICommand FilterCollectionsCommand { get; set; }
 
-        protected abstract override void LoadAll();
+        protected abstract override Task LoadAll();
 
         protected abstract override bool SearchFilter(object obj);
 

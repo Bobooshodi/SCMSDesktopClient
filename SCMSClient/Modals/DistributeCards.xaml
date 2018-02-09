@@ -83,12 +83,12 @@
 										<ColumnDefinition Width="auto"></ColumnDefinition>
 										<ColumnDefinition></ColumnDefinition>
 									</Grid.ColumnDefinitions>
-									<TextBox  Style="{StaticResource FlatTextBox}">
+									<TextBox  Style="{StaticResource FlatTextBox}" Text="{Binding DistributeFrom, UpdateSourceTrigger=PropertyChanged}">
 									</TextBox>
 
 									<TextBlock Grid.Column="1" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center">TO</TextBlock>
 
-									<TextBox  Grid.Column="2" Style="{StaticResource FlatTextBox}">
+									<TextBox  Grid.Column="2" Style="{StaticResource FlatTextBox}" Text="{Binding DistributeTo, UpdateSourceTrigger=PropertyChanged}">
 									</TextBox>
 								</Grid>
 							</Grid>

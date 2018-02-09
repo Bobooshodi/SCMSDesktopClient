@@ -6,7 +6,7 @@ using SCMSClient.Services.Interfaces;
 using System;
 using System.Collections.Specialized;
 
-namespace SCMSClientTests.Services.AuthenticationServiceTests
+namespace SCMSClientTests.Services
 {
     [TestFixture]
     public class AuthenticationServiceTest

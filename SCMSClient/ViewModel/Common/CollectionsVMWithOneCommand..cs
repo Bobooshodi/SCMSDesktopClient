@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using SCMSClient.ToastNotification;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -15,7 +16,7 @@ namespace SCMSClient.ViewModel
         protected string filterText;
         private T selectedObject;
         private ObservableCollection<T> allObjects;
-        protected readonly Toaster toaster = new Toaster();
+        protected readonly Toaster toaster = Toaster.Instance;
 
         #endregion
 
@@ -59,7 +60,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This method Loads all the objects to display in the List
         /// </summary>
-        protected abstract void LoadAll();
+        protected abstract Task LoadAll();
 
         /// <summary>
         /// This Method contains the logic to needed by the <see cref="AllObjectsCollection"/> to

@@ -1,5 +1,8 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -19,6 +22,16 @@ namespace SCMSClient.ViewModel
         private ICardService cardService;
         private readonly ICardTypeService cardTypeService;
         private readonly ICardVendorService cardVendorService;
+        protected override bool CanProcess
+        {
+            get
+            {
+                if (SelectedCardType == null || SelectedCardVendor == null)
+                    return false;
+
+                return true;
+            }
+        }
 
         #endregion
 
@@ -38,7 +51,7 @@ namespace SCMSClient.ViewModel
             cardTypeService = _cardTypeService;
             cardVendorService = _cardVendorService;
 
-            LoadAll();
+            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
@@ -72,20 +85,7 @@ namespace SCMSClient.ViewModel
 
         #endregion
 
-
-        #region Private Methods
-
-        /// <summary>
-        /// This Method Loads all the Objects and Collections needed
-        /// </summary>
-        private void LoadAll()
-        {
-            Task.Run(() =>
-                {
-                    CardVendors = new ObservableCollection<CardVendor>(cardVendorService.GetAll());
-                    CardTypes = new ObservableCollection<CardType>(cardTypeService.GetAll());
-                });
-        }
+        #region Public Methods
 
         /// <summary>
         /// this funcrion provides a way to release
@@ -103,14 +103,60 @@ namespace SCMSClient.ViewModel
         #endregion
 
 
+        #region Private Methods
+
+        /// <summary>
+        /// This Method Loads all the Objects and Collections needed
+        /// </summary>
+        private async Task LoadAll()
+        {
+            try
+            {
+                //await Task.Run(() =>
+                //{
+                //    var allCardVendors = cardVendorService.GetAll() ?? new List<CardVendor>();
+                //    CardVendors = new ObservableCollection<CardVendor>(allCardVendors);
+                //});
+
+                //await Task.Run(() =>
+                //{
+                //    var allCardTypes = cardTypeService.GetAll() ?? new List<CardType>();
+                //    CardTypes = new ObservableCollection<CardType>(allCardTypes);
+                //});
+
+                var actions = new List<Action>
+                {
+                    () =>
+                    {
+                        var allCardTypes = cardTypeService.GetAll() ?? new List<CardType>();
+                        CardTypes = new ObservableCollection<CardType>(allCardTypes);
+                    },
+                    () =>
+                    {
+                        var allCardVendors = cardVendorService.GetAll() ?? new List<CardVendor>();
+                        CardVendors = new ObservableCollection<CardVendor>(allCardVendors);
+                    }
+                };
+
+                await RunMethodAsync(actions);
+            }
+            catch (Exception e)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
+        }
+
+        #endregion
+
+
         #region Command Methods
 
         /// <summary>
         /// This Class' Implementation of the Process Logic defined in the Base Class
         /// </summary>
-        protected override void Process()
+        protected override async Task ProcessLogic()
         {
-            throw new System.NotImplementedException();
+
         }
 
         #endregion

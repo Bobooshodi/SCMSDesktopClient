@@ -8,8 +8,8 @@ namespace SCMSClient.Services.Implementation
     {
         public CardholderService(IHTTPService httpService) : base(_httpService: httpService)
         {
-            getUrl = ApiEndpoints.AllCardholders;
-            getAllUrl = ApiEndpoints.FindCardholderById;
+            getUrl = ApiEndpoints.FindCardholderById;
+            getAllUrl = ApiEndpoints.AllCardholders;
             updateUrl = ApiEndpoints.UpdateCardholder;
             createUrl = ApiEndpoints.CreateCardholder;
             deleteUrl = ApiEndpoints.DeleteCardholder;

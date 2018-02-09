@@ -86,7 +86,7 @@ namespace SCMSClient.Services.Implementation
         /// </returns>
         public T LoadSettings<T>(string fileName)
         {
-            T appSettings = default(T);
+            var appSettings = default(T);
             IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
             srReader = new StreamReader(new IsolatedStorageFileStream(fileName, FileMode.OpenOrCreate, isolatedStorage));
             var settings = string.Empty;
@@ -109,9 +109,9 @@ namespace SCMSClient.Services.Implementation
                     appSettings = JsonConvert.DeserializeObject<T>(settings);
                 }
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -144,9 +144,9 @@ namespace SCMSClient.Services.Implementation
 
                 srWriter.Write(output);
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -176,10 +176,14 @@ namespace SCMSClient.Services.Implementation
                 {
                     isolatedStorage.DeleteFile("AppSettings");
                 }
+                else
+                {
+                    throw new InvalidOperationException("No settings found");
+                }
             }
-            catch (IsolatedStorageException ex)
+            catch
             {
-                throw ex;
+                throw;
             }
 
             return true;
@@ -203,6 +207,10 @@ namespace SCMSClient.Services.Implementation
                 if (isolatedStorage.FileExists(fileName))
                 {
                     isolatedStorage.DeleteFile(fileName);
+                }
+                else
+                {
+                    throw new InvalidOperationException("No settings found");
                 }
             }
             catch (IsolatedStorageException ex)
@@ -242,9 +250,9 @@ namespace SCMSClient.Services.Implementation
                     appSettings = JsonConvert.DeserializeObject<ApplicationSettings>(settings);
                 }
             }
-            catch (Exception e)
+            catch
             {
-                throw e;
+                throw;
             }
             finally
             {

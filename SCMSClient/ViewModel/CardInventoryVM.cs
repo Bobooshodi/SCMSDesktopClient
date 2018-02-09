@@ -24,7 +24,7 @@ namespace SCMSClient.ViewModel
         {
             cardService = _cardService;
 
-            LoadAll();
+            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
@@ -47,11 +47,15 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        protected override void LoadAll()
+        protected override async Task LoadAll()
         {
             try
             {
-                Task.Run(() => AllObjects = FilteredCollection = new ObservableCollection<Card>(cardService.GetAll()));
+                await Task.Run(() =>
+                {
+                    var allCards = cardService.GetAll() ?? new System.Collections.Generic.List<Card>();
+                    AllObjects = FilteredCollection = new ObservableCollection<Card>(allCards);
+                });
             }
             catch (Exception e)
             {

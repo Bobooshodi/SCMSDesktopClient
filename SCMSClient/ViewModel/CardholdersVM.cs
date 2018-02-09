@@ -2,6 +2,7 @@
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace SCMSClient.ViewModel
         {
             cardholderService = _cardholderService;
 
-            LoadAll();
+            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
@@ -38,13 +39,15 @@ namespace SCMSClient.ViewModel
             return false;
         }
 
-        protected override void LoadAll()
+        protected override async Task LoadAll()
         {
             try
             {
-                //AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(RandomDataGenerator.Cardholders(10));
-
-                Task.Run(() => AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(cardholderService.GetAll()));
+                await Task.Run(() =>
+                {
+                    var allCardholders = cardholderService.GetAll() ?? new List<Cardholder>();
+                    AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(allCardholders);
+                });
             }
             catch (Exception e)
             {
@@ -57,10 +60,6 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
-        /// <summary>
-        /// This Method is called when the <see cref="CreateCommand"/> Action is invoked
-        /// The Methos Opens a new page to create the Cardholder
-        /// </summary>
         protected override void Process()
         {
             throw new NotImplementedException();

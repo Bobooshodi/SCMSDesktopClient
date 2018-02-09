@@ -1,0 +1,15 @@
+﻿<Window x:Class="SCMSClient.Windows.Spinner"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        mc:Ignorable="d"
+        Title="Loading..." Height="100" Width="100"
+        WindowStartupLocation="CenterScreen" Topmost="True" 
+        ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        <Image gif:ImageBehavior.AnimatedSource="/Images/loading_spinner.gif"></Image>
+    </Grid>
+</Window>

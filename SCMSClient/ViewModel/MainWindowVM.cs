@@ -13,8 +13,7 @@ namespace SCMSClient.ViewModel
 
         private Uri activePage;
         private UIElement activeModal;
-        private User loggedInUser =
-            Application.Current.Properties["loggedInUser"] as User;
+        private User loggedInUser;
 
         #endregion
 
@@ -23,6 +22,11 @@ namespace SCMSClient.ViewModel
 
         public MainWindowVM()
         {
+            ToastNotification.Toaster.Refresh();
+
+            if (Application.Current?.Properties?["loggedInUser"] != null)
+                loggedInUser = Application.Current.Properties["loggedInUser"] as User;
+
             MessengerInstance.Register<UIElement>(this, ChangeModal);
 
             NavigationCommand = new RelayCommand<object>(Navigate);
