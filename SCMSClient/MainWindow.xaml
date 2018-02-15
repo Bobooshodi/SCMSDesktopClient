@@ -43,7 +43,7 @@
 
                     <Button Template="{StaticResource ButtonEmpty}">
 
-                        <TextBlock Grid.Column="1" Style="{StaticResource ButtonNav__Text}" VerticalAlignment="Center" Foreground="{StaticResource MarkerInvertedBrush}"> SCMS
+                        <TextBlock Grid.Column="1" Style="{StaticResource NotificationContainer__Count}" VerticalAlignment="Center" Foreground="{StaticResource MarkerInvertedBrush}"> SCMS
                         </TextBlock>
                     </Button>
                     <Border Grid.Column="2" Style="{StaticResource NotificationContainer}" Background="{StaticResource ComplementaryBrush}">

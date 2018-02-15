@@ -22,7 +22,8 @@
     <Style x:Key="DataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="Height" Value="auto"/>
         <Setter Property="Margin" Value="10 14 0 14" />
-        <Setter Property="Foreground" Value="{DynamicResource MarkerInvertedBrush}" />
+        <Setter Property="FontSize" Value="3"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}" />
 
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="Template">
@@ -56,7 +57,7 @@
         <Setter Property="BorderThickness" Value='0, 1, 0, 1'></Setter>
         <Setter Property="Padding" Value="12"/>
         <Setter Property="Background" Value="{StaticResource MarkerBrush}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource MarkerInvertedBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource MarkerInvertedBrush}" />
         
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Style.Triggers>
@@ -92,7 +93,7 @@
 
     <Style x:Key="DatGrid2" TargetType="{x:Type DataGrid}">
         <!--<Setter Property="Padding" Value="0 12"></Setter> -->
-        <Setter Property="Margin" Value="0 -20 0 0"></Setter>
+        <Setter Property="Margin" Value="0 20 0 0"></Setter>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="IsReadOnly" Value="True"/>

@@ -15,6 +15,7 @@ namespace SCMSClient.Models
         public string Cardholder { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IsExpanded { get; set; }
     }
 
     public enum CarParkStatus

@@ -153,6 +153,8 @@
     <Compile Include="Models\Domain\UserModel.cs" />
     <Compile Include="Models\Domain\VehicleModel.cs" />
     <Compile Include="Services\Implementation\AuthenticationService.cs" />
+    <Compile Include="Services\Implementation\EmployeeService.cs" />
+    <Compile Include="Services\Implementation\TenantService.cs" />
     <Compile Include="Services\Implementation\CardholderService.cs" />
     <Compile Include="Services\Implementation\CardRequestService.cs" />
     <Compile Include="Services\Implementation\CardVendorService.cs" />
@@ -168,6 +170,8 @@
     <Compile Include="Services\Interfaces\Common\IAbstractService.cs" />
     <Compile Include="Services\Interfaces\Common\IHTTPService.cs" />
     <Compile Include="Services\Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Services\Interfaces\ITenantService.cs" />
+    <Compile Include="Services\Interfaces\IEmployeeService.cs" />
     <Compile Include="Services\Interfaces\ICardholderService.cs" />
     <Compile Include="Services\Interfaces\ICardReplacementService.cs" />
     <Compile Include="Services\Interfaces\IPersonalizationRequestService.cs" />
@@ -177,6 +181,9 @@
     <Compile Include="Services\Interfaces\ICardService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Spinner\LoaderSpinner.xaml.cs">
+      <DependentUpon>LoaderSpinner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToastNotification\CustomMessageExtensions.cs" />
     <Compile Include="ToastNotification\EnumBooleanConverter.cs" />
     <Compile Include="ToastNotification\Error\ErrorNotification.cs" />
@@ -208,10 +215,11 @@
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
     <Compile Include="Utilities\ValueConverters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\ValueConverters\IdentificationNumberConverter.cs" />
+    <Compile Include="ViewModel\CardholderDetailsVM.cs" />
     <Compile Include="ViewModel\CardholdersVM.cs" />
     <Compile Include="ViewModel\CardInventoryVM.cs" />
     <Compile Include="ViewModel\Common\BaseModalsVM.cs" />
-    <Compile Include="ViewModel\Common\CollectionsVMWithThreeCommand.cs" />
+    <Compile Include="ViewModel\Common\CollectionsVMWithTwoCommands.cs" />
     <Compile Include="ViewModel\Modals\BlacklistRequestVM.cs" />
     <Compile Include="ViewModel\Modals\CardDistributionVM.cs" />
     <Compile Include="ViewModel\Modals\CardPersonalizationVM.cs" />
@@ -301,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modals\WarningModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Spinner\LoaderSpinner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -506,6 +518,7 @@
   <ItemGroup>
     <Resource Include="Images\loading_spinner.gif" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('..\packages\Fody.2.3.18\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

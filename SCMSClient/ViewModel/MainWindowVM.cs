@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using SCMSClient.Models;
+using SCMSClient.Views;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -28,6 +29,8 @@ namespace SCMSClient.ViewModel
                 loggedInUser = Application.Current.Properties["loggedInUser"] as User;
 
             MessengerInstance.Register<UIElement>(this, ChangeModal);
+
+            MessengerInstance.Register<CardholderDetails>(this, OpenCardholderDetails);
 
             NavigationCommand = new RelayCommand<object>(Navigate);
         }
@@ -79,6 +82,9 @@ namespace SCMSClient.ViewModel
                 case "cardholders":
                     ActivePage = new Uri("/Views/CardholderList.xaml", UriKind.RelativeOrAbsolute);
                     break;
+                case "cardholder-details":
+                    ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
+                    break;
                 case "settings":
                     break;
             }
@@ -92,6 +98,11 @@ namespace SCMSClient.ViewModel
         private void ChangeModal(UIElement modal)
         {
             ActiveModal = modal;
+        }
+
+        private void OpenCardholderDetails(CardholderDetails obj)
+        {
+            Navigate("cardholder-details");
         }
 
         #endregion

@@ -9,10 +9,10 @@ namespace TestLab
     {
         static void Main(string[] args)
         {
-            var objects = RandomDataGenerator.CardRequests(50);
+            var objects = RandomDataGenerator.ReplaceCardRequests(5);
 
             const string folder = @"D:\Projects\VisualStudio2017\repos\SCMS\SCMSClient\SCMSClient\Data";
-            const string file = "db.json";
+            const string file = "database.json";
 
             var content = JsonConvert.SerializeObject(objects);
 
@@ -34,10 +34,14 @@ namespace TestLab
                 }
 
                 Console.WriteLine("Done!!!");
+
+                Console.ReadKey();
             }
             catch (Exception e)
             {
                 Console.WriteLine($"An Error Occured: {e}");
+
+                Console.ReadKey();
             }
         }
     }

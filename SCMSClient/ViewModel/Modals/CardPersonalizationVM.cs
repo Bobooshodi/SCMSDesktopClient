@@ -1,4 +1,5 @@
 ﻿using SCMSClient.Models;
+using SCMSClient.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
@@ -8,17 +9,10 @@ namespace SCMSClient.ViewModel
     /// </summary>
     public class CardPersonalizationVM : BaseModalsVM<SOAPersonalizationRequest>
     {
-        #region Default Constructor
-
-        /// <summary>
-        /// This Class' implementation of the Base Class' constructor
-        /// </summary>
-        public CardPersonalizationVM()
+        public CardPersonalizationVM(IPersonalizationRequestService service) : base(_service: service)
         {
+
         }
-
-        #endregion
-
 
         #region Inherited Methods
 
@@ -27,6 +21,9 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override async Task ProcessLogic()
         {
+            await Task.Delay(15000);
+
+            throw new System.Exception("Test");
         }
 
         #endregion

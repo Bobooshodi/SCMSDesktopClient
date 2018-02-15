@@ -24,7 +24,7 @@
                               Background="Transparent" />
                         <Border x:Name="Border"
                             Grid.Row="1"
-                            BorderThickness="1"
+                            BorderThickness="0"
                             CornerRadius="0"
                             KeyboardNavigation.TabNavigation="Local"
                             KeyboardNavigation.DirectionalNavigation="Contained"
@@ -40,7 +40,7 @@
 
     <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
         <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="#FF474747"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -67,7 +67,7 @@
                             <RowDefinition Height="6" />
                             <RowDefinition Height="2" />
                         </Grid.RowDefinitions>
-                        <Border x:Name="Border"  Margin="0,0,-1,0" Background="Transparent">
+                        <Border x:Name="Border"  Margin="0,0,0,0" Background="Transparent">
                             <ContentPresenter x:Name="ContentSite"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Center"

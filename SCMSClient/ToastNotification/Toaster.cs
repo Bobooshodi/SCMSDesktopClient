@@ -70,7 +70,7 @@ namespace SCMSClient.ToastNotification
             if (lifetime == NotificationLifetimeType.Basic)
                 return new CountBasedLifetimeSupervisor(MaximumNotificationCount.FromCount(5));
 
-            return new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(3), MaximumNotificationCount.UnlimitedNotifications());
+            return new TimeAndCountBasedLifetimeSupervisor(TimeSpan.FromSeconds(5), MaximumNotificationCount.UnlimitedNotifications());
         }
 
         private static IPositionProvider CreatePositionProvider(Corner corner, PositionProviderType relation)

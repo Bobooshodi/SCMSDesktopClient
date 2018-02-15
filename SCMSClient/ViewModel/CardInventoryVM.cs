@@ -1,30 +1,20 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
 {
-    public class CardInventoryVM : CollectionsVMWithThreeCommand<Card>
+    public class CardInventoryVM : CollectionsVMWithTwoCommands<Card>
     {
-        #region Private Members
-
-        private readonly ICardService cardService;
-
-        #endregion
-
+        public override bool IsBusy { get; set; }
 
         #region Default Constructors
 
-        public CardInventoryVM(ICardService _cardService)
+        public CardInventoryVM(ICardService _cardService) : base(_service: _cardService)
         {
-            cardService = _cardService;
-
-            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
@@ -44,22 +34,6 @@ namespace SCMSClient.ViewModel
             else
             {
                 return false;
-            }
-        }
-
-        protected override async Task LoadAll()
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    var allCards = cardService.GetAll() ?? new System.Collections.Generic.List<Card>();
-                    AllObjects = FilteredCollection = new ObservableCollection<Card>(allCards);
-                });
-            }
-            catch (Exception e)
-            {
-                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
             }
         }
 
@@ -88,11 +62,6 @@ namespace SCMSClient.ViewModel
 
             FilteredCollection = new ObservableCollection<Card>(cards);
 
-        }
-
-        protected override void ViewObject()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

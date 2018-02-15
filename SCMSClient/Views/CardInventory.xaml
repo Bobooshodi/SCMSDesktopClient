@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:SCMSClient.Views"
+      xmlns:utilities="clr-namespace:SCMSClient.Utilities"
+      xmlns:loader="clr-namespace:SCMSClient.Spinner"
       DataContext="{Binding Source={StaticResource Locator}, Path=CardInventory}"
       mc:Ignorable="d"
       Title="CardInventory">
@@ -113,5 +114,8 @@
                 </DataGrid>
             </ScrollViewer>
         </Border>
+
+        <loader:LoaderSpinner Grid.Row="2" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsBusy, Converter={utilities:BooleanToVisiblityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </Page>

@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utilities="clr-namespace:SCMSClient.Utilities"
-      xmlns:local="clr-namespace:SCMSClient.Views"
+      xmlns:loader="clr-namespace:SCMSClient.Spinner"
       DataContext="{Binding Source={StaticResource Locator}, Path=Cardholders}"
       mc:Ignorable="d"
       Title="CardholderList">
@@ -193,13 +193,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
-                                                  Path=DataContext.ViewObjectCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
+                                                  Path=DataContext.ProcessCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
+            
         </Border>
+
+        <loader:LoaderSpinner Grid.Row="2" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsBusy, Converter={utilities:BooleanToVisiblityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Grid>
 </Page>

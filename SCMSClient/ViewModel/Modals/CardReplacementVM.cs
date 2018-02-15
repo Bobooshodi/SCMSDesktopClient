@@ -1,25 +1,16 @@
 ﻿using SCMSClient.Models;
+using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
     public class CardReplacementVM : BaseModalsVM<SOAReplaceCardRequest>
     {
-        #region Default Constructor
-
-        /// <summary>
-        /// This Class' implementation of the Base Class' constructor
-        /// </summary>
-        /// <param name="_selectedRequest">
-        /// The Item Selected from the List
-        /// </param>
-        public CardReplacementVM()
+        public CardReplacementVM(ICardReplacementService service) : base(_service: service)
         {
 
         }
-
-        #endregion
-
 
         #region Inherited Methods
 
@@ -28,7 +19,9 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override async Task ProcessLogic()
         {
+            await Task.Delay(15000);
 
+            toastManager.ShowSuccessToast(Toaster.SuccessTitle, "Succss!!!");
         }
 
         #endregion

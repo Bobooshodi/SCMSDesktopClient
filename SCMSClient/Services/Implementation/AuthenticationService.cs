@@ -49,9 +49,20 @@ namespace SCMSClient.Services.Implementation
             }
         }
 
-        public User RefreshUserLogin(string token)
+        /// <summary>
+        /// Refreshes the LoggedIn User's Expired AccessToken and 
+        /// requests for a new one from the server
+        /// </summary>
+        /// <param name="refreshToken">
+        /// The refreshToken of the LoggedIn User's current session
+        /// </param>
+        /// <returns>
+        /// A User Object containing the new AccessToken and other
+        /// session Information
+        /// </returns>
+        public User RefreshUserLogin(string refreshToken)
         {
-            if (string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(refreshToken))
                 throw new InvalidOperationException("No token was Passed");
 
             try
@@ -60,7 +71,7 @@ namespace SCMSClient.Services.Implementation
                 const string clientId = "desktop";
 
                 var content = HttpUtility.ParseQueryString(string.Empty);
-                content.Add("refresh_token", token);
+                content.Add("refresh_token", refreshToken);
                 content.Add("grant_type", grantType);
                 content.Add("client_id", clientId);
 

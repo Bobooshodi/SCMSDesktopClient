@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight.Ioc;
+using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using System;
@@ -9,17 +10,55 @@ using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
-    public class CardholdersVM : CollectionsVMWithThreeCommand<Cardholder>
+    public class CardholdersVM : CollectionsVMWithTwoCommands<Cardholder>
     {
-        private ICardholderService cardholderService;
+        private IEmployeeService empService;
+        private ITenantService tenantService;
+
+        public override bool IsBusy { get; set; }
 
         #region Default Constructor
 
-        public CardholdersVM(ICardholderService _cardholderService)
+        public CardholdersVM(ICardholderService _cardholderService, IEmployeeService _empService,
+            ITenantService _tenantService) : base(_service: _cardholderService)
         {
-            cardholderService = _cardholderService;
+            empService = _empService;
+            tenantService = _tenantService;
 
-            LoadAll().ConfigureAwait(false);
+            LoadAll();
+        }
+
+        #endregion
+
+
+        #region Tests
+
+        /// <summary>
+        /// This is a method thar runs on the initialization of the class
+        /// to load all objects using the service class
+        /// </summary>
+        /// <returns></returns>
+        protected override async Task LoadAll()
+        {
+            try
+            {
+                await RunMethodAsync(() =>
+                {
+                    if (AllObjects?.Count > 0)
+                        AllObjects.Clear();
+
+                    if (FilteredCollection?.Count > 0)
+                        FilteredCollection.Clear();
+
+                    var allObjects = tenantService.GetAll().Cast<Cardholder>().ToList() ??
+                    new List<Employee>().Cast<Cardholder>().ToList();
+                    AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(allObjects);
+                }, () => IsBusy);
+            }
+            catch (Exception e)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
+            }
         }
 
         #endregion
@@ -39,22 +78,6 @@ namespace SCMSClient.ViewModel
             return false;
         }
 
-        protected override async Task LoadAll()
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    var allCardholders = cardholderService.GetAll() ?? new List<Cardholder>();
-                    AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(allCardholders);
-                });
-            }
-            catch (Exception e)
-            {
-                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
-            }
-        }
-
         #endregion
 
 
@@ -62,12 +85,11 @@ namespace SCMSClient.ViewModel
 
         protected override void Process()
         {
-            throw new NotImplementedException();
-        }
+            var detailsVm = SimpleIoc.Default.GetInstance<CardholderDetailsVM>();
+            detailsVm.SelectedItem = SelectedObject;
 
-        protected override void ViewObject()
-        {
-
+            var mainWindowVm = SimpleIoc.Default.GetInstance<MainWindowVM>();
+            mainWindowVm.ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
         }
 
         protected override void FilterCollections(object obj)
@@ -77,7 +99,7 @@ namespace SCMSClient.ViewModel
             var cardholders = AllObjects
                 .Where(ch => ch.Cards
                                 .Any(c => c.CardType.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0))
-                .ToList();
+                                .ToList();
 
             FilteredCollection = new ObservableCollection<Cardholder>(cardholders);
         }

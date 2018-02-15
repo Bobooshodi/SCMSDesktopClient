@@ -26,6 +26,8 @@ namespace SCMSClient.Models
 
         public IdentificationType IdentificationType { get; set; }
 
+        public SHCCardType UserType { get; set; }
+
         [Required(ErrorMessage = "Please, Enter either a Passport or IC Number for this Cardholder")]
         public string IdentificationNo
         {

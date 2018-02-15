@@ -102,7 +102,6 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-
     <ControlTemplate x:Key="ButtonSubNavEmpty"
                      TargetType="{x:Type Button}">
         <Border x:Name="Border"
@@ -153,12 +152,62 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="ButtonSubNavActive"
+                     TargetType="{x:Type Button}">
+        <Border x:Name="Border"
+                BorderThickness="0"
+                TextBlock.Foreground="Red"
+                TextBlock.FontWeight="Regular"
+                TextBlock.FontSize="14px"
+                Background="Transparent"
+                Padding="16, 0"
+                Height="auto">
+
+            <!--<Border.Background>
+                <SolidColorBrush Color="Transparent"/>
+            </Border.Background>-->
+
+            <ContentPresenter RecognizesAccessKey="True"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+        </Border>
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter  Property="Cursor"
+                         Value="Hand"
+                         />
+                <Setter Property="Opacity" Value="0.6"></Setter>
+            </Trigger>
+
+            <Trigger Property="IsPressed"
+                     Value="True">
+
+
+
+            </Trigger>
+
+            <Trigger Property="IsEnabled"
+                     Value="False">
+                <Setter TargetName="Border"
+                        Property="Opacity"
+                        Value="0.15" />
+                <!--<Setter TargetName="Border"
+                        Property="Background"
+                        Value="#000000" />-->
+            </Trigger>
+
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
     <ControlTemplate x:Key="ButtonEmptyActive"
                      TargetType="{x:Type Button}">
         <Border x:Name="Border"
                 BorderThickness="0"
-                TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
+                TextBlock.Foreground="Red"
                 TextBlock.FontWeight="Regular"
                 TextBlock.FontSize="14px"
                 Background="Red"
@@ -204,7 +253,9 @@
 
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
+    
+    
+    
 
     <ControlTemplate x:Key="ButtonPrimary"
                      TargetType="{x:Type Button}">
@@ -360,239 +411,6 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="ButtonNav__Text" TargetType="TextBlock">
-        
-        <Setter Property="FontWeight" Value="SemiBold"></Setter>
-    </Style>
-
-    <ControlTemplate x:Key="Buttontoggle" 
-                     TargetType="{x:Type Button}">
-
-        <Border x:Name="Border"
-          TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
-          TextBlock.FontWeight="Normal"
-         Background="Transparent"  
-         Height="25" 
-                >
-
-            <ContentPresenter RecognizesAccessKey="True"
-                              Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-        </Border>
-        <ControlTemplate.Triggers>
-
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-
-                <Setter  Property="Cursor"
-                         Value="Hand"
-                         />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource HoverBackgroundBrush}" />
-            </Trigger>
-
-            <Trigger Property="IsPressed"
-                     Value="True">
-                <Setter TargetName="Border"
-                        Property="BorderThickness"
-                        Value="0" />
-                <Setter TargetName="Border"
-                        Property="BorderBrush"
-                        Value="#3ac162" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource HoverBackgroundBrush}" />
-                
-            </Trigger>
-
-            <Trigger Property="IsEnabled"
-                     Value="False">
-                <Setter TargetName="Border"
-                        Property="Opacity"
-                        Value="0.15" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="#000000" />
-            </Trigger>
-
-        </ControlTemplate.Triggers>
-
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="ButtontoggleActive" 
-                     TargetType="{x:Type Button}">
-
-        <Border x:Name="Border"
-          TextBlock.Foreground="{DynamicResource MarkerInvertedBrush}"
-                TextBlock.FontWeight="Bold"
-         Background="#FF4FA520"  
-         Height="24" 
-         CornerRadius="13">
-
-            <ContentPresenter RecognizesAccessKey="True"
-                              Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-        </Border>
-        <ControlTemplate.Triggers>
-
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-
-                <Setter  Property="Cursor"
-                         Value="Hand"
-                         />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="Transparent" />
-            </Trigger>
-
-            <Trigger Property="IsPressed"
-                     Value="True">
-                <Setter TargetName="Border"
-                        Property="BorderThickness"
-                        Value="1" />
-               
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="Transparent" />
-                <Setter TargetName="Border"
-                        Property="TextBlock.Foreground"
-                        Value="#ccc" />
-            </Trigger>
-
-            <Trigger Property="IsEnabled"
-                     Value="False">
-                <Setter TargetName="Border"
-                        Property="Opacity"
-                        Value="0.15" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="#000000" />
-            </Trigger>
-
-        </ControlTemplate.Triggers>
-
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="ButtontoggleInActive" 
-                     TargetType="{x:Type Button}">
-
-        <Border x:Name="Border"
-          TextBlock.Foreground="#FFFFFF"
-          TextBlock.FontWeight="Bold"
-         Background="#f9b954"  
-         Height="25" 
-         CornerRadius="13">
-
-            <ContentPresenter RecognizesAccessKey="True"
-                              Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-        </Border>
-        <ControlTemplate.Triggers>
-
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-
-                <Setter  Property="Cursor"
-                         Value="Hand"
-                         />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource HoverBackgroundBrush}" />
-            </Trigger>
-
-            <Trigger Property="IsPressed"
-                     Value="True">
-                <Setter TargetName="Border"
-                        Property="BorderThickness"
-                        Value="1" />
-                <Setter TargetName="Border"
-                        Property="BorderBrush"
-                        Value="#3ac162" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="#3ac162" />
-                <Setter TargetName="Border"
-                        Property="TextBlock.Foreground"
-                        Value="#ccc" />
-            </Trigger>
-
-            <Trigger Property="IsEnabled"
-                     Value="False">
-                <Setter TargetName="Border"
-                        Property="Opacity"
-                        Value="0.15" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="#000000" />
-            </Trigger>
-
-        </ControlTemplate.Triggers>
-
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="ButtontoggleBlacklisted" 
-                     TargetType="{x:Type Button}">
-
-        <Border x:Name="Border"
-        TextBlock.Foreground="#fff"
-                TextBlock.FontWeight="Bold"
-         Background="#ef0800"  
-                
-         Height="25" 
-         CornerRadius="13">
-
-            <ContentPresenter RecognizesAccessKey="True"
-                              Margin="{TemplateBinding Padding}"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-        </Border>
-        <ControlTemplate.Triggers>
-
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-
-                <Setter  Property="Cursor"
-                         Value="Hand"
-                         />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="{DynamicResource HoverBackgroundBrush}" />
-            </Trigger>
-
-            <Trigger Property="IsPressed"
-                     Value="True">
-                <Setter TargetName="Border"
-                        Property="BorderThickness"
-                        Value="1" />
-                <Setter TargetName="Border"
-                        Property="BorderBrush"
-                        Value="#3ac162" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="Transparent" />
-                <Setter TargetName="Border"
-                        Property="TextBlock.Foreground"
-                        Value="#ccc" />
-            </Trigger>
-
-            <Trigger Property="IsEnabled"
-                     Value="False">
-                <Setter TargetName="Border"
-                        Property="Opacity"
-                        Value="0.15" />
-                <Setter TargetName="Border"
-                        Property="Background"
-                        Value="#000000" />
-            </Trigger>
-
-        </ControlTemplate.Triggers>
-
-    </ControlTemplate>
 
     <ControlTemplate x:Key="ButtonSearch"
                      TargetType="{x:Type Button}">
@@ -644,7 +462,6 @@
 
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
 
     <!-- CUSTOM BUTTON FOR HEADER -->
 
@@ -705,6 +522,13 @@
         <Setter Property="Canvas.Top" Value="-3"></Setter>
         <Setter Property="Width" Value="18"></Setter>
         <Setter Property="Height" Value="48"></Setter>
+    </Style>
+
+
+    <Style x:Key="nav__active" TargetType="{x:Type Border}">
+        
+        <Setter Property="BorderThickness" Value="0 0 0 2"></Setter>
+        <Setter Property="BorderBrush" Value="{StaticResource ComplementaryBrush}"></Setter>
     </Style>
 
 

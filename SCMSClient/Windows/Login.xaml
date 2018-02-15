@@ -1,90 +1,87 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        x:Class="SCMSClient.Windows.Login"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		x:Class="SCMSClient.Windows.Login"
         xmlns:utilities="clr-namespace:SCMSClient.Utilities"
-        x:Name="loginWindow"
-        mc:Ignorable="d"
-        Title="Login">
+		x:Name="loginWindow"
+	    DataContext="{Binding Source={StaticResource Locator}, Path=Login}"
+		xmlns:loader="clr-namespace:SCMSClient.Spinner"
+		mc:Ignorable="d"
+		Title="Login">
 
-    <Window.DataContext>
-        <Binding Path="Login" Source="{StaticResource Locator}"/>
-    </Window.DataContext>
+	<Grid Background="#000">
+		<Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4" />
+		<Grid Style="{StaticResource login-wrapper}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="300" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
 
-    <Grid Background="#000">
-        <Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4"/>
-        <Grid Style="{StaticResource login-wrapper}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Border  Style="{StaticResource credential-container}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
+			<Border  Style="{StaticResource credential-container}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto" />
+							<RowDefinition Height="auto" />
+						</Grid.RowDefinitions>
 
-                    <TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account"/></TextBlock>
-                    <Border  Grid.Row="1" Style="{StaticResource credential__form}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+						<TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account" /></TextBlock>
+						<Border  Grid.Row="1" Style="{StaticResource credential__form}">
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition />
+									<RowDefinition />
+								</Grid.RowDefinitions>
 
-                            <Grid Style="{DynamicResource FormGroup}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Label Style="{DynamicResource FormLabel}" Content="Operator Name"/>
-                                <Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-                                    <TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
-                                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-                                </Border>
-                            </Grid>
+								<Grid Style="{DynamicResource FormGroup}">
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition />
+									</Grid.RowDefinitions>
+									<Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
+									<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+										<TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
+											 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+									</Border>
+								</Grid>
 
-                            <Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Label Style="{DynamicResource FormLabel}" Content="Operator Password"/>
-                                <Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-                                    <PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword"
-                                                 x:FieldModifier="public" Tag="Password">
-                                        <PasswordBox.InputBindings>
-                                            <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
-                                        </PasswordBox.InputBindings>
-                                    </PasswordBox>
-                                </Border>
-                            </Grid>
+								<Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
+									<Grid.RowDefinitions>
+										<RowDefinition />
+										<RowDefinition />
+									</Grid.RowDefinitions>
+									<Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
+									<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+										<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword"
+												 x:FieldModifier="public" Tag="Password">
+											<PasswordBox.InputBindings>
+												<KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+											</PasswordBox.InputBindings>
+										</PasswordBox>
+									</Border>
+								</Grid>
 
-                            <Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
-                                    Command="{Binding NextPageCommand}" CommandParameter="{Binding ElementName=loginWindow}" Content="Login Me In"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+								<Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
+									Command="{Binding NextPageCommand}" CommandParameter="{Binding ElementName=loginWindow}" Content="Login Me In" />
+							</Grid>
+						</Border>
+					</Grid>
+				</Border>
 
-            <Grid Grid.Column="1" Style="{StaticResource welcome}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+            <loader:LoaderSpinner loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"  
+                                  VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-                <TextBlock Grid.Row="0" Style="{StaticResource welcome__title}"><Run Text="Your Space To A Smart Connected World."/></TextBlock>
-                <TextBlock Grid.Row="1" Style="{StaticResource welcome__message}" ><Run Text="Welcome! We are happy to see you again. Enjoy the benefits of a smart connected world."/></TextBlock>
+			<Grid Grid.Column="1" Style="{StaticResource welcome}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto" />
+					<RowDefinition Height="auto" />
+				</Grid.RowDefinitions>
 
-            </Grid>
-
-        </Grid>
-
-
-    </Grid>
-
+				<TextBlock Grid.Row="0" Style="{StaticResource welcome__title}"><Run Text="Your Space To A Smart Connected World." /></TextBlock>
+				<TextBlock Grid.Row="1" Style="{StaticResource welcome__message}" ><Run Text="Welcome! We are happy to see you again. Enjoy the benefits of a smart connected world." /></TextBlock>
+			</Grid>
+		</Grid>
+	</Grid>
 </Window>

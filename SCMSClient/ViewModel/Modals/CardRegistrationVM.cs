@@ -19,9 +19,12 @@ namespace SCMSClient.ViewModel
         private ObservableCollection<CardType> cardTypes;
         private ObservableCollection<CardVendor> cardVendors;
         private CardVendor selectedCardVendor;
-        private ICardService cardService;
         private readonly ICardTypeService cardTypeService;
         private readonly ICardVendorService cardVendorService;
+
+        /// <summary>
+        /// This is the Logic to Enable or Disable the Process button on the view
+        /// </summary>
         protected override bool CanProcess
         {
             get
@@ -41,13 +44,11 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Class' implementation of the Base Class' constructor
         /// </summary>
-        /// <param name="_cardService"></param>
         /// <param name="_cardTypeService"></param>
         /// <param name="_cardVendorService"></param>
         public CardRegistrationVM(ICardService _cardService, ICardTypeService _cardTypeService,
-            ICardVendorService _cardVendorService)
+            ICardVendorService _cardVendorService) : base(_service: _cardService)
         {
-            cardService = _cardService;
             cardTypeService = _cardTypeService;
             cardVendorService = _cardVendorService;
 
@@ -59,24 +60,37 @@ namespace SCMSClient.ViewModel
 
         #region Public Properties
 
+        /// <summary>
+        /// This holds the value of the Cardtype Selected from the ComboBox
+        /// </summary>
         public CardType SelectedCardType
         {
             get => selectedCardType;
             set => Set(ref selectedCardType, value, true);
         }
 
+        /// <summary>
+        /// This holds the value of the CardVendor Selected from the CardVendors
+        /// ComboBox
+        /// </summary>
         public CardVendor SelectedCardVendor
         {
             get => selectedCardVendor;
             set => Set(ref selectedCardVendor, value, true);
         }
 
+        /// <summary>
+        /// This is the Collection Bound to the CardTypes ComboBox
+        /// </summary>
         public ObservableCollection<CardType> CardTypes
         {
             get => cardTypes;
             set => Set(ref cardTypes, value, true);
         }
 
+        /// <summary>
+        /// This is the Collection Bound to the CardVendors ComboBox
+        /// </summary>
         public ObservableCollection<CardVendor> CardVendors
         {
             get => cardVendors;
@@ -95,7 +109,6 @@ namespace SCMSClient.ViewModel
         {
             SelectedCardType = null;
             SelectedCardVendor = null;
-            cardService = null;
 
             base.Cleanup();
         }
@@ -112,33 +125,17 @@ namespace SCMSClient.ViewModel
         {
             try
             {
-                //await Task.Run(() =>
-                //{
-                //    var allCardVendors = cardVendorService.GetAll() ?? new List<CardVendor>();
-                //    CardVendors = new ObservableCollection<CardVendor>(allCardVendors);
-                //});
-
-                //await Task.Run(() =>
-                //{
-                //    var allCardTypes = cardTypeService.GetAll() ?? new List<CardType>();
-                //    CardTypes = new ObservableCollection<CardType>(allCardTypes);
-                //});
-
-                var actions = new List<Action>
+                await RunMethodAsync(() =>
                 {
-                    () =>
-                    {
-                        var allCardTypes = cardTypeService.GetAll() ?? new List<CardType>();
-                        CardTypes = new ObservableCollection<CardType>(allCardTypes);
-                    },
-                    () =>
-                    {
-                        var allCardVendors = cardVendorService.GetAll() ?? new List<CardVendor>();
-                        CardVendors = new ObservableCollection<CardVendor>(allCardVendors);
-                    }
-                };
+                    var allCardTypes = cardTypeService.GetAll() ?? new List<CardType>();
+                    CardTypes = new ObservableCollection<CardType>(allCardTypes);
+                }, () => IsProcessing);
 
-                await RunMethodAsync(actions);
+                await RunMethodAsync(() =>
+                {
+                    var allCardVendors = cardVendorService.GetAll() ?? new List<CardVendor>();
+                    CardVendors = new ObservableCollection<CardVendor>(allCardVendors);
+                }, () => IsProcessing);
             }
             catch (Exception e)
             {
@@ -156,7 +153,9 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override async Task ProcessLogic()
         {
+            await Task.Delay(15000);
 
+            toastManager.ShowSuccessToast(Toaster.SuccessTitle, "Succss!!!");
         }
 
         #endregion

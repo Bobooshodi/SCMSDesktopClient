@@ -2,6 +2,7 @@
 using SCMSClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SCMSClient.Utilities
 {
@@ -28,10 +29,111 @@ namespace SCMSClient.Utilities
                 .RuleFor(u => u.SmartCardId, f => f.Random.Replace("#####-##-####"))
                 .RuleFor(u => u.State, f => f.Address.State())
                 .RuleFor(u => u.Status, f => f.PickRandom<CardUserStatus>())
+                .RuleFor(u => u.UserType, f => f.PickRandom<SHCCardType>())
                 .RuleFor(u => u.ID, Guid.NewGuid().ToString())
-                .RuleFor(u => u.Cards, Cards(1));
+                .RuleFor(u => u.Cards, Cards(1))
+                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3))); ;
 
             return testUsers.Generate(amount);
+        }
+
+        public static List<Employee> Employees(int amount)
+        {
+            string[] genders = { "Male", "Female" };
+
+            var testUsers = new Faker<Employee>()
+                //Basic rules using built-in generators
+                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
+                .RuleFor(u => u.LastName, f => f.Name.LastName())
+                .RuleFor(u => u.Address, f => f.Address.StreetAddress())
+                .RuleFor(u => u.City, f => f.Address.City())
+                .RuleFor(u => u.Country, f => f.Address.Country())
+                .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
+                .RuleFor(u => u.Nationality, f => f.Address.Country())
+                .RuleFor(u => u.DateOfBirth, f => f.Person.DateOfBirth)
+                .RuleFor(u => u.Gender, f => f.PickRandom(genders))
+                .RuleFor(u => u.IdentificationType, f => f.PickRandom<IdentificationType>())
+                .RuleFor(u => u.IdentificationNo, f => f.Random.Replace("###-##-####"))
+                .RuleFor(u => u.Phone, f => f.Phone.PhoneNumberFormat())
+                .RuleFor(u => u.SmartCardId, f => f.Random.Replace("#####-##-####"))
+                .RuleFor(u => u.State, f => f.Address.State())
+                .RuleFor(u => u.Status, f => f.PickRandom<CardUserStatus>())
+                .RuleFor(u => u.UserType, f => SHCCardType.Employee)
+                .RuleFor(u => u.ID, Guid.NewGuid().ToString())
+                .RuleFor(u => u.Cards, Cards(1))
+                .RuleFor(u => u.EmployeeId, Guid.NewGuid().ToString())
+                .RuleFor(U => U.ContractId, f => f.Random.Replace("#####-???-***"))
+                .RuleFor(u => u.Designation, f => f.Name.JobTitle())
+                .RuleFor(u => u.Company, Companies(1).FirstOrDefault())
+                .RuleFor(u => u.Buildings, f => Buildings(f.Random.Int(0, 3)))
+                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3)));
+
+            return testUsers.Generate(amount);
+        }
+
+        public static List<Tenant> Tenants(int amount)
+        {
+            string[] genders = { "Male", "Female" };
+
+            var testUsers = new Faker<Tenant>()
+                //Basic rules using built-in generators
+                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
+                .RuleFor(u => u.LastName, f => f.Name.LastName())
+                .RuleFor(u => u.Address, f => f.Address.StreetAddress())
+                .RuleFor(u => u.City, f => f.Address.City())
+                .RuleFor(u => u.Country, f => f.Address.Country())
+                .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
+                .RuleFor(u => u.Nationality, (f, u) => u.Country)
+                .RuleFor(u => u.DateOfBirth, f => f.Person.DateOfBirth)
+                .RuleFor(u => u.Gender, f => f.PickRandom(genders))
+                .RuleFor(u => u.IdentificationType, f => f.PickRandom<IdentificationType>())
+                .RuleFor(u => u.IdentificationNo, f => f.Random.Replace("###-##-####"))
+                .RuleFor(u => u.Phone, f => f.Phone.PhoneNumberFormat())
+                .RuleFor(u => u.SmartCardId, f => f.Random.Replace("#####-##-####"))
+                .RuleFor(u => u.State, f => f.Address.State())
+                .RuleFor(u => u.Status, f => f.PickRandom<CardUserStatus>())
+                .RuleFor(u => u.ID, Guid.NewGuid().ToString())
+                .RuleFor(u => u.Cards, Cards(1))
+                .RuleFor(u => u.CarParks, (f) => CarParks(f.Random.Int(0, 3)))
+                .RuleFor(u => u.SHCTenant, SHCTenants(1).FirstOrDefault())
+                .RuleFor(u => u.Buildings, f => Buildings(f.Random.Int(0, 1)))
+                .RuleFor(u => u.UserType, SHCCardType.Tenant);
+
+            return testUsers.Generate(amount);
+        }
+
+        public static List<SHCTenant> SHCTenants(int amount)
+        {
+            var testTenants = new Faker<SHCTenant>()
+                .RuleFor(t => t.Name, f => f.Company.CompanyName())
+                .RuleFor(t => t.AccessGroups, f => null)
+                .RuleFor(t => t.Address, f => f.Address.StreetAddress())
+                .RuleFor(t => t.Building, f => f.Commerce.Department())
+                .RuleFor(t => t.BuildingId, Guid.NewGuid().ToString())
+                .RuleFor(t => t.Code, f => f.Random.Replace("#####-#######-###############"))
+                .RuleFor(t => t.ContactPerson, f => f.Name.FindName())
+                .RuleFor(t => t.Phone, f => f.Phone.PhoneNumber())
+                .RuleFor(t => t.Email, (f, u) => f.Internet.Email(u.Name))
+                .RuleFor(t => t.ID, Guid.NewGuid().ToString())
+                .RuleFor(t => t.ImageUrl, f => null)
+                .RuleFor(t => t.IsActive, f => f.Random.Bool());
+
+            return testTenants.Generate(amount);
+        }
+
+        public static List<Building> Buildings(int amount)
+        {
+            var testBuildings = new Faker<Building>()
+                .RuleFor(b => b.AccessGroups, f => null)
+                .RuleFor(b => b.Address, f => f.Address.FullAddress())
+                .RuleFor(b => b.ContactPerson, f => f.Name.FindName())
+                .RuleFor(b => b.Email, (f, u) => f.Internet.Email(u.Name))
+                .RuleFor(b => b.ID, Guid.NewGuid().ToString())
+                .RuleFor(b => b.Image, f => f.Image.City())
+                .RuleFor(b => b.Name, f => f.Company.CompanyName())
+                .RuleFor(b => b.Phone, f => null);
+
+            return testBuildings.Generate(amount);
         }
 
         public static List<Card> Cards(int amount)
@@ -40,7 +142,7 @@ namespace SCMSClient.Utilities
             var cardVendors = CardVendors(5);
             var cards = new Faker<Card>()
                 .RuleFor(c => c.BatchNo, f => f.Date.Recent(3).ToString("ddMMyyyy_HHmmss"))
-                .RuleFor(c => c.CardInventoryNo, f => f.Random.Number().ToString())
+                .RuleFor(c => c.CardInventoryNo, f => f.Random.Replace("###############"))
                 .RuleFor(c => c.CardType, f => f.PickRandom(cardTypes))
                 .RuleFor(c => c.CardVendor, f => cardVendors[f.Random.Number(3)])
                 .RuleFor(c => c.ID, Guid.NewGuid().ToString())
@@ -151,7 +253,7 @@ namespace SCMSClient.Utilities
             var companies = new Faker<Company>()
                 .RuleFor(b => b.Name, f => f.Company.CompanyName())
                 .RuleFor(b => b.ID, Guid.NewGuid().ToString())
-                .RuleFor(b => b.BusinessUnits, BusinessUnits(rnd.Next(5)))
+                .RuleFor(b => b.BusinessUnits, f => null)
                 .RuleFor(b => b.Code, f => f.Random.Replace("????-####-????"));
 
             return companies.Generate(amount);

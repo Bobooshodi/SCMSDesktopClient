@@ -18,6 +18,7 @@ namespace SCMSClient.ViewModel
         private string username;
         private readonly Toaster toastManager = Toaster.Instance;
         private readonly IAuthenticationService authService;
+        private bool loaderVisibility;
         private bool CanLogin => !string.IsNullOrEmpty(Username);
 
         #endregion
@@ -56,6 +57,13 @@ namespace SCMSClient.ViewModel
             set => Set(ref username, value, true);
         }
 
+        public bool LoaderVisibility
+        {
+            get => loaderVisibility;
+            set => Set(ref loaderVisibility, value, true);
+        }
+
+
         #endregion
 
 
@@ -93,7 +101,7 @@ namespace SCMSClient.ViewModel
         /// <returns></returns>
         private async Task Login(object obj)
         {
-            if (obj is null)
+            if (obj == null)
             {
                 toastManager.ShowInformationToast(Toaster.InformationTitle, "Page is Initializing, Please wait a moment and try again");
                 return;
@@ -106,7 +114,11 @@ namespace SCMSClient.ViewModel
                 if (loginWindow.UserPassword.Length < 1)
                     throw new Exception("Please, Enter a Password");
 
+                LoaderVisibility = true;
+
                 var loggedInUser = await Task.Run(() => authService.Login(Username, loginWindow.UserPassword.Unsecure()));
+
+                LoaderVisibility = false;
 
                 if (loggedInUser != null)
                 {

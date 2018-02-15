@@ -39,6 +39,20 @@
         public static string UpdateCardholder = "cardholders";
         public static string DeleteCardholder = "cardholders";
 
+        // Employees
+        public static string FindEmployeeById = "employees";
+        public static string AllEmployees = "employees";
+        public static string CreateEmployee = "employees";
+        public static string UpdateEmployee = "employees";
+        public static string DeleteEmployee = "employees";
+
+        // Tenants
+        public static string FindTenantById = "tenants";
+        public static string AllTenants = "tenants";
+        public static string CreateTenant = "tenants";
+        public static string UpdateTenant = "tenants";
+        public static string DeleteTenant = "tenants";
+
         // Card Replacement Service
         public static string FindCardReplacementRequestById = "card-replacement-requests";
         public static string AllCardReplacementRequests = "card-replacement-requests";

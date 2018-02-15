@@ -35,25 +35,14 @@ namespace SCMSClient.ViewModel
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 // Create design time view services and models
-                SimpleIoc.Default.Register<IUserService, UserService>();
-                SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<ISettingsService, SettingsService>();
-                SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
-                SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
-                SimpleIoc.Default.Register<ICardholderService, CardholderService>();
-                SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
-                SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
-                SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
-                SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
             }
             else
             {
                 // Create run time view services and models
                 SimpleIoc.Default.Register<IUserService, UserService>();
                 SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<ICardService, CardService>();
+                SimpleIoc.Default.Register<ITenantService, TenantService>();
+                SimpleIoc.Default.Register<IEmployeeService, EmployeeService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
                 SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
                 SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
@@ -78,6 +67,7 @@ namespace SCMSClient.ViewModel
             SimpleIoc.Default.Register<CardRegistrationVM>();
             SimpleIoc.Default.Register<CardDistributionVM>();
             SimpleIoc.Default.Register<BlacklistRequestVM>();
+            SimpleIoc.Default.Register<CardholderDetailsVM>();
             SimpleIoc.Default.Register<ReplaceCardRequestVM>();
             SimpleIoc.Default.Register<CardPersonalizationVM>();
             SimpleIoc.Default.Register<PersonalizationRequestVM>();
@@ -102,6 +92,14 @@ namespace SCMSClient.ViewModel
         public CardholdersVM Cardholders
         {
             get => ServiceLocator.Current.GetInstance<CardholdersVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Cardholder Details view
+        /// </summary>
+        public CardholderDetailsVM CardholderDetails
+        {
+            get => ServiceLocator.Current.GetInstance<CardholderDetailsVM>();
         }
 
         /// <summary>

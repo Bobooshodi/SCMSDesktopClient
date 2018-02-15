@@ -1,10 +1,6 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.ToastNotification;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
@@ -14,41 +10,25 @@ namespace SCMSClient.ViewModel
     /// </summary>
     public class PersonalizationRequestVM : CollectionsVMWithOneCommand<SOAPersonalizationRequest>
     {
-        private readonly IPersonalizationRequestService service;
+        public override bool IsBusy { get; set; }
 
         #region Default Constructor
 
-        public PersonalizationRequestVM(IPersonalizationRequestService _service)
+        /// <summary>
+        /// This Class' Implementation of the Base class' constructor
+        /// </summary>
+        /// <param name="_service">
+        /// The default Service class that manages objects of the type 
+        /// inferred from the Argument passed to the base class
+        /// </param>
+        public PersonalizationRequestVM(IPersonalizationRequestService _service) : base(_service: _service)
         {
-            service = _service;
-
-            LoadAll().ConfigureAwait(false);
         }
 
         #endregion
 
 
         #region Private Methods
-
-        /// <summary>
-        /// Implementation of the Logic to Load all <see cref="SOAPersonalizationRequest"/>
-        /// </summary>
-        protected override async Task LoadAll()
-        {
-            try
-            {
-                await Task.Run(() =>
-                {
-                    var allRequests = service.GetAll() ?? new List<SOAPersonalizationRequest>();
-
-                    AllObjects = new ObservableCollection<SOAPersonalizationRequest>(allRequests);
-                });
-            }
-            catch (Exception e)
-            {
-                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
-            }
-        }
 
         /// <summary>
         /// Implementaton of the Logic to filter the Collection

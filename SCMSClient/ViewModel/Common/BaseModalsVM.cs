@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
+using SCMSClient.Utilities;
 using System;
-using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -23,6 +25,8 @@ namespace SCMSClient.ViewModel
         #region Members Declaration
 
         private T selectedItem;
+        protected IAbstractService<T> service;
+
         protected readonly Toaster toastManager = Toaster.Instance;
         protected virtual bool CanProcess
         {
@@ -43,8 +47,10 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// The default constructor Inheriteda and implemented by all Child classes
         /// </summary>
-        protected BaseModalsVM()
+        protected BaseModalsVM(IAbstractService<T> _service)
         {
+            service = _service;
+
             ProcessCommand = new RelayCommand(async () => await Process(), () => CanProcess);
             CloseCommand = new RelayCommand(CloseModal);
         }
@@ -69,6 +75,9 @@ namespace SCMSClient.ViewModel
 
         #region Public Properties
 
+        /// <summary>
+        /// This is a Flag to show the state of the <see cref="Process"/> Method
+        /// </summary>
         public bool IsProcessing { get; set; }
 
         /// <summary>
@@ -86,21 +95,41 @@ namespace SCMSClient.ViewModel
         #region inheritable Methods
 
         /// <summary>
-        /// The Logic that's called when the <see cref="ProcessCommand"/> is invoked
+        /// This Method runs the <see cref="ProcessLogic"/> Method in a new <see cref="Task"/> 
+        /// when the <see cref="ProcessCommand"/> is invoked
         /// All Child classes must implemen their own logic
         /// </summary>
         protected virtual async Task Process()
         {
+            // Check if the flag property is true (meaning the function is already running)
+            if (IsProcessing)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, "Please wait for the current operation to complete before starting another one");
+                return;
+            }
+
             try
             {
-                await RunCommandAsync(() => ProcessLogic());
+                // Set the property flag to true to indicate we are running
+                IsProcessing = true;
+
+                await ProcessLogic();
             }
             catch (Exception e)
             {
                 toastManager.ShowErrorToast(Toaster.ErrorTitle, e.Message);
             }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                IsProcessing = false;
+            }
         }
 
+        /// <summary>
+        /// This is the Logic to execute when the <see cref="ProcessCommand"/> is invoked
+        /// </summary>
+        /// <returns></returns>
         protected abstract Task ProcessLogic();
 
         /// <summary>
@@ -118,36 +147,25 @@ namespace SCMSClient.ViewModel
 
         #region Member Methods
 
-        protected async Task RunCommandAsync(Func<Task> action)
-        {
-            // Check if the flag property is true (meaning the function is already running)
-            if (IsProcessing)
-                throw new InvalidOperationException("Please wait for the current operation to complete before starting another one");
-
-            try
-            {
-                // Set the property flag to true to indicate we are running
-                IsProcessing = true;
-
-                await action();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                // Set the property flag back to false now it's finished
-                IsProcessing = false;
-            }
-        }
-
-        protected async Task RunMethodAsync(Action action)
+        /// <summary>
+        /// This Method Runs the Method <paramref name="action"/> Passed to in in a
+        /// New <see cref="Task"/> to avoid blocking the current Thread and updates the
+        /// flag <paramref name="isRunning"/> passed to it to true or false to indicate 
+        /// the state of the operation
+        /// </summary>
+        /// <param name="action">
+        /// The Method to be run
+        /// </param>
+        /// <param name="isRunning">
+        /// Flag to hold the state of the Operation
+        /// </param>
+        /// <returns></returns>
+        protected async Task RunMethodAsync(Action action, Expression<Func<bool>> isRunning = null)
         {
             try
             {
                 // Set the property flag to true to indicate we are running
-                IsProcessing = true;
+                isRunning?.SetPropertyValue(true);
 
                 await Task.Run(action);
             }
@@ -158,44 +176,7 @@ namespace SCMSClient.ViewModel
             finally
             {
                 // Set the property flag back to false now it's finished
-                IsProcessing = false;
-            }
-        }
-
-        protected async Task RunMethodAsync(List<Action> actions)
-        {
-            try
-            {
-                var caughtExceptions = new List<Exception>();
-
-                // Set the property flag to true to indicate we are running
-                IsProcessing = true;
-
-                foreach (var action in actions)
-                {
-                    try
-                    {
-                        await Task.Run(action);
-                    }
-                    catch (Exception e)
-                    {
-                        caughtExceptions.Add(e);
-                        continue;
-                    }
-                    finally
-                    {
-                        caughtExceptions.ForEach(e => throw e);
-                    }
-                }
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                // Set the property flag back to false now it's finished
-                IsProcessing = false;
+                isRunning?.SetPropertyValue(false);
             }
         }
 

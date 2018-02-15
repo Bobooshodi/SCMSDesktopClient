@@ -1,4 +1,5 @@
 ﻿using SCMSClient.Models;
+using SCMSClient.Services.Interfaces;
 using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
@@ -6,14 +7,27 @@ namespace SCMSClient.ViewModel
     public class CardDistributionVM : BaseModalsVM<SOACardRequest>
     {
         #region Member Declarations
+        private int intValue;
         private string distributeFrom;
         private string distributeTo;
+
+        public CardDistributionVM(ICardRequestService service) : base(_service: service)
+        {
+
+        }
+
+        /// <summary>
+        /// This is the Logic to Enable or Disable the Process Button
+        /// </summary>
         protected override bool CanProcess
         {
             get
             {
-                if (string.IsNullOrEmpty(DistributeFrom) || string.IsNullOrEmpty(DistributeTo) || IsProcessing)
+                if (string.IsNullOrEmpty(DistributeFrom) || string.IsNullOrEmpty(DistributeTo) || IsProcessing ||
+                    !int.TryParse(DistributeFrom, out intValue) || !int.TryParse(DistributeTo, out intValue))
+                {
                     return false;
+                }
 
                 return true;
             }
@@ -22,27 +36,20 @@ namespace SCMSClient.ViewModel
         #endregion
 
 
-        #region Default Constructor
-
-        /// <summary>
-        /// This Class' implementation of the Base Class' constructor
-        /// </summary>
-        public CardDistributionVM()
-        {
-
-        }
-
-        #endregion
-
-
         #region Public Properties
 
+        /// <summary>
+        /// This holds the value of the From Textbox in the View
+        /// </summary>
         public string DistributeFrom
         {
             get => distributeFrom;
             set => Set(ref distributeFrom, value, true);
         }
 
+        /// <summary>
+        /// This holds the value of the To Textbox in the View
+        /// </summary>
         public string DistributeTo
         {
             get => distributeTo;
@@ -59,6 +66,9 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected override async Task ProcessLogic()
         {
+            await Task.Delay(15000);
+
+            throw new System.Exception("Test");
         }
 
         #endregion
