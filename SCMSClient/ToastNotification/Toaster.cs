@@ -26,10 +26,10 @@ namespace SCMSClient.ToastNotification
         {
             try
             {
-                lazy = new Lazy<Toaster>(() => new Toaster());
-
                 _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
                 Application.Current.MainWindow.Closing += MainWindowOnClosing;
+
+                lazy = new Lazy<Toaster>(() => new Toaster());
             }
             catch
             {
