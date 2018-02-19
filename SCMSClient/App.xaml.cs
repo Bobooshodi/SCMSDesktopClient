@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using SCMSClient.Utilities;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SCMSClient
 {
@@ -23,7 +25,7 @@ namespace SCMSClient
             {
                 // if the mutex already exists, notify and quit
                 MessageBox.Show("This program is already running");
-                Current.Shutdown();
+                Current.Shutdown(0);
             }
         }
 
@@ -44,6 +46,17 @@ namespace SCMSClient
             base.OnExit(e);
 
             Shutdown();
+        }
+
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            ErrorLogger.LogError(e.Exception.ToString(), ErrorType.APPLICATION_ERROR);
+
+            MessageBox.Show("An error has occured in the Application and the Application needs to Shutdown. Please restart the App");
+
+            e.Handled = true;
+
+            Current.Shutdown(0);
         }
     }
 }

@@ -139,6 +139,7 @@ namespace SCMSClient.ViewModel
             }
             catch (Exception e)
             {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, "Could not load resources to use on this page");
                 toastManager.ShowErrorToast(Toaster.ErrorTitle, e.Message);
             }
         }
