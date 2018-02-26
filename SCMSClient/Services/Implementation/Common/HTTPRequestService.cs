@@ -669,6 +669,34 @@ namespace SCMSClient.Services.Implementation
             throw ex.GetBaseException();
         }
 
+        private void Dispose(bool disposing)
+        {
+            client?.Dispose();
+            client = null;
+
+            if (disposing)
+            {
+                _sSettings = null;
+                appUser = null;
+                appSettings = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        #region Destructor
+
+        ~HTTPRequestService()
+        {
+            Dispose(false);
+        }
+
         #endregion
     }
 }

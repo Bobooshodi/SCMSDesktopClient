@@ -47,6 +47,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// The default constructor Inheriteda and implemented by all Child classes
         /// </summary>
+        /// <param name="_service"></param>
         protected BaseModalsVM(IAbstractService<T> _service)
         {
             service = _service;
@@ -83,7 +84,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// The Property to bind to the View
         /// </summary>
-        public T SelectedItem
+        public virtual T SelectedItem
         {
             get => selectedItem;
             set => Set(ref selectedItem, value, true);
@@ -168,6 +169,26 @@ namespace SCMSClient.ViewModel
                 isRunning?.SetPropertyValue(true);
 
                 await Task.Run(action);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                isRunning?.SetPropertyValue(false);
+            }
+        }
+
+        protected async Task<Tresult> RunMethodAsync<Tresult>(Func<Tresult> action, Expression<Func<bool>> isRunning = null)
+        {
+            try
+            {
+                // Set the property flag to true to indicate we are running
+                isRunning?.SetPropertyValue(true);
+
+                return await Task.Run(action);
             }
             catch
             {

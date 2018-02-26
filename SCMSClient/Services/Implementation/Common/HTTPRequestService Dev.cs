@@ -17,7 +17,7 @@ namespace SCMSClient.Services.Implementation
         #region Private Members
 
         private HttpClient client;
-        private readonly ISettingsService _sSettings;
+        private ISettingsService _sSettings;
         private User appUser = (User)Application.Current.Properties["activeUser"];
 
         #endregion
@@ -576,6 +576,33 @@ namespace SCMSClient.Services.Implementation
             }
 
             throw ex.GetBaseException();
+        }
+
+        private void Dispose(bool disposing)
+        {
+            client?.Dispose();
+            client = null;
+
+            if (disposing)
+            {
+                _sSettings = null;
+                appUser = null;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+
+        #region Destructor
+
+        ~HTTPRequestServiceDev()
+        {
+            Dispose(false);
         }
 
         #endregion

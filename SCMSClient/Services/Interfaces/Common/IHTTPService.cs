@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 
 namespace SCMSClient.Services.Interfaces
 {
-    public interface IHTTPService
+    public interface IHTTPService : IDisposable
     {
         T Put<T>(T model, string url);
 

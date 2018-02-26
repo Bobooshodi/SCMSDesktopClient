@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace SCMSClient.Services.Implementation
 {
-    public class SettingsService : ISettingsService
+    public class SettingsService : ISettingsService, IDisposable
     {
         #region Private Members
 
@@ -276,7 +276,7 @@ namespace SCMSClient.Services.Implementation
         {
             string content = JsonConvert.SerializeObject(settings);
 
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            var dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = "VMSClientSetting"; // Default file name
             dlg.DefaultExt = ".Json"; // Default file extension
             dlg.Filter = "JSON (.Json)|*.Json"; // Filter files by extension
@@ -291,7 +291,7 @@ namespace SCMSClient.Services.Implementation
                 fileName = dlg.FileName;
 
                 FileStream file = File.Open(fileName, FileMode.Create);
-                StreamWriter writer = new StreamWriter(file);
+                var writer = new StreamWriter(file);
 
                 try
                 {
@@ -299,7 +299,7 @@ namespace SCMSClient.Services.Implementation
                 }
                 catch (Exception e)
                 {
-                    throw e;
+                    throw;
                 }
                 finally
                 {
@@ -325,6 +325,12 @@ namespace SCMSClient.Services.Implementation
             loginPage.Show();
 
             Application.Current.MainWindow.Close();
+        }
+
+        public void Dispose()
+        {
+            srReader.Close();
+            srReader = null;
         }
 
         #endregion

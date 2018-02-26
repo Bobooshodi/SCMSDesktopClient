@@ -19,7 +19,7 @@ namespace SCMSClient.Services.Implementation
 
         #region Private Members
 
-        protected readonly IHTTPService httpService;
+        protected IHTTPService httpService;
 
         #endregion
 
@@ -176,6 +176,18 @@ namespace SCMSClient.Services.Implementation
             {
                 throw;
             }
+        }
+
+        public virtual void Dispose()
+        {
+            getAllUrl = null;
+            getAllUrl = null;
+            createUrl = null;
+            deleteUrl = null;
+            updateUrl = null;
+
+            httpService.Dispose();
+            httpService = null;
         }
 
         #endregion
