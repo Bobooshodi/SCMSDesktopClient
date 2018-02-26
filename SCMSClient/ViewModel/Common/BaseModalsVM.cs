@@ -52,7 +52,7 @@ namespace SCMSClient.ViewModel
             service = _service;
 
             ProcessCommand = new RelayCommand(async () => await Process(), () => CanProcess);
-            CloseCommand = new RelayCommand(CloseModal);
+            CloseCommand = new RelayCommand(Close);
         }
 
         #endregion
@@ -137,7 +137,7 @@ namespace SCMSClient.ViewModel
         /// the Child classes can override this Logic if there's a custom logic to
         /// close the modal
         /// </summary>
-        protected virtual void CloseModal()
+        protected virtual void Close()
         {
             MessengerInstance.Send<UIElement>(null);
         }

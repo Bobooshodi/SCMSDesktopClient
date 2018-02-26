@@ -15,5 +15,17 @@ namespace SCMSClient.Windows
         }
 
         public SecureString UserPassword => userPassword.SecurePassword;
+
+        private void userPassword_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (System.Console.CapsLock)
+            {
+                notificationText.Content = "Caps Lock Is On";
+            }
+            else
+            {
+                notificationText.Content = string.Empty;
+            }
+        }
     }
 }

@@ -69,7 +69,7 @@ namespace SCMSClient.ViewModel
             return null;
         }
 
-        protected override void CloseModal()
+        protected override void Close()
         {
             SelectedParking.IsExpanded = !SelectedParking.IsExpanded;
         }
@@ -89,6 +89,7 @@ namespace SCMSClient.ViewModel
                 PersonalizationStatus = RequestStatus.New,
                 CardType = new CardType
                 {
+                    ID = SelectedCard.CardTypeId,
                     Name = SelectedCard.CardType
                 }
             };

@@ -50,7 +50,7 @@ namespace SCMSClient
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            ErrorLogger.LogError(e.Exception.ToString(), ErrorType.APPLICATION_ERROR);
+            ErrorLogger.LogError(e.Exception.ToString(), ErrorType.APPLICATION_CRASH_ERROR);
 
             MessageBox.Show("An error has occured in the Application and the Application needs to Shutdown. Please restart the App");
 

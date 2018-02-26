@@ -4,9 +4,9 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		x:Class="SCMSClient.Windows.Login"
-        xmlns:utilities="clr-namespace:SCMSClient.Utilities"
+		xmlns:utilities="clr-namespace:SCMSClient.Utilities"
 		x:Name="loginWindow"
-	    DataContext="{Binding Source={StaticResource Locator}, Path=Login}"
+		DataContext="{Binding Source={StaticResource Locator}, Path=Login}"
 		xmlns:loader="clr-namespace:SCMSClient.Spinner"
 		mc:Ignorable="d"
 		Title="Login">
@@ -20,58 +20,60 @@
 			</Grid.ColumnDefinitions>
 
 			<Border  Style="{StaticResource credential-container}">
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto" />
-							<RowDefinition Height="auto" />
-						</Grid.RowDefinitions>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto" />
+						<RowDefinition Height="auto" />
+					</Grid.RowDefinitions>
 
-						<TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account" /></TextBlock>
-						<Border  Grid.Row="1" Style="{StaticResource credential__form}">
-							<Grid>
+					<TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account" /></TextBlock>
+					<Border  Grid.Row="1" Style="{StaticResource credential__form}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+
+							<Grid Style="{DynamicResource FormGroup}">
+								<Grid.RowDefinitions>
+									<RowDefinition />
+									<RowDefinition />
+								</Grid.RowDefinitions>
+								<Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
+								<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+									<TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
+											 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
+								</Border>
+							</Grid>
+
+							<Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
 								<Grid.RowDefinitions>
 									<RowDefinition />
 									<RowDefinition />
 									<RowDefinition />
 								</Grid.RowDefinitions>
-
-								<Grid Style="{DynamicResource FormGroup}">
-									<Grid.RowDefinitions>
-										<RowDefinition />
-										<RowDefinition />
-									</Grid.RowDefinitions>
-									<Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
-									<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-										<TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
-											 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-									</Border>
-								</Grid>
-
-								<Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
-									<Grid.RowDefinitions>
-										<RowDefinition />
-										<RowDefinition />
-									</Grid.RowDefinitions>
-									<Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
-									<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-										<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword"
+								<Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
+								<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
+									<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword" KeyDown="userPassword_KeyDown"
 												 x:FieldModifier="public" Tag="Password">
-											<PasswordBox.InputBindings>
-												<KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
-											</PasswordBox.InputBindings>
-										</PasswordBox>
-									</Border>
-								</Grid>
-
-								<Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
-									Command="{Binding NextPageCommand}" CommandParameter="{Binding ElementName=loginWindow}" Content="Login Me In" />
+										<PasswordBox.InputBindings>
+											<KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+										</PasswordBox.InputBindings>
+									</PasswordBox>
+								</Border>
+								<Label Name="notificationText" Grid.Row="2" Style="{DynamicResource FormLabel}" />
 							</Grid>
-						</Border>
-					</Grid>
-				</Border>
 
-            <loader:LoaderSpinner loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"  
-                                  VerticalAlignment="Center" HorizontalAlignment="Center" />
+							<Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
+									Command="{Binding NextPageCommand}" CommandParameter="{Binding ElementName=loginWindow}" Content="Login Me In" />
+						</Grid>
+					</Border>
+				</Grid>
+			</Border>
+
+			<loader:LoaderSpinner loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"
+								  VerticalAlignment="Center" HorizontalAlignment="Center" />
 
 			<Grid Grid.Column="1" Style="{StaticResource welcome}">
 				<Grid.RowDefinitions>

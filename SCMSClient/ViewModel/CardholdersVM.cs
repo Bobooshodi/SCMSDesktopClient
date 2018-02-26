@@ -1,12 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.ToastNotification;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
@@ -15,8 +12,6 @@ namespace SCMSClient.ViewModel
         private IEmployeeService empService;
         private ITenantService tenantService;
 
-        public override bool IsBusy { get; set; }
-
         #region Default Constructor
 
         public CardholdersVM(ICardholderService _cardholderService, IEmployeeService _empService,
@@ -24,44 +19,10 @@ namespace SCMSClient.ViewModel
         {
             empService = _empService;
             tenantService = _tenantService;
-
-            LoadAll();
         }
 
         #endregion
 
-
-        #region Tests
-
-        /// <summary>
-        /// This is a method thar runs on the initialization of the class
-        /// to load all objects using the service class
-        /// </summary>
-        /// <returns></returns>
-        protected override async Task LoadAll()
-        {
-            try
-            {
-                await RunMethodAsync(() =>
-                {
-                    if (AllObjects?.Count > 0)
-                        AllObjects.Clear();
-
-                    if (FilteredCollection?.Count > 0)
-                        FilteredCollection.Clear();
-
-                    var allObjects = tenantService.GetAll().Cast<Cardholder>().ToList() ??
-                    new List<Employee>().Cast<Cardholder>().ToList();
-                    AllObjects = FilteredCollection = new ObservableCollection<Cardholder>(allObjects);
-                }, () => IsBusy);
-            }
-            catch (Exception e)
-            {
-                toaster.ShowErrorToast(Toaster.ErrorTitle, e.Message);
-            }
-        }
-
-        #endregion
 
         #region Private Methods
 

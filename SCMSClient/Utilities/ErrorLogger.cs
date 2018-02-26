@@ -11,6 +11,7 @@ namespace SCMSClient.Utilities
         private const string baseErrorFolderName = "SCMS Error Logs";
         private const string applicationErrorFile = "Application Error Logs.txt";
         private const string deviceFailureErrorFile = "Device Failure Error Logs.txt";
+        private const string applicationCrashErrorFile = "Application Crash Error Logs.txt";
         private const string serverErrorFile = "Server Error Logs.txt";
         private const string applicationErrorFolder = "Application Error Logs";
         private const string deviceFailureErrorFolder = "Device Failure Error Logs";
@@ -52,6 +53,11 @@ namespace SCMSClient.Utilities
                     sb.Append("Occurrence DateTime: ").Append(DateTime.Now).AppendLine();
                     sb.Append("Error: ").AppendLine(content);
                     LogError(serverErrorFolder, serverErrorFile, sb.ToString());
+                    break;
+                case ErrorType.APPLICATION_CRASH_ERROR:
+                    sb.Append("Occurrence DateTime: ").Append(DateTime.Now).AppendLine();
+                    sb.Append("Error: ").AppendLine(content);
+                    LogError(applicationErrorFolder, applicationCrashErrorFile, sb.ToString());
                     break;
             }
         }
@@ -104,6 +110,7 @@ namespace SCMSClient.Utilities
     {
         SERVER_ERROR,
         APPLICATION_ERROR,
-        DEVICE_FAILURE_ERROR
+        DEVICE_FAILURE_ERROR,
+        APPLICATION_CRASH_ERROR
     }
 }

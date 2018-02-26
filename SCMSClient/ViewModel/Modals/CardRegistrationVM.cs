@@ -99,6 +99,7 @@ namespace SCMSClient.ViewModel
 
         #endregion
 
+
         #region Public Methods
 
         /// <summary>
