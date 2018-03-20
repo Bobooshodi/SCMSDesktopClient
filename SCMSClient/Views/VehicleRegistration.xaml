@@ -1,0 +1,115 @@
+﻿<Page x:Class="SCMSClient.Views.VehicleRegistration"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="VehicleRegistration">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height='auto'></RowDefinition>
+            <RowDefinition Height='*'></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource SubMenu}" Padding="0 15">
+            <Border MaxWidth="1050">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Template="{StaticResource ButtonEmpty}" Command="{Binding GotoFirstPage}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Border Style="{StaticResource process__counter--first--complete}">
+                                <TextBlock Style="{StaticResource process__counter__text--complete}" >1</TextBlock>
+                            </Border>
+                            <TextBlock Grid.Row="1" Style="{StaticResource process__text--first}">General Details</TextBlock>
+                        </Grid>
+                    </Button>
+                    <Border Grid.Column="1"  Style="{StaticResource process__line}">
+                    </Border>
+                    <Button Template="{StaticResource ButtonEmpty}" Grid.Column="2" Command="{Binding GotoSecondPage}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Border Style="{StaticResource process__counter--complete}">
+                                <TextBlock Style="{StaticResource process__counter__text--complete}" >2</TextBlock>
+                            </Border>
+                            <TextBlock Grid.Row="1" Style="{StaticResource process__text}">Tenant Details</TextBlock>
+                        </Grid>
+                    </Button>
+                    <Border Grid.Column="3" Style="{StaticResource process__line}">
+                    </Border>
+                    <Button  Template="{StaticResource ButtonEmpty}" Grid.Column="4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Border Style="{StaticResource process__counter--last--complete}">
+                                <TextBlock Style="{StaticResource process__counter__text--complete}" >3</TextBlock>
+                            </Border>
+                            <TextBlock Grid.Row="1" Style="{StaticResource process__text--last}">Vehicle Details</TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Border>
+        </Border>
+        <Border Grid.Row="1" MaxWidth="1050">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Template="{StaticResource ButtonPrimary}" MaxWidth="140" HorizontalAlignment="Right" Command="{Binding AddVehicleCommand}">Add a vehicle</Button>
+
+                <DataGrid Grid.Row="1" Style="{DynamicResource DatGrid}" VerticalAlignment="Top" ItemsSource="{Binding Vehicles}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Plate Number" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+
+                                    <TextBlock Foreground="{StaticResource MarkerBrush}" FontWeight="Light" Text="{Binding Path=NumberPlate}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Car Model" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="{StaticResource MarkerBrush}" FontWeight="Light" Text="{Binding Path=VehicleModel}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Template="{StaticResource ButtonEmpty}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
+                                                      Path=DataContext.RemoveVehicleCommand}">Remove</Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="4" Template="{StaticResource ButtonPrimary}" Command="{Binding PerformAction}">Continue Registration</Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

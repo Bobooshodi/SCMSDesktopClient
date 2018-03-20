@@ -18,37 +18,38 @@ namespace SCMSClient.ViewModel
         private string username;
         private readonly Toaster toastManager = Toaster.Instance;
         private readonly IAuthenticationService authService;
+
+        private readonly IDinkeyDongleService dongleService;
         private bool loaderVisibility;
+
         private bool CanLogin => !string.IsNullOrEmpty(Username);
 
-        #endregion
-
+        #endregion Private Members
 
         #region Default Constructor
 
-        public LoginViewModel(IAuthenticationService _authService)
+        public LoginViewModel(IAuthenticationService _authService, IDinkeyDongleService _dongleService)
         {
+            dongleService = _dongleService;
             authService = _authService;
 
             LoginCommand = new RelayCommand<object>(async (object obj) => await Login(obj), (obj) => CanLogin);
             NextPageCommand = new RelayCommand<object>(OpenNextPage);
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region Button Commands for the View
 
         public ICommand LoginCommand { get; set; }
         public ICommand NextPageCommand { get; set; }
 
-        #endregion
-
+        #endregion Button Commands for the View
 
         #region Public Properties
 
         /// <summary>
-        /// Public Property to hold The User's 
+        /// Public Property to hold The User's
         /// Username
         /// </summary>
         public string Username
@@ -63,11 +64,74 @@ namespace SCMSClient.ViewModel
             set => Set(ref loaderVisibility, value, true);
         }
 
+        public string UsernameBorderStyle
+        {
+            get
+            {
+                if (DisplayError())
+                {
+                    return "InputBorder";
+                }
 
-        #endregion
+                return "InputBorderHasError";
+            }
+        }
 
+        public bool UsernameErrorTextVisibility
+        {
+            get => !DisplayError();
+        }
+
+        #endregion Public Properties
 
         #region Private Methods
+
+        private void CheckPCValidity()
+        {
+            try
+            {
+                var mutexName = "";
+
+                if (dongleService.IsDonglePresent())
+                {
+                    var allowedPc = false;
+
+                    var data = dongleService.GetDongleData();
+
+                    foreach (var pc in data.PCToBoind)
+                    {
+                        if (pc.Uid == mutexName)
+                        {
+                            allowedPc = true;
+                            break;
+                        }
+                    }
+
+                    if (!allowedPc)
+                    {
+                        throw new Exception("SCMS is not configured to work on this PC");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Dongle is not Present");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Not Allowed");
+
+                Application.Current.Shutdown(0);
+            }
+        }
+
+        private bool DisplayError()
+        {
+            if (Username?.Length < 1)
+                return false;
+
+            return true;
+        }
 
         /// <summary>
         /// Just a Method to go to the next page
@@ -144,8 +208,7 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Private Methods
     }
 
     public interface IHavePassword

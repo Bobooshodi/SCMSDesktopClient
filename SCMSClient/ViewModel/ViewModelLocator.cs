@@ -4,7 +4,7 @@
       <vm:ViewModelLocator xmlns:vm="clr-namespace:SCMSClient"
                            x:Key="Locator" />
   </Application.Resources>
-  
+
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
@@ -42,6 +42,9 @@ namespace SCMSClient.ViewModel
                 SimpleIoc.Default.Register<IUserService, UserService>();
                 SimpleIoc.Default.Register<ICardService, CardService>();
                 SimpleIoc.Default.Register<ITenantService, TenantService>();
+                SimpleIoc.Default.Register<ICarParkService, CarParkService>();
+                SimpleIoc.Default.Register<IVehicleService, VehicleService>();
+                SimpleIoc.Default.Register<IBuildingService, BuildingService>();
                 SimpleIoc.Default.Register<IEmployeeService, EmployeeService>();
                 SimpleIoc.Default.Register<ISettingsService, SettingsService>();
                 SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
@@ -49,6 +52,7 @@ namespace SCMSClient.ViewModel
                 SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
                 SimpleIoc.Default.Register<ICardholderService, CardholderService>();
                 SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
+                SimpleIoc.Default.Register<IDinkeyDongleService, DinkeyDongleService>();
                 SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
                 SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
                 SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
@@ -56,20 +60,28 @@ namespace SCMSClient.ViewModel
 
             SimpleIoc.Default.Register<RequestsVM>();
             SimpleIoc.Default.Register<DashboardVM>();
+            SimpleIoc.Default.Register<AddCarParkVM>();
             SimpleIoc.Default.Register<MainWindowVM>();
+            SimpleIoc.Default.Register<AddVehicleVM>();
             SimpleIoc.Default.Register<CardholdersVM>();
+            SimpleIoc.Default.Register<AddBuildingVM>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CardRequestsVM>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<CardInventoryVM>();
+            SimpleIoc.Default.Register<ChangePasswordVM>();
             SimpleIoc.Default.Register<CardReplacementVM>();
             SimpleIoc.Default.Register<SystemOperatorsVM>();
             SimpleIoc.Default.Register<CardRegistrationVM>();
             SimpleIoc.Default.Register<CardDistributionVM>();
             SimpleIoc.Default.Register<BlacklistRequestVM>();
             SimpleIoc.Default.Register<CardholderDetailsVM>();
+            SimpleIoc.Default.Register<TenantRegistrationVM>();
             SimpleIoc.Default.Register<ReplaceCardRequestVM>();
             SimpleIoc.Default.Register<CardPersonalizationVM>();
+            SimpleIoc.Default.Register<VehicleRegistrationVM>();
+            SimpleIoc.Default.Register<EmployeeRegistrationVM>();
+            SimpleIoc.Default.Register<CardholderRegistrationVM>();
             SimpleIoc.Default.Register<PersonalizationRequestVM>();
         }
 
@@ -172,6 +184,70 @@ namespace SCMSClient.ViewModel
         public ReplaceCardRequestVM ReplaceCardRequest
         {
             get => ServiceLocator.Current.GetInstance<ReplaceCardRequestVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Cardholder Registration Page
+        /// </summary>
+        public CardholderRegistrationVM CardholderRegistration
+        {
+            get => ServiceLocator.Current.GetInstance<CardholderRegistrationVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Employee Registration Page
+        /// </summary>
+        public EmployeeRegistrationVM EmployeeRegistration
+        {
+            get => ServiceLocator.Current.GetInstance<EmployeeRegistrationVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Tenant Registration Page
+        /// </summary>
+        public TenantRegistrationVM TenantRegistration
+        {
+            get => ServiceLocator.Current.GetInstance<TenantRegistrationVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Tenant Registration Page
+        /// </summary>
+        public VehicleRegistrationVM VehicleRegistration
+        {
+            get => ServiceLocator.Current.GetInstance<VehicleRegistrationVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the AddVehicle Modal
+        /// </summary>
+        public AddVehicleVM AddVehicles
+        {
+            get => ServiceLocator.Current.GetInstance<AddVehicleVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the AddBuilding Modal
+        /// </summary>
+        public AddBuildingVM AddBuilding
+        {
+            get => ServiceLocator.Current.GetInstance<AddBuildingVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the AddCarPark Modal
+        /// </summary>
+        public AddCarParkVM AddCarPark
+        {
+            get => ServiceLocator.Current.GetInstance<AddCarParkVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Change Password Modal
+        /// </summary>
+        public ChangePasswordVM ChangePassword
+        {
+            get => ServiceLocator.Current.GetInstance<ChangePasswordVM>();
         }
 
         public static void Cleanup()

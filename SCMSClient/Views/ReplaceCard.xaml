@@ -15,18 +15,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
-        <Grid Margin="30 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition MaxWidth="400"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="1" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-        </Grid>
-        <Border  Grid.Row="2" Style="{StaticResource main_section}">
+        
             <ScrollViewer Grid.Row="1">
 
                 <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding AllObjects}" SelectedItem="{Binding SelectedObject}" 
@@ -123,13 +112,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </ScrollViewer>
-        </Border>
+
         <loader:LoaderSpinner Grid.Row="1" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsBusy, Converter={utilities:BooleanToVisiblityConverter}}"
                               VerticalAlignment="Center" HorizontalAlignment="Center" />
-
-        <!--  <Canvas>
-            <Border Canvas.Right="0" Background="Red" Height="40" Width="40" CornerRadius="40">
-            </Border>
-        </Canvas> -->
     </Grid>
 </Page>

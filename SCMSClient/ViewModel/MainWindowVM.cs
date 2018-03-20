@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using SCMSClient.Models;
+using SCMSClient.Services.Interfaces;
 using SCMSClient.Views;
 using System;
 using System.Windows;
@@ -15,14 +16,17 @@ namespace SCMSClient.ViewModel
         private Uri activePage;
         private UIElement activeModal;
         private User loggedInUser;
+        private readonly ISettingsService settingsService;
 
         #endregion
 
 
         #region Default Constructor
 
-        public MainWindowVM()
+        public MainWindowVM(ISettingsService _settingsService)
         {
+            settingsService = _settingsService;
+
             ToastNotification.Toaster.Refresh();
 
             if (Application.Current?.Properties?["loggedInUser"] != null)
@@ -32,7 +36,9 @@ namespace SCMSClient.ViewModel
 
             MessengerInstance.Register<CardholderDetails>(this, OpenCardholderDetails);
 
+            LogOutCommand = new RelayCommand(LogOut);
             NavigationCommand = new RelayCommand<object>(Navigate);
+            ChangePasswordCommand = new RelayCommand(ChangePassword);
         }
 
         #endregion
@@ -40,12 +46,16 @@ namespace SCMSClient.ViewModel
 
         #region Commands
 
+        public ICommand LogOutCommand { get; set; }
         public ICommand NavigationCommand { get; set; }
+        public ICommand ChangePasswordCommand { get; set; }
 
         #endregion
 
 
         #region Public Properties
+
+        public bool ShowOptions { get; set; }
 
         public string LoggedInUserName => $"Welcome {loggedInUser.Username}";
 
@@ -85,9 +95,20 @@ namespace SCMSClient.ViewModel
                 case "cardholder-details":
                     ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
                     break;
-                case "settings":
+                case "options":
+                    ShowOptions = !ShowOptions;
                     break;
             }
+        }
+
+        private void LogOut()
+        {
+            settingsService.LogOutUser();
+        }
+
+        private void ChangePassword()
+        {
+            ActiveModal = new Modals.ChangePassword();
         }
 
         #endregion

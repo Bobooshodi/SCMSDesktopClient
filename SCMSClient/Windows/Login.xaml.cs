@@ -20,11 +20,25 @@ namespace SCMSClient.Windows
         {
             if (System.Console.CapsLock)
             {
-                notificationText.Content = "Caps Lock Is On";
+                //loginBorder.Style = (Style)FindResource("InputBorderHasError");
+                notificationText.Text = "Caps Lock Is On";
+                notificationText.Visibility = Visibility.Visible;
             }
             else
             {
-                notificationText.Content = string.Empty;
+                loginBorder.Style = (Style)FindResource("InputBorder");
+                notificationText.Text = string.Empty;
+                notificationText.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void userPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (userPassword.SecurePassword.Length < 1)
+            {
+                loginBorder.Style = (Style)FindResource("InputBorderHasError");
+                notificationText.Text = "Please, Enter a Password";
+                notificationText.Visibility = Visibility.Visible;
             }
         }
     }

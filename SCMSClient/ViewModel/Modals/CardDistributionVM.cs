@@ -1,5 +1,7 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
@@ -37,6 +39,36 @@ namespace SCMSClient.ViewModel
 
 
         #region Public Properties
+
+        public List<Card> AvailableNumbers { get; set; }
+
+        private string selectedNumber;
+
+        public string SelectedNumber
+        {
+            get => selectedNumber;
+            set
+            {
+                Set(ref selectedNumber, value, true);
+
+                ProcessSelection(value);
+            }
+        }
+
+        public List<string> SelectedNumbers { get; set; }
+
+        private void ProcessSelection(string value)
+        {
+            if ((SelectedNumbers?.Contains(value)).Value)
+            {
+                SelectedNumbers.Remove(value);
+            }
+            else
+            {
+                SelectedNumbers?.Add(value);
+            }
+        }
+
 
         /// <summary>
         /// This holds the value of the From Textbox in the View

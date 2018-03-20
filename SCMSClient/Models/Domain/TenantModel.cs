@@ -10,6 +10,5 @@ namespace SCMSClient.Models
         }
 
         public SHCTenant SHCTenant { get; set; }
-        public List<Building> Buildings { get; set; }
     }
 }

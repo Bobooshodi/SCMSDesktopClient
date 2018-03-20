@@ -4,10 +4,10 @@
 
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="#333333" />
-    <SolidColorBrush x:Key="InputBackround" Color="#f6f6f6" />
+    <SolidColorBrush x:Key="InputBackround" Color="#f1f6fa" />
 
 
-    <SolidColorBrush x:Key="BorderColor" Color="#FFE2E3E4"></SolidColorBrush>
+    <SolidColorBrush x:Key="BorderColor" Color="#e7ebf3"></SolidColorBrush>
     <SolidColorBrush x:Key="ErrorColor" Color="#FFD50000"></SolidColorBrush>
     <SolidColorBrush x:Key="SuccessColor" Color="#00b333"></SolidColorBrush>
     <SolidColorBrush x:Key="WarningColor" Color="#FFFF9100"></SolidColorBrush>

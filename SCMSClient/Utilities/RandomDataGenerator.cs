@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using CardEncoderLib;
 using SCMSClient.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,24 @@ namespace SCMSClient.Utilities
 {
     public static class RandomDataGenerator
     {
+        public static List<CardKey> CardKeys(int amount, int startSector, char keyType)
+        {
+            var keys = new List<CardKey>();
+
+            for (int i = startSector; i <= (startSector + amount); i++)
+            {
+                var cardKeys = new Faker<CardKey>()
+                .RuleFor(k => k.Key, f => f.Random.AlphaNumeric(12).ToUpper())
+                .RuleFor(k => k.Block, 0)
+                .RuleFor(k => k.Sector, i)
+                .RuleFor(k => k.KeyType, keyType);
+
+                keys.Add(cardKeys.Generate());
+            }
+
+            return keys;
+        }
+
         public static List<Cardholder> Cardholders(int amount)
         {
             string[] genders = { "Male", "Female" };
@@ -32,7 +51,8 @@ namespace SCMSClient.Utilities
                 .RuleFor(u => u.UserType, f => f.PickRandom<SHCCardType>())
                 .RuleFor(u => u.ID, Guid.NewGuid().ToString())
                 .RuleFor(u => u.Cards, Cards(1))
-                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3))); ;
+                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3)))
+                .RuleFor(u => u.Vehicles, f => Vehicles(f.Random.Int(0, 3)));
 
             return testUsers.Generate(amount);
         }
@@ -66,7 +86,8 @@ namespace SCMSClient.Utilities
                 .RuleFor(u => u.Designation, f => f.Name.JobTitle())
                 .RuleFor(u => u.Company, Companies(1).FirstOrDefault())
                 .RuleFor(u => u.Buildings, f => Buildings(f.Random.Int(0, 3)))
-                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3)));
+                .RuleFor(u => u.CarParks, f => CarParks(f.Random.Number(0, 3)))
+                .RuleFor(u => u.Vehicles, f => Vehicles(f.Random.Int(0, 3)));
 
             return testUsers.Generate(amount);
         }
@@ -97,7 +118,8 @@ namespace SCMSClient.Utilities
                 .RuleFor(u => u.CarParks, (f) => CarParks(f.Random.Int(0, 3)))
                 .RuleFor(u => u.SHCTenant, SHCTenants(1).FirstOrDefault())
                 .RuleFor(u => u.Buildings, f => Buildings(f.Random.Int(0, 1)))
-                .RuleFor(u => u.UserType, SHCCardType.Tenant);
+                .RuleFor(u => u.UserType, SHCCardType.Tenant)
+                .RuleFor(u => u.Vehicles, f => Vehicles(f.Random.Int(0, 3)));
 
             return testUsers.Generate(amount);
         }
@@ -333,15 +355,14 @@ namespace SCMSClient.Utilities
             var list = new List<T>(values);
             var stack = new Stack<T>();
             while (list.Count > 0)
-            {  // Get the next item at random. 
+            {  // Get the next item at random.
                 var randomIndex = random.Next(0, list.Count);
                 var randomItem = list[randomIndex];
-                // Remove the item from the list and push it to the top of the deck. 
+                // Remove the item from the list and push it to the top of the deck.
                 list.RemoveAt(randomIndex);
                 stack.Push(randomItem);
             }
             return stack;
         }
-
     }
 }

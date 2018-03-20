@@ -3,13 +3,20 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		x:Class="SCMSClient.Windows.Login"
 		xmlns:utilities="clr-namespace:SCMSClient.Utilities"
-		x:Name="loginWindow"
-		DataContext="{Binding Source={StaticResource Locator}, Path=Login}"
 		xmlns:loader="clr-namespace:SCMSClient.Spinner"
+		x:Class="SCMSClient.Windows.Login"
+		x:Name="loginWindow"
 		mc:Ignorable="d"
 		Title="Login">
+
+    <Window.Resources>
+        <utilities:StyleConverter x:Key="StyleConverter" />
+    </Window.Resources>
+    
+	<Window.DataContext>
+		<Binding Path="Login" Source="{StaticResource Locator}" />
+	</Window.DataContext>
 
 	<Grid Background="#000">
 		<Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4" />
@@ -39,30 +46,43 @@
 								<Grid.RowDefinitions>
 									<RowDefinition />
 									<RowDefinition />
+									<RowDefinition />
 								</Grid.RowDefinitions>
 								<Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
-								<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-									<TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
+								<Border Grid.Row="1">
+                                    <Border.Style>
+                                        <MultiBinding Converter="{StaticResource StyleConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}"/>
+                                                <Binding Path="UsernameBorderStyle"/>
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </Border.Style>
+                                        <TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
 											 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
 								</Border>
+                                <TextBlock  Grid.Row="2" Style="{StaticResource ValidationText}" 
+                                            Visibility="{Binding UsernameErrorTextVisibility, Converter={utilities:BooleanToVisiblityConverter}}" >
+                                    Please, Enter your Username
+                                </TextBlock>
 							</Grid>
 
 							<Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
 								<Grid.RowDefinitions>
-									<RowDefinition />
-									<RowDefinition />
-									<RowDefinition />
+									<RowDefinition Height="auto"></RowDefinition>
+									<RowDefinition Height="auto"></RowDefinition>
+									<RowDefinition Height="auto"></RowDefinition>
 								</Grid.RowDefinitions>
 								<Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
-								<Border Grid.Row="1" Style="{DynamicResource InputBorder}">
-									<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword" KeyDown="userPassword_KeyDown"
+								<Border Grid.Row="1" Style="{DynamicResource InputBorder}" Name="loginBorder">
+									<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword" KeyDown="userPassword_KeyDown" PasswordChanged="userPassword_PasswordChanged"
 												 x:FieldModifier="public" Tag="Password">
 										<PasswordBox.InputBindings>
 											<KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
 										</PasswordBox.InputBindings>
 									</PasswordBox>
 								</Border>
-								<Label Name="notificationText" Grid.Row="2" Style="{DynamicResource FormLabel}" />
+                                <TextBlock Name="notificationText" Grid.Row="2" Style="{StaticResource ValidationText}" ></TextBlock>
 							</Grid>
 
 							<Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
@@ -72,7 +92,7 @@
 				</Grid>
 			</Border>
 
-			<loader:LoaderSpinner loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"
+			<loader:LoaderSpinner SpinnerColor="Black" SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"
 								  VerticalAlignment="Center" HorizontalAlignment="Center" />
 
 			<Grid Grid.Column="1" Style="{StaticResource welcome}">

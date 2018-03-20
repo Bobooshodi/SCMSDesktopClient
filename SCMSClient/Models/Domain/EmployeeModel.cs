@@ -13,6 +13,5 @@ namespace SCMSClient.Models
         public string Designation { get; set; }
         public string EmployeeId { get; set; }
         public Company Company { get; set; }
-        public List<Building> Buildings { get; set; }
     }
 }

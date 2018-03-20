@@ -4,115 +4,168 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:utilities="clr-namespace:SCMSClient.Utilities"
-             xmlns:loader="clr-namespace:SCMSClient.Spinner"
+			 xmlns:loader="clr-namespace:SCMSClient.Spinner"
 			 mc:Ignorable="d"
 			 HorizontalAlignment="Stretch"
 			 VerticalAlignment="Stretch"
 			 HorizontalContentAlignment="Stretch"
 			 VerticalContentAlignment="Stretch">
-	<StackPanel x:Name="ModalContainer">
-		<StackPanel.Background>
-			<SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
-		</StackPanel.Background>
+    <StackPanel x:Name="ModalContainer">
+        <StackPanel.Background>
+            <SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
+        </StackPanel.Background>
 
-		<Border Style="{StaticResource modal}"  Width="460">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="auto"></RowDefinition>
-					<RowDefinition Height="*"></RowDefinition>
-					<RowDefinition Height="auto"></RowDefinition>
-				</Grid.RowDefinitions>
+        <Border Style="{StaticResource modal}"  Width="460">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-				<TextBlock Style="{StaticResource modal__header}">Distribute Card</TextBlock>
+                <TextBlock Style="{StaticResource modal__header}">Distribute Card</TextBlock>
 
-				<Border Grid.Row="1" Style="{StaticResource modal__body}">
+                <Border Grid.Row="1" Style="{StaticResource modal__body}">
 
-					<Grid VerticalAlignment="Top">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"></RowDefinition>
-							<RowDefinition></RowDefinition>
-						</Grid.RowDefinitions>
+                    <Grid VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="270"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border>
+                            <Grid Margin="8 20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
 
-						<Grid Grid.Row="0" Style="{StaticResource FormGroup}">
-							<Grid.RowDefinitions>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
+                                <Grid Style="{StaticResource FormGroup}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Style="{StaticResource FormLabel}">Requesting Business Unit</Label>
+                                    <Border Grid.Row="1" Style="{StaticResource InputBorder}">
+                                        <TextBox IsEnabled="False"  Style="{StaticResource FlatTextBox}">
+                                        </TextBox>
+                                    </Border>
+                                </Grid>
 
-							<Grid Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="150" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Requesting Business Unit</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.BusinessUnit}">
-								</TextBox>
-							</Grid>
+                                <Grid Grid.Row="1" Style="{StaticResource FormGroup}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Style="{StaticResource FormLabel}">Requested Card Type</Label>
+                                    <Border Grid.Row="1" Style="{StaticResource InputBorder}">
+                                        <TextBox IsEnabled="False" Style="{StaticResource FlatTextBox}">
+                                        </TextBox>
+                                    </Border>
+                                </Grid>
 
-							<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="150" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Requested Card Type</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.CardType.Name}">
-								</TextBox>
-							</Grid>
+                                <Grid Grid.Row="2" Style="{StaticResource FormGroup}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Style="{StaticResource FormLabel}">Remaining Quantity</Label>
+                                    <Border Grid.Row="1" Style="{StaticResource InputBorder}">
+                                        <TextBox IsEnabled="False" Style="{StaticResource FlatTextBox}">
+                                        </TextBox>
+                                    </Border>
+                                </Grid>
 
-							<Grid Grid.Row="2" Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="150" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Remaining Quantity</Label>
-								<TextBox IsEnabled="False" Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.QuantityRemaining, Mode=OneWay}">
-								</TextBox>
-							</Grid>
+                                <Grid Grid.Row="3" Style="{StaticResource FormGroup}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource FormLabel}">Remaining Quantity</Label>
+                                        <Border Grid.Row="1" Style="{StaticResource InputBorder}">
+                                            <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                                        </Border>
+                                    </Grid>
 
-							<Grid Grid.Row="3" Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="150" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Remaining Quantity</Label>
-								<Grid Grid.Column="1">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition></ColumnDefinition>
-										<ColumnDefinition Width="auto"></ColumnDefinition>
-										<ColumnDefinition></ColumnDefinition>
-									</Grid.ColumnDefinitions>
-									<TextBox  Style="{StaticResource FlatTextBox}" Text="{Binding DistributeFrom, UpdateSourceTrigger=PropertyChanged}">
-									</TextBox>
+                                    <Grid Grid.Column="1" Margin="10 0 0 0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource FormLabel}">Quantity</Label>
+                                        <Border Grid.Row="1" Style="{StaticResource InputBorder}">
+                                            <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
 
-									<TextBlock Grid.Column="1" Margin="10 0" VerticalAlignment="Center" HorizontalAlignment="Center">TO</TextBlock>
+                                <Grid Grid.Row="4">
+                                    <Button Template="{StaticResource ButtonPrimary}">Process Numbers</Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
 
-									<TextBox  Grid.Column="2" Style="{StaticResource FlatTextBox}" Text="{Binding DistributeTo, UpdateSourceTrigger=PropertyChanged}">
-									</TextBox>
-								</Grid>
-							</Grid>
-						</Grid>
-					</Grid>
-                    
-				</Border>
+                        <Grid Grid.Column="1" Margin="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition MaxHeight="600"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock FontSize="20" Margin="8 20">Select Numbers</TextBlock>
+
+                            <Grid Grid.Row="1">
+
+                                <ScrollViewer  Grid.Row="3" Height="200">
+                                    <Grid Style="{StaticResource FormGroup}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <DataGrid Name="AccessLevelsList" VirtualizingStackPanel.VirtualizationMode="Standard"
+												  AutoGenerateColumns="False" ItemsSource="{Binding AvailableNumbers}"
+												  Style="{StaticResource DatGrid}" HeadersVisibility="None">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn>
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Style="{DynamicResource CheckBoxStyle}" Height="auto" HorizontalAlignment="Stretch"
+																	  IsChecked="{Binding Path=IsSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                                                <TextBlock TextWrapping="Wrap"  Margin="5 0 0 0" Text="{Binding Path=CardInventoryNo}" TextTrimming="WordEllipsis" FontSize="12" />
+                                                            </CheckBox>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
 
                 <loader:LoaderSpinner Grid.Row="1" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsProcessing, Converter={utilities:BooleanToVisiblityConverter}}"
-                              VerticalAlignment="Center" HorizontalAlignment="Center" />
+							  VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                 <Border Grid.Row="2" Style="{StaticResource modal__footer}">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-							<ColumnDefinition></ColumnDefinition>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-						<Button Command="{Binding CloseCommand}" Template="{StaticResource ButtonEmpty}">Cancel</Button>
-						<Button Grid.Column="2" Command="{Binding ProcessCommand}" Template="{StaticResource ButtonPrimary}">Distribute Card</Button>
-					</Grid>
-				</Border>
-			</Grid>
-		</Border>
-	</StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Command="{Binding CloseCommand}" Template="{StaticResource ButtonEmpty}">Cancel</Button>
+                        <Button Grid.Column="2" Command="{Binding ProcessCommand}" Template="{StaticResource ButtonPrimary}">Distribute Card</Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </StackPanel>
 </UserControl>

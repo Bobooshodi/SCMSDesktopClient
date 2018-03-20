@@ -2,44 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
-    <!--<SolidColorBrush x:Key="StandardBorderBrush"
-                     Color="Black"></SolidColorBrush>-->
-
-    <LinearGradientBrush x:Key="IQLBlueGradient"
-                         EndPoint="0.5,1"
-                         StartPoint="0.5,0">
-        <GradientStop Color="#000"
-                      Offset="0" />
-
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="IQLBlueGradientHorizontal"
-                         EndPoint="0.5,1"
-                         StartPoint="0.5,0">
-        <LinearGradientBrush.RelativeTransform>
-            <TransformGroup>
-                <ScaleTransform CenterY="0.5"
-                                CenterX="0.5" />
-                <SkewTransform CenterY="0.5"
-                               CenterX="0.5" />
-                <RotateTransform Angle="90"
-                                 CenterY="0.5"
-                                 CenterX="0.5" />
-                <TranslateTransform />
-            </TransformGroup>
-        </LinearGradientBrush.RelativeTransform>
-        <GradientStop Color="#25bcca"
-                      Offset="0" />
-        <GradientStop Color="#25bcca"
-                      Offset="0.36" />
-        <GradientStop Color="#25bcca"
-                      Offset="0.98" />
-        <GradientStop Color="#25bcca"
-                      Offset="0.77" />
-        <GradientStop Color="#25bcca"
-                      Offset="0.577" />
-    </LinearGradientBrush>
-
     <SolidColorBrush x:Key="PressedBrush"
                      Color="#FF03567E"></SolidColorBrush>
 
@@ -61,7 +23,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Rectangle Width="4"
-                               Margin="0 0 -1 0"
+                               Margin="0 0 0 0"
                                Name="ellipse"                               
                                Fill="{DynamicResource AccentBrush}"
                                RadiusX="0"
@@ -119,7 +81,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
                     <Grid Margin="1"
-                          Height="18">
+                          Height="8">
                         <Path Stretch="None"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"
@@ -199,7 +161,7 @@
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"
                               Name="Path"
-                              Fill="{StaticResource IQLBlueGradient}"
+                              Fill="Red"
                               Data="M 0 0 L -8 4 L 0 8 Z"></Path>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -239,7 +201,7 @@
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"
                               Name="Path"
-                              Fill="{StaticResource IQLBlueGradient}"
+                              Fill="Red"
                               Data="M 0 0 L 8 4 L 0 8 Z"></Path>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -284,7 +246,7 @@
 
     <ControlTemplate x:Key="VerticalScrollBar"
                      TargetType="{x:Type ScrollBar}">
-        <Grid Margin="0 0 -13 0" Width="5">
+        <Grid Margin="0 0 0 0" Width="5">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="0" />
                 <RowDefinition Height="*" />
@@ -295,7 +257,7 @@
                                      EndPoint="0,1">
                     <GradientStop Offset="0"
                                   
-                                  Color="#1c1c1c"></GradientStop>
+                                  Color="Red"></GradientStop>
 
                 </LinearGradientBrush>
             </Grid.Background>
@@ -322,7 +284,7 @@
             </Track>
 
             <RepeatButton Grid.Row="2"
-                          Height="18"
+                          
                           Style="{StaticResource LineButtonDownStyle}"
                           Command="ScrollBar.LineDownCommand"></RepeatButton>
         </Grid>

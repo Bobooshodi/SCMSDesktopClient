@@ -18,27 +18,27 @@ namespace SCMSClient.ToastNotification
 
         private static Lazy<Toaster> lazy;
 
-        public static Toaster Instance => lazy?.Value;
+        public static Toaster Instance
+        {
+            get
+            {
+                if (lazy == null)
+                {
+                    lazy = new Lazy<Toaster>(() => new Toaster());
+                }
+                return lazy?.Value;
+            }
+        }
 
         private static Notifier _notifier;
 
         private Toaster()
         {
-            try
-            {
-                _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
-                Application.Current.MainWindow.Closing += MainWindowOnClosing;
-
-                lazy = new Lazy<Toaster>(() => new Toaster());
-            }
-            catch
-            {
-
-            }
-
+            _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Window, NotificationLifetimeType.TimeBased);
+            Application.Current.MainWindow.Closing += MainWindowOnClosing;
         }
 
-        #endregion
+        #endregion LazyLoading
 
         #region notifier configuration
 
@@ -227,6 +227,6 @@ namespace SCMSClient.ToastNotification
             lazy = new Lazy<Toaster>(() => new Toaster());
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

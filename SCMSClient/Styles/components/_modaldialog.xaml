@@ -5,14 +5,15 @@
     <!-- MODAL STYLES -->
 
     <Style x:Key="modal" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="0"></Setter>
-        <Setter Property="BorderThickness" Value="0, 1, 0, 0"></Setter>
-        
         <Setter Property="Margin" Value="0 40 0 0"></Setter>
-        <Setter Property="MaxHeight" Value="600"></Setter>
-        
+    </Style>
+
+    <Style x:Key="modalLong" TargetType="{x:Type Border}" BasedOn="{StaticResource modal}">
+        <Setter Property="Margin" Value="0"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
         
     </Style>
+
 
 
     <Style x:Key="modal__header" TargetType="{x:Type TextBlock}">
@@ -27,7 +28,7 @@
     <Style x:Key="modal__body" TargetType="Border">
         <Setter Property="Padding" Value="20 10" />
         <Setter Property="Background" Value="{DynamicResource MainBrush}"></Setter>
-        <Setter Property="MaxHeight" Value="500"></Setter>
+        
         <Setter Property="ScrollViewer.CanContentScroll" Value="True"></Setter>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Visible"></Setter>
 
@@ -44,35 +45,58 @@
     
     
     <!--- FEEDBACK STYLE IN MODALS-->
-
-    <Style x:Key="feedback" TargetType="Grid">
-        
-    </Style>
-
     <Style x:Key="feedback__icon" TargetType="Border">
         <Setter Property="Background" Value="#ddd"></Setter>
     </Style>
 
+    <Style x:Key="feedback__icon--success" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource SuccessColor}"></Setter>
+    </Style>
+
+    <Style x:Key="feedback__icon--error" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource ValidationBrush}"></Setter>
+    </Style>
+
+    <!--- FEEDBACK MESSAGES ERROR-->
+
+    <Style x:Key="feedback" TargetType="Grid">
+        <Setter Property="Margin" Value="4"></Setter>
+    </Style>
+
     <Style x:Key="feedback__message" TargetType="Border">
+        <Setter Property="Padding" Value="21 18"></Setter>
+        <Setter Property="Background" Value="{StaticResource BasicBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="feedback__message--error" TargetType="Border">
         <Setter Property="Padding" Value="21 24"></Setter>
-        <Setter Property="Background" Value="#efefef"></Setter>
+        <Setter Property="Background" Value="{StaticResource ValidationBrush}"></Setter>
+    </Style>
+
+    <Style x:Key="feedback__message--success" TargetType="Border" BasedOn="{StaticResource feedback__message}">
+        <Setter Property="Background" Value="{StaticResource SuccessColor}"></Setter>
     </Style>
 
     <Style x:Key="feedback__message__header" TargetType="TextBlock">
 
-        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource MarkerInvertedBrush}"></Setter>
         <Setter Property="FontSize" Value="20"></Setter>
         <Setter Property="Margin" Value="0 0 0 4"></Setter>
-        <Setter Property="FontWeight" Value="Light"></Setter>
+        <Setter Property="FontWeight" Value="Medium"></Setter>
         
         
     </Style>
 
     <Style x:Key="feedback__message__text" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"></Setter>
-        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource MarkerInvertedBrush}"></Setter>
+        <Setter Property="FontSize" Value="15"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+
         
+
     </Style>
+    
+    
     
 
 

@@ -11,5 +11,6 @@ namespace SCMSClient.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public List<AccessGroup> AccessGroups { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

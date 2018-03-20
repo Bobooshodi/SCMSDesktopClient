@@ -11,11 +11,18 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Style="{StaticResource SubMenu}">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -42,22 +49,15 @@
                     Blacklist
                 </Button>
 
-                <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" 
-                        CommandParameter="distribution">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" 
+                        CommandParameter="distribution">Card Distribution</Button>
+                </Grid>
 
-                        <Grid Grid.Column="1">
-
-                            <TextBlock Foreground="{StaticResource MarkerBrush}" VerticalAlignment="Center" FontSize="14" >Card Distribution</TextBlock>
-                        </Grid>
-                    </Grid>
-                </Button>
+                <Grid Grid.Column="1">
+                    <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                </Grid>
             </Grid>
+
         </Border>
 
         <Frame x:Name="MainNav" Grid.Row="1" NavigationUIVisibility="Hidden" Source="{Binding ActivePage}" />

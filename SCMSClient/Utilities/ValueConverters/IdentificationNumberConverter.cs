@@ -12,19 +12,26 @@ namespace SCMSClient.Utilities
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var idType = (IdentificationType)value?.GetType().GetProperty("IdentificationType").GetValue(value, null);
-            var id = (string)value?.GetType().GetProperty("IdentificationNo").GetValue(value, null);
-
-            if (idType == IdentificationType.NRIC)
+            try
             {
-                return $"National ID {id}";
-            }
-            if (idType == IdentificationType.Passport)
-            {
-                return $"Passport No: {id}";
-            }
+                var idType = (IdentificationType)value?.GetType().GetProperty("IdentificationType").GetValue(value, null);
+                var id = (string)value?.GetType().GetProperty("IdentificationNo").GetValue(value, null);
 
-            return string.Empty;
+                if (idType == IdentificationType.NRIC)
+                {
+                    return $"National ID {id}";
+                }
+                if (idType == IdentificationType.Passport)
+                {
+                    return $"Passport No: {id}";
+                }
+
+                return string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

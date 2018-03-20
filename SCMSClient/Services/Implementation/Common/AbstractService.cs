@@ -8,6 +8,8 @@ namespace SCMSClient.Services.Implementation
     {
         #region Inheritable Members
 
+        protected List<Model> allObjects;
+
         protected string getUrl;
         protected string getAllUrl;
         protected string updateUrl;
@@ -47,7 +49,7 @@ namespace SCMSClient.Services.Implementation
         /// returns an object of the Type <see cref="Model"/> specified in the
         /// Inheriting class
         /// </returns>
-        public Model Delete(string parameter)
+        public virtual Model Delete(string parameter)
         {
             try
             {
@@ -78,7 +80,7 @@ namespace SCMSClient.Services.Implementation
         /// returns an object of the Type <see cref="Model"/> specified in the
         /// Inheriting class
         /// </returns>
-        public Model Get(string parameter)
+        public virtual Model Get(string parameter)
         {
             try
             {
@@ -105,7 +107,7 @@ namespace SCMSClient.Services.Implementation
         /// returns a <see cref="List{T}"/>  of objects of the Type <see cref="Model"/> 
         /// specified in the Inheriting class
         /// </returns>
-        public List<Model> GetAll()
+        public virtual List<Model> GetAll()
         {
             try
             {
@@ -131,7 +133,7 @@ namespace SCMSClient.Services.Implementation
         /// returns an object of the Type <see cref="Model"/> specified in the
         /// Inheriting class
         /// </returns>
-        public Model Create(Model model)
+        public virtual Model Create(Model model)
         {
             try
             {
@@ -160,7 +162,7 @@ namespace SCMSClient.Services.Implementation
         /// returns an object of the Type <see cref="Model"/> specified in the
         /// Inheriting class
         /// </returns>
-        public Model Update(Model model)
+        public virtual Model Update(Model model)
         {
             try
             {

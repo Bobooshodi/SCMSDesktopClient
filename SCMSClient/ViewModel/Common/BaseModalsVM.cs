@@ -148,6 +148,15 @@ namespace SCMSClient.ViewModel
 
         #region Member Methods
 
+        protected string DisplayError(Func<bool> expression)
+        {
+            if (expression())
+            {
+                return "InputBorderHasError";
+            }
+            return "InputBorder";
+        }
+
         /// <summary>
         /// This Method Runs the Method <paramref name="action"/> Passed to in in a
         /// New <see cref="Task"/> to avoid blocking the current Thread and updates the

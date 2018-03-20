@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using System.Collections.Generic;
+using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
 
@@ -13,6 +14,16 @@ namespace SCMSClient.Services.Implementation
             updateUrl = ApiEndpoints.UpdateCard;
             createUrl = ApiEndpoints.CreateCard;
             deleteUrl = ApiEndpoints.DeleteCard;
+        }
+
+        public override List<Card> GetAll()
+        {
+            return allObjects ?? (allObjects = RandomDataGenerator.Cards(100));
+        }
+
+        public override Card Get(string parameter)
+        {
+            return GetAll().Find(c => c.ID == parameter);
         }
     }
 }

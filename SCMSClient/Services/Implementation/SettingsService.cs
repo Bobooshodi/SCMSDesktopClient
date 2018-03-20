@@ -14,13 +14,13 @@ namespace SCMSClient.Services.Implementation
 
         private StreamReader srReader;
 
-        #endregion
+        #endregion Private Members
 
         #region Public Members
 
         public string fileName { get; set; }
 
-        #endregion
+        #endregion Public Members
 
         #region Public Methods
 
@@ -297,7 +297,7 @@ namespace SCMSClient.Services.Implementation
                 {
                     writer.WriteLine(content);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -321,7 +321,7 @@ namespace SCMSClient.Services.Implementation
         {
             Application.Current.Properties.Clear();
 
-            var loginPage = new Windows.Login();
+            var loginPage = new Windows.Login { WindowState = WindowState.Maximized };
             loginPage.Show();
 
             Application.Current.MainWindow.Close();
@@ -333,6 +333,6 @@ namespace SCMSClient.Services.Implementation
             srReader = null;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

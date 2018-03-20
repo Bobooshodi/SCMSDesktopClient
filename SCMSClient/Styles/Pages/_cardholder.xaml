@@ -87,7 +87,7 @@
     </Style>
 
     <Style x:Key="cardholder__info__content" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#ddd"></Setter>
+        
     </Style>
 
     <Style x:Key="cardholder__info__icon" TargetType="Canvas">
@@ -97,5 +97,57 @@
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="Margin" Value="0 0 10 0"></Setter>
     </Style>
+
+
+    <Style x:Key="cardholder__info__searcher" TargetType="Canvas">
+        <Setter Property="MaxWidth" Value="600"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        <Setter Property="Panel.ZIndex" Value="999"></Setter>
+    </Style>
+
+    <Style x:Key="toogle-btn" TargetType="Border">
+        <Setter Property="Background" Value="#E0E0E0"></Setter>
+        <Setter Property="Padding" Value="4 0"></Setter>
+        <Setter Property="CornerRadius" Value="10"></Setter>
+        <Setter Property="Height" Value="20"></Setter>
+    </Style>
+
+    <Style x:Key="toogle-btn-indicator" TargetType="Border">
+        <Setter Property="Width" Value="15"></Setter>
+        <Setter Property="CornerRadius" Value="60"></Setter>
+        <Setter Property="Height" Value="15"></Setter>
+        <Setter Property="Margin" Value="5 0 5 0"></Setter>
+    </Style>
+
+
+    <Style x:Key="toogle-btn-active" TargetType="Border" BasedOn="{StaticResource toogle-btn-indicator}">
+        <Setter Property="Background" Value="#65CC5C"></Setter>
+    </Style>
+
+    <Style x:Key="toogle-btn-deactive" TargetType="Border" BasedOn="{StaticResource toogle-btn-indicator}">
+        <Setter Property="Background" Value="{StaticResource ValidationBrush}"></Setter>
+    </Style>
+
+
+
+
+
+
+    <Style x:Key="AddParking" TargetType="Canvas">
+
+  </Style>
+  <Style x:Key="AddCard" TargetType="Canvas">
+
+  </Style>
+
+  <Style x:Key="AddVehcile" TargetType="Canvas">
+
+  </Style>
+
+  <Style x:Key="AddBuilding" TargetType="Canvas">
+
+  </Style>
+
+
 
 </ResourceDictionary>

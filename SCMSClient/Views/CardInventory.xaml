@@ -18,58 +18,62 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Style="{StaticResource SubMenu}">
+
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition MaxWidth="400"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCollectionsCommand}" CommandParameter="">
+                    <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCollectionsCommand}" CommandParameter="">
 
-                    Cards
-                </Button>
+                        Cards
+                    </Button>
 
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" 
+                    <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" 
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="tenant">
 
-                    Tenant CIN
-                </Button>
+                        Tenant CIN
+                    </Button>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" 
+                    <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" 
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="employee">
-                    Employee CIN
-                </Button>
+                        Employee CIN
+                    </Button>
 
-                <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" 
+                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" 
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="strata">
-                    Strata CIN
-                </Button>
+                        Strata CIN
+                    </Button>
 
-                <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}" 
+                    <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}" 
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="individual">
-                    Individual CIN
-                </Button>
+                        Individual CIN
+                    </Button>
+                </Grid>
+
+                <Grid  Grid.Column="1" Margin="0 0 5 0">
+
+                    <Border Grid.Row="1" Style="{DynamicResource searchBorder}" >
+                        <TextBox Style="{DynamicResource searchTextBox}" />
+                    </Border>
+                </Grid>
+
             </Grid>
         </Border>
 
-        <Grid Margin="30 0" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition MaxWidth="400"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource page-title}">Card Inventory</TextBlock>
-
-            <Grid Grid.Column="2" Style="{StaticResource FormGroup}">
-                <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-        </Grid>
+  
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
             <ScrollViewer>
@@ -94,19 +98,11 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Registration Date" Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=RegisteredDate, StringFormat='{}{0:dd MMMM yy h:mm tt}'}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="" Width="160">
+                        <DataGridTemplateColumn Header="" Width="140">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
-                                                  Path=DataContext.ProcessCommand}" Template="{StaticResource ButtonPrimary}">Register CIN To Card</Button>
+                                                  Path=DataContext.ProcessCommand}" Template="{StaticResource ButtonPrimary}">Register</Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

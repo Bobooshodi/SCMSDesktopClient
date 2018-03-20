@@ -26,6 +26,7 @@ namespace SCMSClient.Models
         public string RegisteredById { get; set; }
         public string PersonalizedBy { get; set; }
         public string PersonalizedById { get; set; }
+        public bool IsSelected { get; set; }
     }
 
     public enum CardStatus

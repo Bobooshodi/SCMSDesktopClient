@@ -10,6 +10,10 @@ namespace SCMSClient.Modals
     /// </summary>
     public partial class CardRegistration : UserControl
     {
+        public CardRegistration()
+        {
+        }
+
         public CardRegistration(Card selectedCard)
         {
             InitializeComponent();

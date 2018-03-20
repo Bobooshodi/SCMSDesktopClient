@@ -4,8 +4,8 @@ namespace SCMSClient.Models
 {
     public class ApplicationSettings
     {
+        public DongleData DongleData { get; set; }
         public Server RemoteServer { get; set; }
-        //public MainFacility MainFacility { get; set; }
         public LockedOutModel UserLockedOut { get; set; }
         public ApplicationTheme? SelectedTheme { get; set; }
         public TimeSpan DefaultDuration { get; set; }

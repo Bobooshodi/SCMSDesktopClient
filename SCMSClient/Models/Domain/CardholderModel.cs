@@ -74,13 +74,17 @@ namespace SCMSClient.Models
         public List<CarPark> CarParks { get; set; }
 
         public List<Vehicle> Vehicles { get; set; }
+
+        public List<Building> Buildings { get; set; }
     }
+
     public enum CardUserStatus
     {
         Active,
         Inactive,
         Blacklist
     }
+
     public enum IdentificationType
     {
         NRIC,

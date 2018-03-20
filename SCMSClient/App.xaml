@@ -37,6 +37,7 @@
                 <ResourceDictionary Source="Styles/Pages/_visitorinfo.xaml" />
                 <ResourceDictionary Source="Styles/Pages/_walkthrough.xaml" />
                 <ResourceDictionary Source="Styles/Pages/_manage-cards.xaml" />
+                <ResourceDictionary Source="Styles/Pages/_register-cardholder.xaml" />
 
                 <!-- THEMES STYLES -->
 

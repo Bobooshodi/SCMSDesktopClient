@@ -54,6 +54,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CardEncoderLib\CardEncoderLib\CardEncoderLib.csproj">
+      <Project>{82C964E2-870B-4730-B252-08355497B506}</Project>
+      <Name>CardEncoderLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DinkeyHelper\DinkeyHelper.csproj">
+      <Project>{EAEA43EA-76A8-42A4-AE14-1E3261AE797E}</Project>
+      <Name>DinkeyHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SCMSClient\SCMSClient.csproj">
       <Project>{75164A8D-E1BE-45CA-81F6-D57041CBD3C2}</Project>
       <Name>SCMSClient</Name>

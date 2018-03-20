@@ -106,14 +106,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modals\AddBuilding.xaml.cs">
+      <DependentUpon>AddBuilding.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\AddParking.xaml.cs">
+      <DependentUpon>AddParking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\AddVehicle.xaml.cs">
+      <DependentUpon>AddVehicle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modals\BlacklistCardholders.xaml.cs">
       <DependentUpon>BlacklistCardholders.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\CardRegistration.xaml.cs">
       <DependentUpon>CardRegistration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\DefaultFeedback.xaml.cs">
+      <DependentUpon>DefaultFeedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modals\DistributeCards.xaml.cs">
       <DependentUpon>DistributeCards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modals\ErrorFeedback.xaml.cs">
+      <DependentUpon>ErrorFeedback.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\PersonaliseCard.xaml.cs">
       <DependentUpon>PersonaliseCard.xaml</DependentUpon>
@@ -121,12 +139,16 @@
     <Compile Include="Modals\ReplaceCard.xaml.cs">
       <DependentUpon>ReplaceCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\SuccessFeedback.xaml.cs">
+      <DependentUpon>SuccessFeedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modals\VerifyCard.xaml.cs">
       <DependentUpon>VerifyCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modals\WarningModal.xaml.cs">
       <DependentUpon>WarningModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Application\DongleData.cs" />
     <Compile Include="Models\Domain\AccessGroupModel.cs" />
     <Compile Include="Models\Application\ApplicationSettings.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -153,7 +175,11 @@
     <Compile Include="Models\Domain\UserModel.cs" />
     <Compile Include="Models\Domain\VehicleModel.cs" />
     <Compile Include="Services\Implementation\AuthenticationService.cs" />
+    <Compile Include="Services\Implementation\BuildingService.cs" />
+    <Compile Include="Services\Implementation\CarParkService.cs" />
+    <Compile Include="Services\Implementation\DinkeyDongleService.cs" />
     <Compile Include="Services\Implementation\EmployeeService.cs" />
+    <Compile Include="Services\Implementation\SL600ReaderService.cs" />
     <Compile Include="Services\Implementation\TenantService.cs" />
     <Compile Include="Services\Implementation\CardholderService.cs" />
     <Compile Include="Services\Implementation\CardRequestService.cs" />
@@ -167,9 +193,14 @@
     <Compile Include="Services\Implementation\PersonalizationRequestService.cs" />
     <Compile Include="Services\Implementation\SettingsService.cs" />
     <Compile Include="Services\Implementation\UserService.cs" />
+    <Compile Include="Services\Implementation\VehicleService.cs" />
     <Compile Include="Services\Interfaces\Common\IAbstractService.cs" />
     <Compile Include="Services\Interfaces\Common\IHTTPService.cs" />
     <Compile Include="Services\Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Services\Interfaces\IBuildingService.cs" />
+    <Compile Include="Services\Interfaces\ICardReaderService.cs" />
+    <Compile Include="Services\Interfaces\ICarParkService.cs" />
+    <Compile Include="Services\Interfaces\IDinkeyDongleService.cs" />
     <Compile Include="Services\Interfaces\ITenantService.cs" />
     <Compile Include="Services\Interfaces\IEmployeeService.cs" />
     <Compile Include="Services\Interfaces\ICardholderService.cs" />
@@ -181,6 +212,7 @@
     <Compile Include="Services\Interfaces\ICardService.cs" />
     <Compile Include="Services\Interfaces\ISettingsService.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
+    <Compile Include="Services\Interfaces\IVehicleService.cs" />
     <Compile Include="Spinner\LoaderSpinner.xaml.cs">
       <DependentUpon>LoaderSpinner.xaml</DependentUpon>
     </Compile>
@@ -215,16 +247,25 @@
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
     <Compile Include="Utilities\ValueConverters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\ValueConverters\IdentificationNumberConverter.cs" />
+    <Compile Include="Utilities\ValueConverters\StyleConverter.cs" />
     <Compile Include="ViewModel\CardholderDetailsVM.cs" />
+    <Compile Include="ViewModel\Modals\AddBuildingVM.cs" />
+    <Compile Include="ViewModel\Modals\AddCarParkVM.cs" />
+    <Compile Include="ViewModel\Registration\BaseRegistrationVM.cs" />
+    <Compile Include="ViewModel\Registration\CardholderRegistrationVM.cs" />
     <Compile Include="ViewModel\CardholdersVM.cs" />
     <Compile Include="ViewModel\CardInventoryVM.cs" />
     <Compile Include="ViewModel\Common\BaseModalsVM.cs" />
     <Compile Include="ViewModel\Common\CollectionsVMWithTwoCommands.cs" />
+    <Compile Include="ViewModel\Registration\EmployeeRegistrationVM.cs" />
+    <Compile Include="ViewModel\Modals\AddVehicleVM.cs" />
     <Compile Include="ViewModel\Modals\BlacklistRequestVM.cs" />
     <Compile Include="ViewModel\Modals\CardDistributionVM.cs" />
     <Compile Include="ViewModel\Modals\CardPersonalizationVM.cs" />
     <Compile Include="ViewModel\Modals\CardRegistrationVM.cs" />
     <Compile Include="ViewModel\Common\CollectionsVMWithOneCommand..cs" />
+    <Compile Include="ViewModel\Modals\ChangePasswordVM.cs" />
+    <Compile Include="ViewModel\Registration\VehicleRegistration.cs" />
     <Compile Include="ViewModel\Requests\CardRequestsVM.cs" />
     <Compile Include="ViewModel\DashboardVM.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -235,6 +276,7 @@
     <Compile Include="ViewModel\Requests\ReplaceCardRequestVM.cs" />
     <Compile Include="ViewModel\RequestsVM.cs" />
     <Compile Include="ViewModel\SystemOperatorsVM.cs" />
+    <Compile Include="ViewModel\Registration\TenantRegistrationVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\BlacklistRequest.xaml.cs">
       <DependentUpon>BlacklistRequest.xaml</DependentUpon>
@@ -248,11 +290,17 @@
     <Compile Include="Views\CardInventory.xaml.cs">
       <DependentUpon>CardInventory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CardList.xaml.cs">
+      <DependentUpon>CardList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CardRequest.xaml.cs">
       <DependentUpon>CardRequest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeRegistration.xaml.cs">
+      <DependentUpon>EmployeeRegistration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InventoryHistory.xaml.cs">
       <DependentUpon>InventoryHistory.xaml</DependentUpon>
@@ -263,8 +311,17 @@
     <Compile Include="Views\PersonalizationRequest.xaml.cs">
       <DependentUpon>PersonalizationRequest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RegisterCardholder.xaml.cs">
+      <DependentUpon>RegisterCardholder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReplaceCard.xaml.cs">
       <DependentUpon>ReplaceCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TenantRegistration.xaml.cs">
+      <DependentUpon>TenantRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VehicleRegistration.xaml.cs">
+      <DependentUpon>VehicleRegistration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -284,6 +341,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Modals\AddBuilding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\AddParking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\AddVehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modals\BlacklistCardholders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,7 +361,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modals\ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\DefaultFeedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modals\DistributeCards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\ErrorFeedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -301,6 +382,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modals\ReplaceCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\SuccessFeedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -388,6 +473,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Pages\_register-cardholder.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Pages\_visitorinfo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -444,11 +533,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CardList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CardRequest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,7 +561,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RegisterCardholder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReplaceCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TenantRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehicleRegistration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -502,6 +611,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Styles\Fonts\Roboto-Light.ttf" />
+    <Resource Include="Styles\Fonts\Roboto-Regular.ttf" />
+    <Resource Include="Styles\Fonts\RobotoCondensed-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -518,7 +630,16 @@
   <ItemGroup>
     <Resource Include="Images\loading_spinner.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CardEncoderLib\CardEncoderLib\CardEncoderLib.csproj">
+      <Project>{82C964E2-870B-4730-B252-08355497B506}</Project>
+      <Name>CardEncoderLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DinkeyHelper\DinkeyHelper.csproj">
+      <Project>{eaea43ea-76a8-42a4-ae14-1e3261ae797e}</Project>
+      <Name>DinkeyHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.3.18\build\Fody.targets" Condition="Exists('..\packages\Fody.2.3.18\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

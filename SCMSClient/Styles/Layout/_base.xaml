@@ -1,20 +1,13 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     >
     
  
 
-    <Style x:Key="title"  TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="/SmartCardSystem;component/Styles/Fonts/#Roboto Condensed" />
-    </Style>
-
-    <Style x:Key="text"  TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="/SmartCardSystem;component/Styles/Fonts/#Roboto Light" />
-    </Style>
 
     <!-- PAGE BACKGROUND-->
     <Style x:Key="page-bg" TargetType="Border">
-        <Setter Property="Background" Value="{DynamicResource MainBrush}"></Setter>
+        <Setter Property="Background" Value="#fff"></Setter>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"></Setter>
         <Setter  Property="BorderThickness" Value="1"></Setter>
         <Setter Property="Padding" Value="40 18 40 0"></Setter>
@@ -27,8 +20,8 @@
     <!--FONT -->
 
     <Style TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14"></Setter>
-        <Setter Property="FontFamily" Value="/SmartCardSystem;component/Styles/Fonts/#Roboto Light" />
+        <Setter Property="FontSize" Value="13"></Setter>
+        <!--<Setter Property="Foreground" Value="#465261"></Setter> -->
         
     </Style>
 
@@ -43,10 +36,11 @@
 
     <Style x:Key="main_section" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource MainBrush}"></Setter>
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"></Setter>
-        <Setter Property="BorderThickness" Value="1"></Setter>
-        <Setter Property="Margin" Value="30 20 33 20"></Setter>
-        <Setter Property="CornerRadius" Value="4"></Setter>
+        <Setter Property="BorderBrush" Value="#616a7a"></Setter>
+        <Setter Property="BorderThickness" Value="0.4"></Setter>
+        <Setter Property="Margin" Value="30 0 33 20"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+        <Setter Property="MaxWidth" Value="1400"></Setter>
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
     </Style>
 
@@ -65,9 +59,12 @@
         <Setter Property="FontWeight" Value="Light"></Setter>
     </Style>
 
-     
 
 
+    <Style x:Key="list-checkbox" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"></Setter>
+        <Setter Property="BorderThickness" Value="0 0 0 0.7"></Setter>
+    </Style>
 
     <Style x:Key="empty-state" TargetType="{x:Type Label}">
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
