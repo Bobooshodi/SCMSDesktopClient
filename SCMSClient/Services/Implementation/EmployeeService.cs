@@ -28,7 +28,9 @@ namespace SCMSClient.Services.Implementation
 
         public override Employee Get(string parameter)
         {
-            return cardholderService.GetAll().Cast<Employee>().SingleOrDefault(c => c.ID == parameter);
+            var selectedCardholder = cardholderService.Get(parameter);
+
+            return (Employee)selectedCardholder;
         }
     }
 }

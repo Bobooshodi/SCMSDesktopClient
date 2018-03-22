@@ -1,6 +1,7 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
+using System.Collections.Generic;
 
 namespace SCMSClient.Services.Implementation
 {
@@ -13,6 +14,16 @@ namespace SCMSClient.Services.Implementation
             updateUrl = ApiEndpoints.UpdateCardRequest;
             createUrl = ApiEndpoints.CreateCardRequest;
             deleteUrl = ApiEndpoints.DeleteCardRequest;
+        }
+
+        public override List<SOACardRequest> GetAll()
+        {
+            return allObjects ?? (allObjects = RandomDataGenerator.CardRequests(50));
+        }
+
+        public override SOACardRequest Get(string parameter)
+        {
+            return allObjects.Find(c => c.ID == parameter);
         }
     }
 }

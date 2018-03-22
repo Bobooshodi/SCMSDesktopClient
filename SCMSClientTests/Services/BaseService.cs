@@ -37,7 +37,7 @@ namespace SCMSClientTests.Services
             Assert.NotNull(ServiceClass.Get("object"));
         }
 
-        #endregion
+        #endregion Get Method
 
         #region Update Method
 
@@ -59,7 +59,7 @@ namespace SCMSClientTests.Services
             Assert.NotNull(ServiceClass.Delete("object"));
         }
 
-        #endregion
+        #endregion Update Method
 
         #region Create Method
 
@@ -81,7 +81,7 @@ namespace SCMSClientTests.Services
             Assert.NotNull(ServiceClass.Delete("object"));
         }
 
-        #endregion
+        #endregion Create Method
 
         #region Delete Method
 
@@ -109,7 +109,7 @@ namespace SCMSClientTests.Services
             Assert.NotNull(ServiceClass.Delete("object"));
         }
 
-        #endregion
+        #endregion Delete Method
 
         #region GetAll Method
 
@@ -125,6 +125,6 @@ namespace SCMSClientTests.Services
             Assert.NotNull(ServiceClass.Get("object"));
         }
 
-        #endregion
+        #endregion GetAll Method
     }
 }

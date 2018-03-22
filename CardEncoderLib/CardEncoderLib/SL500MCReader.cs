@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
-using System.Threading;
-
-
+using System.Text;
 
 namespace CardEncoderLib
 {
@@ -13,76 +8,78 @@ namespace CardEncoderLib
     /// Class provides API for communicating with the StrongLink SL500 Mifare Card Reader
     /// Reads and writes blocks of data to the card.
     /// </summary>
-    class SL500MCReader : CardReader
+    internal class SL500MCReader : CardReader
     {
         #region DLLImports
+
         //Dll Imports for RFID reader
         [DllImport("kernel32.dll")]
-        static extern void Sleep(int dwMilliseconds);
+        private static extern void Sleep(int dwMilliseconds);
 
         [DllImport("MasterRD.dll")]
-        static extern int lib_ver(ref uint pVer);
+        private static extern int lib_ver(ref uint pVer);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_init_com(int port, int baud);
+        private static extern int rf_init_com(int port, int baud);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_ClosePort();
+        private static extern int rf_ClosePort();
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_antenna_sta(short icdev, byte mode);
+        private static extern int rf_antenna_sta(short icdev, byte mode);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_init_type(short icdev, byte type);
+        private static extern int rf_init_type(short icdev, byte type);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_request(short icdev, byte mode, ref ushort pTagType);
+        private static extern int rf_request(short icdev, byte mode, ref ushort pTagType);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_anticoll(short icdev, byte bcnt, IntPtr pSnr, ref byte pRLength);
+        private static extern int rf_anticoll(short icdev, byte bcnt, IntPtr pSnr, ref byte pRLength);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_select(short icdev, IntPtr pSnr, byte srcLen, ref sbyte Size);
+        private static extern int rf_select(short icdev, IntPtr pSnr, byte srcLen, ref sbyte Size);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_halt(short icdev);
+        private static extern int rf_halt(short icdev);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_authentication2(short icdev, byte mode, byte secnr, IntPtr key);
+        private static extern int rf_M1_authentication2(short icdev, byte mode, byte secnr, IntPtr key);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_initval(short icdev, byte adr, Int32 value);
+        private static extern int rf_M1_initval(short icdev, byte adr, Int32 value);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_increment(short icdev, byte adr, Int32 value);
+        private static extern int rf_M1_increment(short icdev, byte adr, Int32 value);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_decrement(short icdev, byte adr, Int32 value);
+        private static extern int rf_M1_decrement(short icdev, byte adr, Int32 value);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_readval(short icdev, byte adr, ref Int32 pValue);
+        private static extern int rf_M1_readval(short icdev, byte adr, ref Int32 pValue);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_read(short icdev, byte adr, IntPtr pData, ref byte pLen);
+        private static extern int rf_M1_read(short icdev, byte adr, IntPtr pData, ref byte pLen);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_M1_write(short icdev, byte adr, IntPtr pData);
+        private static extern int rf_M1_write(short icdev, byte adr, IntPtr pData);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_light(short icdev, byte color);
+        private static extern int rf_light(short icdev, byte color);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_beep(short icdev, byte msec);
+        private static extern int rf_beep(short icdev, byte msec);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_get_device_number(IntPtr icdev);
+        private static extern int rf_get_device_number(IntPtr icdev);
 
         [DllImport("MasterRD.dll")]
-        static extern int rf_get_model(short icdev, IntPtr pVersion, ref byte pLen);
+        private static extern int rf_get_model(short icdev, IntPtr pVersion, ref byte pLen);
 
         #endregion DLLImports
 
         #region Instance Variables
+
         public static string PNPID = "USB\\VID_10C4&PID_EA60&MI_00\\0001_00";
         public static string VID = "10c4";
         public static string PID = "ea60";
@@ -98,9 +95,11 @@ namespace CardEncoderLib
         private IntPtr pSnr;
         private byte len;
         private sbyte size;
-        #endregion
+
+        #endregion Instance Variables
 
         #region Constructor
+
         /// <summary>
         /// Initialize default settings on create
         /// </summary>
@@ -113,7 +112,8 @@ namespace CardEncoderLib
             len = 255;
             size = 0;
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Properties
 
@@ -145,7 +145,6 @@ namespace CardEncoderLib
             {
                 baudRate = value;
             }
-
         }
 
         /// <summary>
@@ -163,9 +162,8 @@ namespace CardEncoderLib
             }
         }
 
-
         /// <summary>
-        /// The reader's working mode. 
+        /// The reader's working mode.
         /// 'A' = ISO14443A
         /// 'B' = ISO14443B
         /// 'r' = AT88RF020
@@ -182,7 +180,6 @@ namespace CardEncoderLib
                 type = (byte)value;
             }
         }
-
 
         /// <summary>
         /// Key validation mode for the Mifare card
@@ -202,7 +199,7 @@ namespace CardEncoderLib
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ushort TagType
         {
@@ -230,12 +227,13 @@ namespace CardEncoderLib
                 byteCount = value;
             }
         }
-        #endregion
+
+        #endregion Properties
 
         #region Methods
+
         public bool Connect()
         {
-
             //fail if port number & baudrate is not set
             if (portNumber == null || baudRate == null)
             {
@@ -283,7 +281,7 @@ namespace CardEncoderLib
             }
             return false;
         }
-      
+
         public bool IsConnected()
         {
             return connected;
@@ -303,7 +301,6 @@ namespace CardEncoderLib
                 status = rf_init_type(ICDEV, type);//Set Reader Working Mode
                 if (status != 0)
                     return false;
-
 
                 Sleep(20);
                 status = rf_antenna_sta(ICDEV, 1);//Turn on RF Transmittal
@@ -408,7 +405,7 @@ namespace CardEncoderLib
                 {
                     pSnr = Marshal.AllocHGlobal(1024); //Allocate 1Kb of memory
 
-                    returnVal = rf_get_device_number(pSnr);//request serial number and lenght of data 
+                    returnVal = rf_get_device_number(pSnr);//request serial number and lenght of data
 
                     byte[] readerSerialNumberInBytes = new byte[len];
 
@@ -420,7 +417,6 @@ namespace CardEncoderLib
                     Marshal.FreeHGlobal(pSnr);
 
                     return Encoding.ASCII.GetString(readerSerialNumberInBytes);
-
                 }
                 catch (Exception)
                 {
@@ -515,7 +511,6 @@ namespace CardEncoderLib
                 {
                     throw new Exception("No card inserted.");
                 }
-
             }
             else
             {
@@ -792,7 +787,6 @@ namespace CardEncoderLib
                 {
                     WriteBlockWithoutAuth(card, keyString, sector, 3);
                 }
-
                 else
                 {
                     if (AuthenticateSector(card, sector))
@@ -806,7 +800,6 @@ namespace CardEncoderLib
                             return false;
                         }
                     }
-
                     else
                         return false;
                 }
@@ -815,11 +808,6 @@ namespace CardEncoderLib
             return false;
         }
 
-        #endregion
-
-
-
-     
+        #endregion Methods
     }
 }
-

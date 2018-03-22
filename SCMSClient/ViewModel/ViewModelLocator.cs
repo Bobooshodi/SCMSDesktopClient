@@ -51,6 +51,7 @@ namespace SCMSClient.ViewModel
                 SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
                 SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
                 SimpleIoc.Default.Register<ICardholderService, CardholderService>();
+                SimpleIoc.Default.Register<ICardReaderService, SL600ReaderService>();
                 SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
                 SimpleIoc.Default.Register<IDinkeyDongleService, DinkeyDongleService>();
                 SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
@@ -60,6 +61,8 @@ namespace SCMSClient.ViewModel
 
             SimpleIoc.Default.Register<RequestsVM>();
             SimpleIoc.Default.Register<DashboardVM>();
+            SimpleIoc.Default.Register<CardsListVM>();
+            SimpleIoc.Default.Register<VerifyCardVM>();
             SimpleIoc.Default.Register<AddCarParkVM>();
             SimpleIoc.Default.Register<MainWindowVM>();
             SimpleIoc.Default.Register<AddVehicleVM>();
@@ -120,6 +123,22 @@ namespace SCMSClient.ViewModel
         public CardInventoryVM CardInventory
         {
             get => ServiceLocator.Current.GetInstance<CardInventoryVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Verify Card modal
+        /// </summary>
+        public VerifyCardVM VerifyCard
+        {
+            get => ServiceLocator.Current.GetInstance<VerifyCardVM>();
+        }
+
+        /// <summary>
+        /// The DataContext of the Cards List view
+        /// </summary>
+        public CardsListVM CardsList
+        {
+            get => ServiceLocator.Current.GetInstance<CardsListVM>();
         }
 
         /// <summary>

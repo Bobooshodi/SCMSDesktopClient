@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace SCMSClient.Utilities
 {
-    public class StyleConverter : IMultiValueConverter
+    public class ForeGroundConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -14,7 +15,7 @@ namespace SCMSClient.Utilities
             if (styleName == null)
                 return null;
 
-            return (Style)targetElement.TryFindResource(styleName);
+            return (Brush)targetElement.TryFindResource(styleName);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)

@@ -13,7 +13,7 @@ namespace SCMSClient.ViewModel
 
         private ObservableCollection<User> operators;
 
-        #endregion
+        #endregion Private Members
 
         #region Default Constructor
 
@@ -23,7 +23,7 @@ namespace SCMSClient.ViewModel
             RemoveCommand = new RelayCommand(DeleteOperator);
         }
 
-        #endregion
+        #endregion Default Constructor
 
         #region ICommand Properties
 
@@ -37,7 +37,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public ICommand RemoveCommand { get; set; }
 
-        #endregion
+        #endregion ICommand Properties
 
         #region Public Properties
 
@@ -47,7 +47,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref operators, value, true);
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Command Methods
 
@@ -61,6 +61,6 @@ namespace SCMSClient.ViewModel
             throw new NotImplementedException();
         }
 
-        #endregion
+        #endregion Command Methods
     }
 }

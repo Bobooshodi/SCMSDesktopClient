@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Management;
-using System.IO.Ports;
-
 
 namespace CardEncoderLib
 {
     /// <summary>
     /// This class manages the device connected to the System
     /// </summary>
-   public class SL500MCReaderAdapter: ReaderAdapter
+    public class SL500MCReaderAdapter : ReaderAdapter
     {
-        CardReader cardReader;
+        private CardReader cardReader;
 
-        ManagementEventWatcher watch;       
-        
+        private ManagementEventWatcher watch;
+
         /// <summary>
         /// This method returns a new instance of cardWithNewKeys reader installed on the system
         /// returns null if non is found
@@ -28,12 +23,12 @@ namespace CardEncoderLib
             {
                 cardReader = findCardReaderOnSystem();
             }
-           
+
             return cardReader;
         }
-        
+
         /// <summary>
-        /// This method starts a thread to watch for new hardware devices 
+        /// This method starts a thread to watch for new hardware devices
         /// </summary>
         public void startUSBEventNotifier()
         {
@@ -47,7 +42,7 @@ namespace CardEncoderLib
             watch = new ManagementEventWatcher(w);
             watch.EventArrived += new
             EventArrivedEventHandler(this.usbDetectionHandler);
-            watch.Start();            
+            watch.Start();
         }
 
         /// <summary>
@@ -55,7 +50,7 @@ namespace CardEncoderLib
         /// </summary>
         public void stopUSBEventNotifier()
         {
-            watch.Stop();            
+            watch.Stop();
         }
 
         /// <summary>
@@ -73,25 +68,22 @@ namespace CardEncoderLib
                     new ManagementObjectSearcher("root\\CIMV2",
                     "SELECT * FROM Win32_SerialPort");
 
-
                 //system available devices
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
                     //check for devices supported by library
-                   string pnpDeviceId = (string)queryObj["PNPDeviceID"];
+                    string pnpDeviceId = (string)queryObj["PNPDeviceID"];
 
-                    if(pnpDeviceId == SL500MCReader.PNPID)
+                    if (pnpDeviceId == SL500MCReader.PNPID)
                     {
-                       
                         cardReader = new SL500MCReader();
-                        dPort  = (string)queryObj["DeviceID"];
+                        dPort = (string)queryObj["DeviceID"];
                         int numDigits = dPort.Length - 3;
 
-                        port = Convert.ToInt32(dPort.Substring(dPort.Length -numDigits, numDigits));
+                        port = Convert.ToInt32(dPort.Substring(dPort.Length - numDigits, numDigits));
                         ((SL500MCReader)cardReader).PortNumber = port;
                         ((SL500MCReader)cardReader).BaudRate = 9600;
-                 
-                    }                   
+                    }
                 }
             }
             catch (ManagementException)
@@ -100,7 +92,7 @@ namespace CardEncoderLib
             }
             return cardReader;
         }
-                
+
         /// <summary>
         /// Call back function when a new usb device is detected
         /// </summary>
@@ -112,9 +104,8 @@ namespace CardEncoderLib
             {
                 cardReader = findCardReaderOnSystem();
             }
-            
+
             // code to handle when a new usb device is detected
         }
-
     }
 }

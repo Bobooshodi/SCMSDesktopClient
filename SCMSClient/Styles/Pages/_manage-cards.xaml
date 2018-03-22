@@ -4,8 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VMSDesktopUI.Styles.Pages"
-        mc:Ignorable="d"
-        >
+        mc:Ignorable="d">
 
     <Style x:Key="cardlist" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource AlternativeBrush}"></Setter>
@@ -16,7 +15,6 @@
         <Setter Property="FontSize" Value="16"></Setter>
     </Style>
 
-
     <Style x:Key="cardlist__header" TargetType="{x:Type Label}">
         <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}"></Setter>
         <Setter Property="FontSize" Value="16"></Setter>
@@ -25,9 +23,6 @@
         <Setter Property="FontSize" Value="16"></Setter>
         <Setter Property="Margin" Value="4 6"></Setter>
     </Style>
-
-
-
 
     <Style x:Key="card-status" TargetType="{x:Type Border}">
         <Setter Property="Height" Value="10"></Setter>
@@ -44,11 +39,4 @@
     <Style x:Key="card-status--deactived" BasedOn="{StaticResource card-status}" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="Red"></Setter>
     </Style>
-
-    
-    
 </ResourceDictionary>
-
-
-
-

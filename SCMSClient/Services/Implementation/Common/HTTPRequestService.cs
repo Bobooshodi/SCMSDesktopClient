@@ -20,10 +20,11 @@ namespace SCMSClient.Services.Implementation
         private HttpClient client;
         private ISettingsService _sSettings;
         private User appUser = (User)Application.Current.Properties["activeUser"];
+
         private ApplicationSettings appSettings =
             (ApplicationSettings)Application.Current.Properties["appSettings"];
 
-        #endregion
+        #endregion Private Members
 
         #region Default Constructor
 
@@ -54,7 +55,7 @@ namespace SCMSClient.Services.Implementation
             InitialiseClient();
         }
 
-        #endregion
+        #endregion Default Constructor
 
         #region Private Methods
 
@@ -83,7 +84,7 @@ namespace SCMSClient.Services.Implementation
         }
 
         /// <summary>
-        /// Processes the <see cref="HttpResponseMessage"/> and returns the 
+        /// Processes the <see cref="HttpResponseMessage"/> and returns the
         /// appropriate Type <typeparamref name="T"/> of object
         /// </summary>
         /// <typeparam name="T">
@@ -185,7 +186,7 @@ namespace SCMSClient.Services.Implementation
             }
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Public Methods
 
@@ -467,7 +468,7 @@ namespace SCMSClient.Services.Implementation
         /// A Url On the Server to send the request to
         /// </param>
         /// <returns>
-        /// A list of the object of the Type <see cref="Type"/> T <typeparamref name="T"/> 
+        /// A list of the object of the Type <see cref="Type"/> T <typeparamref name="T"/>
         /// Specified in the call
         /// </returns>
         public List<T> GetAll<T>(string url)
@@ -505,7 +506,7 @@ namespace SCMSClient.Services.Implementation
         /// a parameter to pass to the Url
         /// </param>
         /// <returns>
-        /// A list of the object of the Type <see cref="Type"/> Tresult <typeparamref name="T"/> 
+        /// A list of the object of the Type <see cref="Type"/> Tresult <typeparamref name="T"/>
         /// Specified in the call
         /// </returns>
         public List<T> GetAll<T>(string url, object parameter = null)
@@ -541,7 +542,7 @@ namespace SCMSClient.Services.Implementation
         /// A Url On the Server to send the request to
         /// </param>
         /// <returns>
-        /// the deleted object the Type <see cref="Type"/> T <typeparamref name="T"/> 
+        /// the deleted object the Type <see cref="Type"/> T <typeparamref name="T"/>
         /// Specified in the call
         /// </returns>
         public T Delete<T>(string url)
@@ -688,7 +689,7 @@ namespace SCMSClient.Services.Implementation
             GC.SuppressFinalize(this);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Destructor
 
@@ -697,6 +698,6 @@ namespace SCMSClient.Services.Implementation
             Dispose(false);
         }
 
-        #endregion
+        #endregion Destructor
     }
 }

@@ -12,6 +12,8 @@ namespace SCMSClient.Windows
         public Login()
         {
             InitializeComponent();
+
+            Application.Current.MainWindow = this;
         }
 
         public SecureString UserPassword => userPassword.SecurePassword;

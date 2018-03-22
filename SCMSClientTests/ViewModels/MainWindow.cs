@@ -1,6 +1,4 @@
 ﻿using NUnit.Framework;
-using SCMSClient.ViewModel;
-using System;
 
 namespace SCMSClientTests.ViewModels
 {

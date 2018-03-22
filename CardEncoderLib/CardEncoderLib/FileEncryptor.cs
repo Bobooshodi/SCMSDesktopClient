@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CardEncoderLib
 {
-   public class FileEncryptor
+    public class FileEncryptor
     {
         /// <summary>
         /// This method decrypts a file encrypted with a private key to its

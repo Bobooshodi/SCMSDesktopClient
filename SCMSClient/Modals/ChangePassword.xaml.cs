@@ -87,11 +87,13 @@ namespace SCMSClient.Modals
                     border = oldPasswordBorder;
                     textBlock = oldPasswordNotification;
                     break;
+
                 case "newPassword":
                     passwordBox = newPassword;
                     border = newPasswordBorder;
                     textBlock = newPasswordNotification;
                     break;
+
                 case "confirmPassword":
                     passwordBox = confirmPassword;
                     border = confirmPasswordBorder;

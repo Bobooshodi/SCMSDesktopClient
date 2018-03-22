@@ -16,7 +16,7 @@ namespace SCMSClient.ViewModel
 
         private ObservableCollection<T> filteredCollection;
 
-        #endregion
+        #endregion Members Declaration
 
         #region Default Constructor
 
@@ -28,12 +28,13 @@ namespace SCMSClient.ViewModel
         /// the default Service class that manages the Type inferred from the Argument passed to the
         /// class
         /// </param>
-        protected CollectionsVMWithTwoCommands(IAbstractService<T> _service) : base(_service: _service)
+        protected CollectionsVMWithTwoCommands(IAbstractService<T> _service, IDinkeyDongleService _dongleService) :
+            base(_service: _service, _dongleService: _dongleService)
         {
             FilterCollectionsCommand = new RelayCommand<object>(FilterCollections);
         }
 
-        #endregion
+        #endregion Default Constructor
 
         #region ICommands
 
@@ -42,8 +43,7 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public ICommand FilterCollectionsCommand { get; set; }
 
-        #endregion
-
+        #endregion ICommands
 
         #region Member Methods
 
@@ -74,12 +74,12 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
+        #endregion Member Methods
 
         #region Public Properties
 
         /// <summary>
-        /// This is an <see cref="ObservableCollection{T}"/> of the Type inferred from the 
+        /// This is an <see cref="ObservableCollection{T}"/> of the Type inferred from the
         /// Argument passed to the class.
         /// It holds the result of the Filtering of the AllObjects Collection
         /// </summary>
@@ -98,7 +98,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref filteredCollection, value, true);
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Command Methods
 
@@ -112,6 +112,6 @@ namespace SCMSClient.ViewModel
         /// </param>
         protected abstract void FilterCollections(object obj);
 
-        #endregion
+        #endregion Command Methods
     }
 }

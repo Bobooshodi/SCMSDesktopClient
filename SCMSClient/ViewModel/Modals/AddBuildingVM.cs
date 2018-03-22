@@ -7,9 +7,8 @@ namespace SCMSClient.ViewModel
 {
     public class AddBuildingVM : BaseModalsVM<Building>
     {
-        public AddBuildingVM(IBuildingService service) : base(_service:service)
+        public AddBuildingVM(IBuildingService service, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
-
         }
 
         protected override Task ProcessLogic()

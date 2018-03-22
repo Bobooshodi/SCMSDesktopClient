@@ -7,9 +7,8 @@ namespace SCMSClient.ViewModel
 {
     public class AddCarParkVM : BaseModalsVM<CarPark>
     {
-        public AddCarParkVM(ICarParkService service) : base(_service: service)
+        public AddCarParkVM(ICarParkService service, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
-
         }
 
         protected override Task ProcessLogic()

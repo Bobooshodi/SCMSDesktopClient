@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="SCMSClient.Modals.VerifyCard"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SCMSClient.Modals"
-             mc:Ignorable="d"
-             HorizontalAlignment="Stretch"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 DataContext="{Binding Source={StaticResource Locator}, Path=VerifyCard}"
+			 mc:Ignorable="d"
+			 HorizontalAlignment="Stretch"
 	VerticalAlignment="Stretch"
 	HorizontalContentAlignment="Stretch"
 	VerticalContentAlignment="Stretch">
@@ -49,15 +49,13 @@
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
 
                                 <Label Style="{StaticResource FormLabel}" Content="Card Inventory Number" />
-                                <Border Grid.Column="1" Style="{StaticResource InputBorderHasError}">
-                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False">
-                                    </TextBox>
+                                <Border Grid.Column="1" Style="{StaticResource InputBorder}">
+                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False"
+                                             Text="{Binding SelectedItem.CardInventoryNo}" />
                                 </Border>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ValidationText}" >Error Message</TextBlock>
                             </Grid>
 
                             <Grid Grid.Row="1" Style="{StaticResource FormGroup}">
@@ -67,8 +65,8 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource FormLabel}" Content="Cardholder Name" />
                                 <Border Grid.Column="1" Style="{StaticResource InputBorder}" IsEnabled="False">
-                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False">
-                                    </TextBox>
+                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False"
+                                             Text="{Binding SelectedItem.AssignedTo}" />
                                 </Border>
                             </Grid>
 
@@ -79,12 +77,13 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource FormLabel}" Content="Cardholder Type" />
                                 <Border Grid.Column="1" Style="{StaticResource InputBorder}">
-                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False">
-                                    </TextBox>
+                                    <TextBox Style="{StaticResource FlatTextBox}" IsEnabled="False"
+                                             Text="{Binding Cardholder.UserType}" />
                                 </Border>
                             </Grid>
 
                             <Grid Grid.Row="3">
+                                <ContentControl Content="{Binding Feedback}" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -97,8 +96,8 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Name="btnShow"  Template="{StaticResource ButtonEmpty}">Cancel</Button>
-                        <Button Grid.Column="2" Template="{StaticResource ButtonPrimary}">Verify Card</Button>
+                        <Button Command="{Binding CloseCommand}" Template="{StaticResource ButtonEmpty}">Cancel</Button>
+                        <Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Verify Card</Button>
                     </Grid>
                 </Border>
             </Grid>

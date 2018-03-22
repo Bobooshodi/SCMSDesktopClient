@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardEncoderLib
 {
-    class ValueConverter
+    internal class ValueConverter
     {
         public static string addTrailingBits(string hex)
         {
             for (int i = hex.Length; i < 32; i++)
             {
                 hex = hex + "0";
-
             }
             return hex;
         }
@@ -32,16 +27,13 @@ namespace CardEncoderLib
                 {
                     asciiString += System.Convert.ToDecimal(System.Convert.ToInt32(hex.Substring(0, 2), 16)).ToString();
                     hex = hex.Substring(2, hex.Length - 2);
-
                 }
                 return asciiString.TrimEnd(new char[] { '\0' });
             }
             catch (Exception ex)
             {
-
                 return "";
             }
-
         }
 
         public static string convertIntToHex(int num)
@@ -64,7 +56,6 @@ namespace CardEncoderLib
             }
             catch (Exception ex)
             {
-
                 return 0;
             }
         }
@@ -85,7 +76,6 @@ namespace CardEncoderLib
             }
             catch (Exception ex)
             {
-
                 return "";
             }
         }
@@ -99,7 +89,6 @@ namespace CardEncoderLib
                 {
                     asciiString += System.Convert.ToChar(System.Convert.ToInt32(hex.Substring(0, 2), 16)).ToString();
                     hex = hex.Substring(2, hex.Length - 2);
-
                 }
                 return asciiString.TrimEnd(new char[] { '\0' });
             }
@@ -126,7 +115,6 @@ namespace CardEncoderLib
                 new Exception("Error converting HEX characters");
             }
             return _str;
-
         }
 
         public static byte[] ToDigitsBytes(string theHex)
@@ -163,6 +151,5 @@ namespace CardEncoderLib
 
             return sz;
         }
-
     }
 }

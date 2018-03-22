@@ -33,9 +33,5 @@ namespace SCMSClient.Spinner
         // Using a DependencyProperty as the backing store for SpinnerVisibility.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SpinnerVisibilityProperty =
             DependencyProperty.Register("SpinnerVisibility", typeof(Visibility), typeof(LoaderSpinner), new PropertyMetadata(Visibility.Hidden));
-
-
-
-
     }
 }

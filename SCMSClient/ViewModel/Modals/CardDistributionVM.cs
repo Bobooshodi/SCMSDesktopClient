@@ -1,6 +1,5 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,13 +8,13 @@ namespace SCMSClient.ViewModel
     public class CardDistributionVM : BaseModalsVM<SOACardRequest>
     {
         #region Member Declarations
+
         private int intValue;
         private string distributeFrom;
         private string distributeTo;
 
-        public CardDistributionVM(ICardRequestService service) : base(_service: service)
+        public CardDistributionVM(ICardRequestService service, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
-
         }
 
         /// <summary>
@@ -35,8 +34,7 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Member Declarations
 
         #region Public Properties
 
@@ -69,7 +67,6 @@ namespace SCMSClient.ViewModel
             }
         }
 
-
         /// <summary>
         /// This holds the value of the From Textbox in the View
         /// </summary>
@@ -88,8 +85,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref distributeTo, value, true);
         }
 
-        #endregion
-
+        #endregion Public Properties
 
         #region Inherited Methods
 
@@ -103,6 +99,6 @@ namespace SCMSClient.ViewModel
             throw new System.Exception("Test");
         }
 
-        #endregion
+        #endregion Inherited Methods
     }
 }

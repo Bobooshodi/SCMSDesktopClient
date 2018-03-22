@@ -1,15 +1,13 @@
-﻿using System.Threading.Tasks;
-using SCMSClient.Models;
+﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace SCMSClient.ViewModel
 {
     public class AddVehicleVM : BaseModalsVM<Vehicle>
     {
-
-        public AddVehicleVM(IVehicleService service) : base(_service: service)
+        public AddVehicleVM(IVehicleService service, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
-
         }
 
         public string PlateNumber { get; set; }
@@ -41,8 +39,6 @@ namespace SCMSClient.ViewModel
         {
             get => CarModel?.Length == 0;
         }
-
-
 
         protected override Task ProcessLogic()
         {

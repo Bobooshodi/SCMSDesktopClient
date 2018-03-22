@@ -4,7 +4,6 @@ using SCMSClient.Services.Implementation;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -14,7 +13,6 @@ namespace TestLab
     {
         private static void Main(string[] args)
         {
-            DinkeyDongleTest();
         }
 
         private static void CardReaderTest()
@@ -70,28 +68,12 @@ namespace TestLab
 
             var keysA = RandomDataGenerator.CardKeys(40, 0, 'A');
             var keysB = RandomDataGenerator.CardKeys(40, 0, 'B');
-            var pcs = new List<PCInfo>
-            {
-                new PCInfo
-                {
-                    Uid = Guid.NewGuid().ToString()
-                },
-                new PCInfo
-                {
-                    Uid = Guid.NewGuid().ToString()
-                },
-                new PCInfo
-                {
-                    Uid = Guid.NewGuid().ToString()
-                }
-            };
 
             keysA.AddRange(keysB);
 
             var dongleData = new DongleData
             {
                 CardKeys = keysA,
-                PCToBoind = pcs
             };
 
             var data = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(dongleData));

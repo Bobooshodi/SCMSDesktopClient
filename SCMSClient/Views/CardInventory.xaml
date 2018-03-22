@@ -9,6 +9,10 @@
       mc:Ignorable="d"
       Title="CardInventory">
 
+    <Page.Resources>
+        <utilities:ForeGroundConverter x:Key="ForeGroundConverter" />
+    </Page.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -37,54 +41,150 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding FilterCollectionsCommand}" CommandParameter="">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        Cards
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="AllStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    All Cards
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Button>
 
-                    <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" 
+                    <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1"
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="tenant">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                        Tenant CIN
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="TenantsStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Tenants
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Button>
 
-                    <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" 
+                    <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4"
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="employee">
-                        Employee CIN
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="EmployeesStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Employees
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Button>
 
-                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" 
+                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}"
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="strata">
-                        Strata CIN
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="StrataStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Strata
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Button>
 
-                    <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}" 
+                    <Button Grid.Column="6" Template="{StaticResource ButtonSubNavEmpty}"
                         Command="{Binding FilterCollectionsCommand}" CommandParameter="individual">
-                        Individual CIN
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="IndividualStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Individuals
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Button>
                 </Grid>
 
-                <Grid  Grid.Column="1" Margin="0 0 5 0">
-
-                    <Border Grid.Row="1" Style="{DynamicResource searchBorder}" >
-                        <TextBox Style="{DynamicResource searchTextBox}" />
-                    </Border>
-                </Grid>
-
+              
             </Grid>
         </Border>
 
-  
-
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
-            <ScrollViewer>
-                <DataGrid Style="{DynamicResource DatGrid}" x:Name="dgReplaceCard" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{DynamicResource searchBorder}">
+                            <TextBox Style="{DynamicResource searchTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+                        </Border>
+                    </Grid>
+                </Border>
+                <DataGrid Grid.Row="1" Style="{DynamicResource DatGrid}" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
                           VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Card Inventory Number"  Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="15" FontWeight="Light"  Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=CardInventoryNo}"/>
+                                    <TextBlock FontSize="15" FontWeight="Light"  Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=CardInventoryNo}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -108,7 +208,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-            </ScrollViewer>
+            </Grid>
         </Border>
 
         <loader:LoaderSpinner Grid.Row="2" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsBusy, Converter={utilities:BooleanToVisiblityConverter}}"

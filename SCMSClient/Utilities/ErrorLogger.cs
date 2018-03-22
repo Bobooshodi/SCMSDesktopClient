@@ -17,7 +17,7 @@ namespace SCMSClient.Utilities
         private const string deviceFailureErrorFolder = "Device Failure Error Logs";
         private const string serverErrorFolder = "Server Error Logs";
 
-        #endregion
+        #endregion Constant Declarations
 
         #region Public Static Methods
 
@@ -54,6 +54,7 @@ namespace SCMSClient.Utilities
                     sb.Append("Error: ").AppendLine(content);
                     LogError(serverErrorFolder, serverErrorFile, sb.ToString());
                     break;
+
                 case ErrorType.APPLICATION_CRASH_ERROR:
                     sb.Append("Occurrence DateTime: ").Append(DateTime.Now).AppendLine();
                     sb.Append("Error: ").AppendLine(content);
@@ -103,7 +104,7 @@ namespace SCMSClient.Utilities
             }
         }
 
-        #endregion
+        #endregion Public Static Methods
     }
 
     public enum ErrorType

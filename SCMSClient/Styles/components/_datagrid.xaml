@@ -8,7 +8,7 @@
         <Setter Property="BorderThickness" Value="0.4"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderColor}"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
-        <Setter Property="Padding" Value="18 20"/>
+        <Setter Property="Padding" Value="18 20" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"></Setter>
@@ -17,15 +17,12 @@
     </Style>
 
     <Style x:Key="DataGridCell" TargetType="{x:Type DataGridCell}">
-        <Setter Property="MinHeight" Value="37"/>
-        
-        <Setter Property="Margin" Value="10 0 0 0" />
-   
+        <Setter Property="MinHeight" Value="37" />
 
+        <Setter Property="Margin" Value="10 0 0 0" />
 
         <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}" />
 
-        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -44,81 +41,69 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"></Setter>
             </Trigger>
-
         </Style.Triggers>
-
-
     </Style>
-
-
 
     <Style x:Key="DataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="BorderThickness" Value=" 0 0.3"></Setter>
         <Setter Property="BorderBrush" Value="#333"></Setter>
-        <Setter Property="Padding" Value="12 8"/>
+        <Setter Property="Padding" Value="12 8" />
         <Setter Property="Background" Value="#dfdfdf"></Setter>
-        <Setter Property="FontWeight" Value="Black"/>
+        <Setter Property="FontWeight" Value="Black" />
         <Setter Property="Foreground" Value="{StaticResource MarkerBrush}" />
-        
+
         <Setter Property="FontWeight" Value="Normal"></Setter>
-        
+
         <Style.Triggers>
 
             <Trigger Property="IsMouseOver" Value="True">
-
             </Trigger>
 
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
             </Trigger>
-
         </Style.Triggers>
     </Style>
 
     <Style x:Key="DatGrid" TargetType="{x:Type DataGrid}">
-        
+
         <Setter Property="Foreground" Value="{DynamicResource MarkerBrush}"></Setter>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="3"></Setter>
-        <Setter Property="AutoGenerateColumns" Value="False"/>
-        <Setter Property="CanUserAddRows" Value="False"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="GridLinesVisibility" Value="Vertical"/>
+        <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="GridLinesVisibility" Value="Vertical" />
         <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BorderColor}"></Setter>
-        <Setter Property="CellStyle" Value="{StaticResource DataGridCell}"/>
-        <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}"/>
-        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeader}"/>
+        <Setter Property="CellStyle" Value="{StaticResource DataGridCell}" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+        <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}" />
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DataGridColumnHeader}" />
         <Setter Property="Background" Value="Transparent"></Setter>
-        
     </Style>
 
     <Style x:Key="DatGrid2" TargetType="{x:Type DataGrid}">
         <!--<Setter Property="Padding" Value="0 12"></Setter> -->
         <Setter Property="Margin" Value="0 20 0 0"></Setter>
-        <Setter Property="CanUserAddRows" Value="False"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="IsReadOnly" Value="True"/>
-       
-        <Setter Property="CellStyle" Value="{StaticResource DataGridCell}"/>
-        <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}"/>
-        
-        
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="IsReadOnly" Value="True" />
+
+        <Setter Property="CellStyle" Value="{StaticResource DataGridCell}" />
+        <Setter Property="RowStyle" Value="{DynamicResource DataGridRow}" />
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
             </Trigger>
 
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Background" Value="Transparent" />
             </Trigger>
-
         </Style.Triggers>
     </Style>
 
-
-    
     <!-- CUSTOME GRID DESIGN -->
 
     <Style x:Key="GridHeader" TargetType="Border">
@@ -135,15 +120,11 @@
         <Setter Property="Padding" Value="0 15"></Setter>
     </Style>
 
-
-    
-
     <Style x:Key="GridHeaderColumn" TargetType="TextBlock">
-        
+
         <Setter Property="Foreground" Value="{StaticResource MainBrush}"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
     </Style>
-
 
     <Style x:Key="GridColumn" TargetType="Border">
         <Setter Property="Padding" Value="20 0"></Setter>
@@ -153,11 +134,10 @@
         <Setter Property="Padding" Value="0 0"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="TextAlignment" Value="Left"></Setter>
-
-    </Style> 
+    </Style>
 
     <Style x:Key="GridStatus" TargetType="Border">
-        
+
         <Setter Property="Background" Value="{StaticResource SuccessColor}"></Setter>
         <Setter Property="Width" Value="72"></Setter>
         <Setter Property="Height" Value="20"></Setter>
@@ -171,18 +151,11 @@
         <Setter Property="Foreground" Value="#89949a"></Setter>
     </Style>
 
-
-    
-
     <Style x:Key="GridStatus__Text" TargetType="TextBlock">
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="{StaticResource MainBrush}"></Setter>
         <Setter Property="FontWeight" Value="Bold"></Setter>
         <Setter Property="FontSize" Value="11"></Setter>
-        
     </Style>
-
-    
-
 </ResourceDictionary>

@@ -18,7 +18,7 @@ namespace SCMSClient.Utilities
         /// </summary>
         public event Action<DependencyObject, object> ValueUpdated = (sender, value) => { };
 
-        #endregion
+        #endregion Public Events
 
         #region Public Properties
 
@@ -27,7 +27,7 @@ namespace SCMSClient.Utilities
         /// </summary>
         public static Parent Instance { get; private set; } = new Parent();
 
-        #endregion
+        #endregion Public Properties
 
         #region Attached Property Definitions
 
@@ -89,7 +89,7 @@ namespace SCMSClient.Utilities
         /// <param name="value">The value to set the property to</param>
         public static void SetValue(DependencyObject d, Property value) => d.SetValue(ValueProperty, value);
 
-        #endregion
+        #endregion Attached Property Definitions
 
         #region Event Methods
 
@@ -107,6 +107,6 @@ namespace SCMSClient.Utilities
         /// <param name="value">The arguments for this event</param>
         public virtual void OnValueUpdated(DependencyObject sender, object value) { }
 
-        #endregion
+        #endregion Event Methods
     }
 }

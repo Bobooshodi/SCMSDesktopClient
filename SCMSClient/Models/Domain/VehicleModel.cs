@@ -1,6 +1,5 @@
 ﻿namespace SCMSClient.Models
 {
-
     public class Vehicle : BaseModel
     {
         public string NumberPlate { get; set; }

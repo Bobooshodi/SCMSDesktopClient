@@ -9,7 +9,6 @@ namespace SCMSClient.Services.Implementation
     {
         public VehicleService(IHTTPService _service) : base(_httpService: _service)
         {
-
         }
 
         public override List<Vehicle> GetAll()
@@ -21,6 +20,5 @@ namespace SCMSClient.Services.Implementation
         {
             return allObjects.Find(c => c.ID == parameter);
         }
-
     }
 }

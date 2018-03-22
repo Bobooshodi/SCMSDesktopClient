@@ -7,7 +7,6 @@ namespace SCMSClient.Services.Implementation
     {
         public BuildingService(IHTTPService _service) : base(_httpService: _service)
         {
-
         }
     }
 }

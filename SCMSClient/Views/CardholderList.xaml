@@ -9,6 +9,10 @@
       mc:Ignorable="d"
       Title="CardholderList">
 
+    <Page.Resources>
+        <utilities:ForeGroundConverter x:Key="ForeGroundConverter" />
+    </Page.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -37,16 +41,100 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Template="{StaticResource ButtonNavEmpty}" Command="{Binding FilterCollectionsCommand}"
-                        CommandParameter="">Cardholders</Button>
+                        CommandParameter="">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="AllStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    All Cardholders
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
 
                     <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1" Command="{Binding FilterCollectionsCommand}"
-                        CommandParameter="tenants">Tenants</Button>
+                        CommandParameter="tenant">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="TenantsStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Tenants
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
 
                     <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4" Command="{Binding FilterCollectionsCommand}"
-                        CommandParameter="employees">Employees</Button>
+                        CommandParameter="employee">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="EmployeesStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Employees
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
 
                     <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e" Command="{Binding FilterCollectionsCommand}"
-                        CommandParameter="strata">Strata</Button>
+                        CommandParameter="strata">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="StrataStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Strata
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
                 </Grid>
 
                 <Grid  Grid.Column="1">
@@ -55,7 +143,7 @@
                         <ColumnDefinition Width="200"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                    <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Button Command="{Binding AddCardholderCommand}" Grid.Column="1" Template="{StaticResource ButtonPrimary}">Register Cardholder</Button>
                 </Grid>
@@ -64,71 +152,69 @@
 
         <Border  Grid.Row="2" Style="{StaticResource main_section}">
 
-    
-                <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
+            <DataGrid Style="{DynamicResource DatGrid}" ItemsSource="{Binding FilteredCollection}" SelectedItem="{Binding SelectedObject}"
                           VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" EnableRowVirtualization="True">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Cardholder Details" Width="2*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Cardholder Details" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Border Height="38" Background="#ccc" Width="38" CornerRadius="38" Margin="0 0 10 0">
-                                        </Border>
+                                    <Border Height="38" Background="#ccc" Width="38" CornerRadius="38" Margin="0 0 10 0">
+                                    </Border>
 
-                                        <Grid Grid.Column="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition></RowDefinition>
-                                                <RowDefinition></RowDefinition>
-                                                <RowDefinition></RowDefinition>
-                                            </Grid.RowDefinitions>
-
-                                            <TextBlock FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SuccessColor}" Text="{Binding Path=FullName}" />
-                                            <Grid Grid.Row="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition></ColumnDefinition>
-                                                    <ColumnDefinition></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock Foreground="#89949a" Text="{Binding Converter={utilities:IdentificationNumberConverter}}" />
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Contact Information" Width="2*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid>
+                                    <Grid Grid.Column="1">
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Email}" />
-                                        <TextBlock Grid.Row="1" Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Phone}" />
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="" Width="120">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
+                                        <TextBlock FontSize="15" TextWrapping="Wrap" Foreground="{StaticResource SuccessColor}" Text="{Binding Path=FullName}" />
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Foreground="#89949a" Text="{Binding Converter={utilities:IdentificationNumberConverter}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Contact Information" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Email}" />
+                                    <TextBlock Grid.Row="1" Foreground="{StaticResource MarkerBrush}" Text="{Binding Path=Phone}" />
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}, Mode=FindAncestor},
                                                   Path=DataContext.ProcessCommand}" Template="{StaticResource ButtonPrimary}">View Details</Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-       
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Border>
 
         <loader:LoaderSpinner Grid.Row="2" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsBusy, Converter={utilities:BooleanToVisiblityConverter}}"

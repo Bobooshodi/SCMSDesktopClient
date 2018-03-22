@@ -19,15 +19,14 @@ namespace SCMSClient.ViewModel
         /// This Class' Implementation of the Base class' constructor
         /// </summary>
         /// <param name="_service">
-        /// The default Service class that manages objects of the type 
+        /// The default Service class that manages objects of the type
         /// inferred from the Argument passed to the base class
         /// </param>
-        public CardRequestsVM(ICardRequestService _service) : base(_service: _service)
+        public CardRequestsVM(ICardRequestService _service, IDinkeyDongleService _dongleService) : base(_service: _service, _dongleService: _dongleService)
         {
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region Inherited Methods
 
@@ -51,8 +50,7 @@ namespace SCMSClient.ViewModel
                 || request?.BusinessUnit?.IndexOf(FilterText, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        #endregion
-
+        #endregion Inherited Methods
 
         #region Command Methods
 
@@ -67,6 +65,6 @@ namespace SCMSClient.ViewModel
             MessengerInstance.Send<UIElement>(modal);
         }
 
-        #endregion
+        #endregion Command Methods
     }
 }

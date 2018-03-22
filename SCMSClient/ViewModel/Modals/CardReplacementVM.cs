@@ -7,9 +7,8 @@ namespace SCMSClient.ViewModel
 {
     public class CardReplacementVM : BaseModalsVM<SOAReplaceCardRequest>
     {
-        public CardReplacementVM(ICardReplacementService service) : base(_service: service)
+        public CardReplacementVM(ICardReplacementService service, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
-
         }
 
         #region Inherited Methods
@@ -24,8 +23,6 @@ namespace SCMSClient.ViewModel
             toastManager.ShowSuccessToast(Toaster.SuccessTitle, "Succss!!!");
         }
 
-        #endregion
-
-
+        #endregion Inherited Methods
     }
 }

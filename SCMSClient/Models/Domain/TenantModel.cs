@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SCMSClient.Models
+﻿namespace SCMSClient.Models
 {
     public class Tenant : Cardholder
     {

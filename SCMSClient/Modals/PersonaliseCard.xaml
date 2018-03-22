@@ -23,7 +23,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Style="{StaticResource modal__header}">Personalize Card</TextBlock>
+                <TextBlock Style="{StaticResource modal__header}" Text="{Binding PageHeader}" />
 
                 <Border Grid.Row="1" Style="{StaticResource modal__body}">
 
@@ -73,7 +73,7 @@
                             </Grid>
 
                             <Grid Grid.Row="3" Margin="4" Style="{StaticResource feedback}">
-                                <ContentControl Content="{Binding ActiveModal}" />
+                                <ContentControl Content="{Binding Feedback}" />
                             </Grid>
                         </Grid>
                     </Grid>

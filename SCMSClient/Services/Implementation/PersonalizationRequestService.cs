@@ -1,6 +1,7 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
+using System.Collections.Generic;
 
 namespace SCMSClient.Services.Implementation
 {
@@ -13,6 +14,16 @@ namespace SCMSClient.Services.Implementation
             updateUrl = ApiEndpoints.UpdatePersonalizationRequest;
             createUrl = ApiEndpoints.CreatePersonalizationRequest;
             deleteUrl = ApiEndpoints.DeletePersonalizationRequest;
+        }
+
+        public override List<SOAPersonalizationRequest> GetAll()
+        {
+            return allObjects ?? (allObjects = RandomDataGenerator.PersonalizationRequests(50));
+        }
+
+        public override SOAPersonalizationRequest Get(string parameter)
+        {
+            return allObjects.Find(c => c.ID == parameter);
         }
     }
 }

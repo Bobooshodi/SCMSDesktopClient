@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CardEncoderLib
 {
@@ -11,6 +8,7 @@ namespace CardEncoderLib
     public class MifareCard
     {
         #region Instance Variables
+
         public const string MifareDefaultKey = "FFFFFFFFFFFF";
         public const int MIfareCardKeySector = 3;
         public const int NumberOfCharactersInKey = 12;
@@ -29,7 +27,8 @@ namespace CardEncoderLib
         private byte[] bytesdata;
         private bool selected = false;
         private int sectors;
-        #endregion
+
+        #endregion Instance Variables
 
         public MifareCard()
         {
@@ -117,11 +116,10 @@ namespace CardEncoderLib
         {
             return cardSerial;
         }
-              
+
         public string GetKey(int id)
         {
             if (authMode == 0x60) return keyA[id];
-
             else return keyB[id];
         }
 
@@ -175,7 +173,7 @@ namespace CardEncoderLib
             }
             return true;
         }
-        
+
         public byte GetAuthenticationMode()
         {
             return authMode;
@@ -196,12 +194,11 @@ namespace CardEncoderLib
 
         public int Sectors
         {
-            get 
+            get
             {
-                return sectors; 
+                return sectors;
             }
         }
-
     }
 
     public enum MifareCardTypes

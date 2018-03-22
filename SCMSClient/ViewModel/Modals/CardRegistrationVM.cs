@@ -36,8 +36,7 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Private Members
 
         #region Default Constructor
 
@@ -47,7 +46,7 @@ namespace SCMSClient.ViewModel
         /// <param name="_cardTypeService"></param>
         /// <param name="_cardVendorService"></param>
         public CardRegistrationVM(ICardService _cardService, ICardTypeService _cardTypeService,
-            ICardVendorService _cardVendorService) : base(_service: _cardService)
+            ICardVendorService _cardVendorService, IDinkeyDongleService _dongleService) : base(_service: _cardService, _dongleService: _dongleService)
         {
             cardTypeService = _cardTypeService;
             cardVendorService = _cardVendorService;
@@ -55,8 +54,7 @@ namespace SCMSClient.ViewModel
             LoadAll().ConfigureAwait(false);
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region Public Properties
 
@@ -97,8 +95,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref cardVendors, value, true);
         }
 
-        #endregion
-
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -114,8 +111,7 @@ namespace SCMSClient.ViewModel
             base.Cleanup();
         }
 
-        #endregion
-
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -145,8 +141,7 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Private Methods
 
         #region Command Methods
 
@@ -160,6 +155,6 @@ namespace SCMSClient.ViewModel
             toastManager.ShowSuccessToast(Toaster.SuccessTitle, "Succss!!!");
         }
 
-        #endregion
+        #endregion Command Methods
     }
 }

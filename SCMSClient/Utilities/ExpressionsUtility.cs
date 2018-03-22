@@ -35,7 +35,6 @@ namespace SCMSClient.Utilities
 
             // Set the property value
             propertyInfo.SetValue(target, value);
-
         }
     }
 }

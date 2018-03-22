@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using SCMSClient.Modals;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using SCMSClient.Utilities;
@@ -9,12 +10,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-
 namespace SCMSClient.ViewModel
 {
     /// <summary>
     /// Base Class for all Modal's Viewmodels
-    /// This class is used to view details about a 
+    /// This class is used to view details about a
     /// single Selected Item in a List of Items
     /// </summary>
     /// <typeparam name="T">
@@ -25,9 +25,14 @@ namespace SCMSClient.ViewModel
         #region Members Declaration
 
         private T selectedItem;
-        protected IAbstractService<T> service;
-
+        protected readonly IAbstractService<T> service;
+        protected readonly IDinkeyDongleService dongleService;
+        private UIElement feedback;
+        protected UIElement defaultFeedback = new DefaultFeedback();
+        protected UIElement successFeedback = new SuccessFeedback();
+        protected UIElement errorFeedback = new ErrorFeedback();
         protected readonly Toaster toastManager = Toaster.Instance;
+
         protected virtual bool CanProcess
         {
             get
@@ -39,8 +44,7 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Members Declaration
 
         #region Default Constructor
 
@@ -48,16 +52,16 @@ namespace SCMSClient.ViewModel
         /// The default constructor Inheriteda and implemented by all Child classes
         /// </summary>
         /// <param name="_service"></param>
-        protected BaseModalsVM(IAbstractService<T> _service)
+        protected BaseModalsVM(IAbstractService<T> _service, IDinkeyDongleService _dongleService)
         {
             service = _service;
+            dongleService = _dongleService;
 
             ProcessCommand = new RelayCommand(async () => await Process(), () => CanProcess);
             CloseCommand = new RelayCommand(Close);
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region ICommands
 
@@ -71,10 +75,15 @@ namespace SCMSClient.ViewModel
         /// </summary>
         public ICommand ProcessCommand { get; set; }
 
-        #endregion
-
+        #endregion ICommands
 
         #region Public Properties
+
+        public UIElement Feedback
+        {
+            get => feedback ?? (feedback = defaultFeedback);
+            set => Set(ref feedback, value, true);
+        }
 
         /// <summary>
         /// This is a Flag to show the state of the <see cref="Process"/> Method
@@ -90,13 +99,12 @@ namespace SCMSClient.ViewModel
             set => Set(ref selectedItem, value, true);
         }
 
-        #endregion
-
+        #endregion Public Properties
 
         #region inheritable Methods
 
         /// <summary>
-        /// This Method runs the <see cref="ProcessLogic"/> Method in a new <see cref="Task"/> 
+        /// This Method runs the <see cref="ProcessLogic"/> Method in a new <see cref="Task"/>
         /// when the <see cref="ProcessCommand"/> is invoked
         /// All Child classes must implemen their own logic
         /// </summary>
@@ -143,8 +151,7 @@ namespace SCMSClient.ViewModel
             MessengerInstance.Send<UIElement>(null);
         }
 
-        #endregion
-
+        #endregion inheritable Methods
 
         #region Member Methods
 
@@ -160,7 +167,7 @@ namespace SCMSClient.ViewModel
         /// <summary>
         /// This Method Runs the Method <paramref name="action"/> Passed to in in a
         /// New <see cref="Task"/> to avoid blocking the current Thread and updates the
-        /// flag <paramref name="isRunning"/> passed to it to true or false to indicate 
+        /// flag <paramref name="isRunning"/> passed to it to true or false to indicate
         /// the state of the operation
         /// </summary>
         /// <param name="action">
@@ -176,6 +183,11 @@ namespace SCMSClient.ViewModel
             {
                 // Set the property flag to true to indicate we are running
                 isRunning?.SetPropertyValue(true);
+
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
 
                 await Task.Run(action);
             }
@@ -197,6 +209,11 @@ namespace SCMSClient.ViewModel
                 // Set the property flag to true to indicate we are running
                 isRunning?.SetPropertyValue(true);
 
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
                 return await Task.Run(action);
             }
             catch
@@ -210,6 +227,6 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
+        #endregion Member Methods
     }
 }

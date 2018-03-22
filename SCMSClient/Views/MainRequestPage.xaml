@@ -1,12 +1,16 @@
 ﻿<Page x:Class="SCMSClient.Views.MainRequestPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SCMSClient.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:utilities="clr-namespace:SCMSClient.Utilities"
       DataContext="{Binding Source={StaticResource Locator}, Path=Requests}"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       Title="MainRequestPage">
+
+    <Page.Resources>
+        <utilities:ForeGroundConverter x:Key="ForeGroundConverter" />
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -22,45 +26,112 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid>
-                    
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" CommandParameter="personalization">
-                    Personalization
-                </Button>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" Command="{Binding NavigationCommand}" 
+                    <Button Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" CommandParameter="personalization">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="PersonalisationStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Personalisation
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="btnRequest" Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="1" Command="{Binding NavigationCommand}"
                         CommandParameter="replacement">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                    Card Replacement
-                </Button>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="ReplacementStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Card Replacement
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
 
-                <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" Command="{Binding NavigationCommand}" 
+                    <Button Template="{StaticResource ButtonSubNavEmpty}" Grid.Column="4" Command="{Binding NavigationCommand}"
                         CommandParameter="blacklist">
-                    Blacklist
-                </Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}" 
-                        CommandParameter="distribution">Card Distribution</Button>
-                </Grid>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="BlacklistStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Blacklist
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
 
-                <Grid Grid.Column="1">
-                    <TextBox Style="{StaticResource FlatTextBox}"></TextBox>
+                    <Button Grid.Column="5" Template="{StaticResource ButtonSubNavEmpty}" Command="{Binding NavigationCommand}"
+                        CommandParameter="distribution">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ForeGroundConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="DistributionStyle" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                    Card Distribution
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
                 </Grid>
             </Grid>
-
         </Border>
 
         <Frame x:Name="MainNav" Grid.Row="1" NavigationUIVisibility="Hidden" Source="{Binding ActivePage}" />
-
     </Grid>
 </Page>

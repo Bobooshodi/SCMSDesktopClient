@@ -20,13 +20,12 @@ namespace SCMSClient.ViewModel
 
         private T selectedObject;
         protected readonly IAbstractService<T> service;
+        protected readonly IDinkeyDongleService dongleService;
         protected string filterText;
         private ObservableCollection<T> allObjects;
         protected readonly Toaster toaster = Toaster.Instance;
 
-
-        #endregion
-
+        #endregion Members Declaration
 
         #region Default Constructor
 
@@ -38,39 +37,39 @@ namespace SCMSClient.ViewModel
         /// the default Service class that manages the Type inferred from the Argument passed to the
         /// class
         /// </param>
-        protected CollectionsVMWithOneCommand(IAbstractService<T> _service)
+        protected CollectionsVMWithOneCommand(IAbstractService<T> _service, IDinkeyDongleService _dongleService)
         {
+            ChangeStyle(string.Empty);
+
             service = _service;
+            dongleService = _dongleService;
 
             ProcessCommand = new RelayCommand(Process);
 
             LoadAll().ConfigureAwait(false);
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region ICollectionViews
 
         /// <summary>
-        /// A <see cref="CollectionView"/> to hold a view of the List of 
+        /// A <see cref="CollectionView"/> to hold a view of the List of
         /// Requests for easy filtering and sorting
         /// </summary>
         public ICollectionView AllObjectsCollection { get; set; }
 
-        #endregion
-
+        #endregion ICollectionViews
 
         #region ICommands
 
         /// <summary>
-        /// an <see cref="ICommand"/> to bind to the view to process the 
+        /// an <see cref="ICommand"/> to bind to the view to process the
         /// button click
         /// </summary>
         public ICommand ProcessCommand { get; set; }
 
-        #endregion
-
+        #endregion ICommands
 
         #region Member Methods
 
@@ -86,7 +85,6 @@ namespace SCMSClient.ViewModel
                     var allrequests = service.GetAll() ?? new List<T>();
                     AllObjects = new ObservableCollection<T>(allrequests);
                 }, () => IsBusy);
-
             }
             catch (Exception e)
             {
@@ -107,10 +105,45 @@ namespace SCMSClient.ViewModel
         /// </returns>
         protected abstract bool SearchFilter(object obj);
 
+        protected void ChangeStyle(string caller)
+        {
+            switch (caller)
+            {
+                case "":
+                    AllStyle = "ComplementaryBrush";
+                    IndividualStyle = EmployeesStyle = TenantsStyle = StrataStyle = "MarkerBrush";
+                    break;
+
+                case "tenant":
+                    TenantsStyle = "ComplementaryBrush";
+                    IndividualStyle = EmployeesStyle = AllStyle = StrataStyle = "MarkerBrush";
+                    break;
+
+                case "employee":
+                    EmployeesStyle = "ComplementaryBrush";
+                    IndividualStyle = TenantsStyle = AllStyle = StrataStyle = "MarkerBrush";
+                    break;
+
+                case "strata":
+                    StrataStyle = "ComplementaryBrush";
+                    IndividualStyle = TenantsStyle = AllStyle = EmployeesStyle = "MarkerBrush";
+                    break;
+
+                case "individual":
+                    IndividualStyle = "ComplementaryBrush";
+                    StrataStyle = TenantsStyle = AllStyle = EmployeesStyle = "MarkerBrush";
+                    break;
+
+                default:
+                    IndividualStyle = AllStyle = EmployeesStyle = TenantsStyle = StrataStyle = "MarkerBrush";
+                    break;
+            }
+        }
+
         /// <summary>
         /// This Method Runs the Method <paramref name="action"/> Passed to in in a
         /// New <see cref="Task"/> to avoid blocking the current Thread and updates the
-        /// flag <paramref name="isRunning"/> passed to it to true or false to indicate 
+        /// flag <paramref name="isRunning"/> passed to it to true or false to indicate
         /// the state of the operation
         /// </summary>
         /// <param name="action">
@@ -127,6 +160,13 @@ namespace SCMSClient.ViewModel
                 // Set the property flag to true to indicate we are running
                 isRunning?.SetPropertyValue(true);
 
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, check the dongle and try again");
+                }
+
+                await Task.Delay(5000);
+
                 await Task.Run(action);
             }
             catch
@@ -140,10 +180,19 @@ namespace SCMSClient.ViewModel
             }
         }
 
-        #endregion
-
+        #endregion Member Methods
 
         #region Public Properties
+
+        public string AllStyle { get; set; }
+
+        public string EmployeesStyle { get; set; }
+
+        public string TenantsStyle { get; set; }
+
+        public string StrataStyle { get; set; }
+
+        public string IndividualStyle { get; set; }
 
         public virtual bool IsBusy { get; set; }
 
@@ -162,7 +211,7 @@ namespace SCMSClient.ViewModel
         }
 
         /// <summary>
-        /// This is an object in The <see cref="AllObjects"/> Collection that has been 
+        /// This is an object in The <see cref="AllObjects"/> Collection that has been
         /// selected by the user
         /// </summary>
         public T SelectedObject
@@ -190,8 +239,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref allObjects, value, true);
         }
 
-        #endregion
-
+        #endregion Public Properties
 
         #region Command Methods
 
@@ -200,6 +248,6 @@ namespace SCMSClient.ViewModel
         /// </summary>
         protected abstract void Process();
 
-        #endregion
+        #endregion Command Methods
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows;
-using DinkeyHelper;
+﻿using DinkeyHelper;
 using Newtonsoft.Json;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SCMSClient.Services.Implementation
 {

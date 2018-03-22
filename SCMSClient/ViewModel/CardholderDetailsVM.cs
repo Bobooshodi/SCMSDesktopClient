@@ -26,7 +26,7 @@ namespace SCMSClient.ViewModel
         private string cardsFilterText, vehiclesFilterText, parkingFilterText, buildingsFilterText;
 
         public CardholderDetailsVM(ICardholderService service, IEmployeeService _empService,
-            ITenantService _tenantService, ICardTypeService _cardTypeService) : base(_service: service)
+            ITenantService _tenantService, ICardTypeService _cardTypeService, IDinkeyDongleService _dongleService) : base(_service: service, _dongleService: _dongleService)
         {
             empService = _empService;
             tenantService = _tenantService;
@@ -348,7 +348,7 @@ namespace SCMSClient.ViewModel
                 }
             };
 
-            var modal = new PersonaliseCard(request);
+            var modal = new PersonaliseCard(request, true);
             MessengerInstance.Send<UIElement>(modal);
         }
 

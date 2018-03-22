@@ -10,113 +10,113 @@
 			 VerticalAlignment="Stretch"
 			 HorizontalContentAlignment="Stretch"
 			 VerticalContentAlignment="Stretch">
-	<StackPanel x:Name="ModalContainer">
-		<StackPanel.Background>
-			<SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
-		</StackPanel.Background>
+    <StackPanel x:Name="ModalContainer">
+        <StackPanel.Background>
+            <SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
+        </StackPanel.Background>
 
-		<Border Style="{StaticResource modal}"  Width="460">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="auto"></RowDefinition>
-					<RowDefinition Height="*"></RowDefinition>
-					<RowDefinition Height="auto"></RowDefinition>
-				</Grid.RowDefinitions>
+        <Border Style="{StaticResource modal}"  Width="460">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-				<TextBlock Style="{StaticResource modal__header}">Register Card To Inventory</TextBlock>
+                <TextBlock Style="{StaticResource modal__header}">Register Card To Inventory</TextBlock>
 
-				<Border Grid.Row="1" Style="{StaticResource modal__body}">
+                <Border Grid.Row="1" Style="{StaticResource modal__body}">
 
-					<Grid VerticalAlignment="Top">
-						<Grid.RowDefinitions>
-							<RowDefinition Height="auto"></RowDefinition>
-							<RowDefinition></RowDefinition>
-						</Grid.RowDefinitions>
+                    <Grid VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
 
-						<Grid Grid.Row="0" Style="{StaticResource FormGroup}">
-							<Grid.RowDefinitions>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-								<RowDefinition></RowDefinition>
-							</Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Style="{StaticResource FormGroup}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
 
-							<Grid Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="140" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Card Inventory Number</Label>
-								<TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.CardInventoryNo}" />
-							</Grid>
+                            <Grid Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Card Inventory Number</Label>
+                                <TextBox Grid.Column="1" Style="{StaticResource FlatTextBox}" Text="{Binding SelectedItem.CardInventoryNo}" />
+                            </Grid>
 
-							<Grid Grid.Row="1" Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="140" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Card Type</Label>
-								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardTypes}" DisplayMemberPath="Name" 
-										  SelectedItem="{Binding SelectedCardType}"/>
-							</Grid>
+                            <Grid Grid.Row="1" Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Card Type</Label>
+                                <ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardTypes}" DisplayMemberPath="Name"
+										  SelectedItem="{Binding SelectedCardType}" />
+                            </Grid>
 
-							<Grid Grid.Row="2" Style="{StaticResource FormGroup}">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="140" ></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
-								<Label Style="{StaticResource FormLabel}">Card Vendor</Label>
-								<ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardVendors}" DisplayMemberPath="Name" 
-										  SelectedItem="{Binding SelectedCardVendor}"/>
-							</Grid>
+                            <Grid Grid.Row="2" Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Card Vendor</Label>
+                                <ComboBox Grid.Column="1" Style="{StaticResource ComboBox}" ItemsSource="{Binding CardVendors}" DisplayMemberPath="Name"
+										  SelectedItem="{Binding SelectedCardVendor}" />
+                            </Grid>
 
-							<Grid Grid.Row="3" Margin="4" Style="{StaticResource feedback}">
+                            <Grid Grid.Row="3" Margin="4" Style="{StaticResource feedback}">
 
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="120"></ColumnDefinition>
-									<ColumnDefinition></ColumnDefinition>
-								</Grid.ColumnDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-								<Border Style="{StaticResource feedback__icon}">
-									<Viewbox Width="48" Height="48">
-										<Canvas Width="24" Height="24">
-											<Path Data="M2,4H6V2H2A2,2 0 0,0 0,4V8H2V4M22,2H18V4H22V8H24V4A2,2 0 0,0 22,2M2,16H0V20A2,2 0 0,0 2,22H6V20H2V16M22,20H18V22H22A2,2 0 0,0 24,20V16H22V20M4,8V16A2,2 0 0,0 6,18H18A2,2 0 0,0 20,16V8A2,2 0 0,0 18,6H6A2,2 0 0,0 4,8M6,16V12H18V16H6M18,8V10H6V8H18Z" Fill="{StaticResource MarkerBrush}" />
-										</Canvas>
-									</Viewbox>
-								</Border>
+                                <Border Style="{StaticResource feedback__icon}">
+                                    <Viewbox Width="48" Height="48">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M2,4H6V2H2A2,2 0 0,0 0,4V8H2V4M22,2H18V4H22V8H24V4A2,2 0 0,0 22,2M2,16H0V20A2,2 0 0,0 2,22H6V20H2V16M22,20H18V22H22A2,2 0 0,0 24,20V16H22V20M4,8V16A2,2 0 0,0 6,18H18A2,2 0 0,0 20,16V8A2,2 0 0,0 18,6H6A2,2 0 0,0 4,8M6,16V12H18V16H6M18,8V10H6V8H18Z" Fill="{StaticResource MarkerBrush}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                </Border>
 
-								<Border Style="{StaticResource feedback__message}"  Grid.Column="1">
-									<Grid>
-										<Grid.RowDefinitions>
-											<RowDefinition></RowDefinition>
-											<RowDefinition></RowDefinition>
-										</Grid.RowDefinitions>
+                                <Border Style="{StaticResource feedback__message}"  Grid.Column="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition></RowDefinition>
+                                        </Grid.RowDefinitions>
 
-										<TextBlock Style="{StaticResource feedback__message__header}">Encoder Is Ready</TextBlock>
-										<TextBlock Grid.Row="1" Style="{StaticResource feedback__message__text}">Place Card On Encoder</TextBlock>
-									</Grid>
-								</Border>
-							</Grid>
-						</Grid>
-					</Grid>
-				</Border>
+                                        <TextBlock Style="{StaticResource feedback__message__header}">Encoder Is Ready</TextBlock>
+                                        <TextBlock Grid.Row="1" Style="{StaticResource feedback__message__text}">Place Card On Encoder</TextBlock>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
 
                 <loader:LoaderSpinner Grid.Row="1" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsProcessing, Converter={utilities:BooleanToVisiblityConverter}}"
                               VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                 <Border Grid.Row="2" Style="{StaticResource modal__footer}">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-							<ColumnDefinition></ColumnDefinition>
-							<ColumnDefinition Width="auto"></ColumnDefinition>
-						</Grid.ColumnDefinitions>
-						<Button Template="{StaticResource ButtonEmpty}" Command="{Binding CloseCommand}">Cancel</Button>
-						<Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Register Card</Button>
-					</Grid>
-				</Border>
-			</Grid>
-		</Border>
-	</StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Template="{StaticResource ButtonEmpty}" Command="{Binding CloseCommand}">Cancel</Button>
+                        <Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Register Card</Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </StackPanel>
 </UserControl>

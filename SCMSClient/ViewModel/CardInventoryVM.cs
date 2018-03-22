@@ -13,12 +13,11 @@ namespace SCMSClient.ViewModel
 
         #region Default Constructors
 
-        public CardInventoryVM(ICardService _cardService) : base(_service: _cardService)
+        public CardInventoryVM(ICardService _cardService, IDinkeyDongleService _dongleService) : base(_service: _cardService, _dongleService: _dongleService)
         {
         }
 
-        #endregion
-
+        #endregion Default Constructors
 
         #region Private Methods
 
@@ -31,14 +30,11 @@ namespace SCMSClient.ViewModel
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
-        #endregion
-
+        #endregion Private Methods
 
         #region Command Methods
 
@@ -62,8 +58,9 @@ namespace SCMSClient.ViewModel
 
             FilteredCollection = new ObservableCollection<Card>(cards);
 
+            ChangeStyle(filter);
         }
 
-        #endregion
+        #endregion Command Methods
     }
 }

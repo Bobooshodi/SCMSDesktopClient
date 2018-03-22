@@ -9,10 +9,12 @@ namespace SCMSClient.ViewModel
     public class ChangePasswordVM : ViewModelBase
     {
         private readonly IUserService userService;
+        private readonly IDinkeyDongleService dongleService;
 
-        public ChangePasswordVM(IUserService _userService)
+        public ChangePasswordVM(IUserService _userService, IDinkeyDongleService _dongleService)
         {
             userService = _userService;
+            dongleService = _dongleService;
 
             CloseModalCommand = new RelayCommand(CloseModal);
             ChangePasswordCommand = new RelayCommand<object>(ChangePassword);
@@ -20,7 +22,6 @@ namespace SCMSClient.ViewModel
 
         public ICommand CloseModalCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
-
 
         public string OldPassword { get; set; }
 
@@ -36,8 +37,7 @@ namespace SCMSClient.ViewModel
             MessengerInstance.Send<System.Windows.UIElement>(null);
         }
 
-
-        #endregion
+        #endregion Command Methods
     }
 
     public interface IChangePasswordM

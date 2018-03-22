@@ -16,15 +16,13 @@ namespace SCMSClient.Services.Implementation
         protected string createUrl;
         protected string deleteUrl;
 
-        #endregion
-
+        #endregion Inheritable Members
 
         #region Private Members
 
         protected IHTTPService httpService;
 
-        #endregion
-
+        #endregion Private Members
 
         #region Default Constructor
 
@@ -33,8 +31,7 @@ namespace SCMSClient.Services.Implementation
             httpService = _httpService;
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region Public Methods
 
@@ -104,7 +101,7 @@ namespace SCMSClient.Services.Implementation
         /// specified in the Inheriting Child Class
         /// </summary>
         /// <returns>
-        /// returns a <see cref="List{T}"/>  of objects of the Type <see cref="Model"/> 
+        /// returns a <see cref="List{T}"/>  of objects of the Type <see cref="Model"/>
         /// specified in the Inheriting class
         /// </returns>
         public virtual List<Model> GetAll()
@@ -192,6 +189,6 @@ namespace SCMSClient.Services.Implementation
             httpService = null;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

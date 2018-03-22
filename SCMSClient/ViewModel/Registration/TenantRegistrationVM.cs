@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using SCMSClient.Models;
+﻿using SCMSClient.Models;
 using SCMSClient.ToastNotification;
 using SCMSClient.Utilities;
 using System;

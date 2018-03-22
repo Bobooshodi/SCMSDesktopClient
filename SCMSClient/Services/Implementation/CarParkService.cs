@@ -7,7 +7,6 @@ namespace SCMSClient.Services.Implementation
     {
         public CarParkService(IHTTPService _service) : base(_httpService: _service)
         {
-
         }
     }
 }

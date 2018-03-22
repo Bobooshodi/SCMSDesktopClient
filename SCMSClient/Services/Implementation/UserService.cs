@@ -9,16 +9,8 @@ namespace SCMSClient.Services.Implementation
 
         public UserService(IHTTPService httpService) : base(_httpService: httpService)
         {
-
         }
 
-        #endregion
-
-
-        #region Public Methods
-
-
-
-        #endregion
+        #endregion Default Constructor
     }
 }

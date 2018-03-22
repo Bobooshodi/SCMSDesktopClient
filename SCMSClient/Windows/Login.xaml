@@ -13,97 +13,97 @@
     <Window.Resources>
         <utilities:StyleConverter x:Key="StyleConverter" />
     </Window.Resources>
-    
-	<Window.DataContext>
-		<Binding Path="Login" Source="{StaticResource Locator}" />
-	</Window.DataContext>
 
-	<Grid Background="#000">
-		<Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4" />
-		<Grid Style="{StaticResource login-wrapper}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="300" />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
+    <Window.DataContext>
+        <Binding Path="Login" Source="{StaticResource Locator}" />
+    </Window.DataContext>
 
-			<Border  Style="{StaticResource credential-container}">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="auto" />
-						<RowDefinition Height="auto" />
-					</Grid.RowDefinitions>
+    <Grid Background="#000">
+        <Image Source="/Images/Starling.jpg" Stretch="Fill" Opacity="0.4" />
+        <Grid Style="{StaticResource login-wrapper}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-					<TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account" /></TextBlock>
-					<Border  Grid.Row="1" Style="{StaticResource credential__form}">
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition />
-								<RowDefinition />
-								<RowDefinition />
-							</Grid.RowDefinitions>
+            <Border  Style="{StaticResource credential-container}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-							<Grid Style="{DynamicResource FormGroup}">
-								<Grid.RowDefinitions>
-									<RowDefinition />
-									<RowDefinition />
-									<RowDefinition />
-								</Grid.RowDefinitions>
-								<Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
-								<Border Grid.Row="1">
+                    <TextBlock Style="{StaticResource credential__title}" ><Run Text="Login To Your Account" /></TextBlock>
+                    <Border  Grid.Row="1" Style="{StaticResource credential__form}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Grid Style="{DynamicResource FormGroup}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Style="{DynamicResource FormLabel}" Content="Operator Name" />
+                                <Border Grid.Row="1">
                                     <Border.Style>
                                         <MultiBinding Converter="{StaticResource StyleConverter}">
                                             <MultiBinding.Bindings>
-                                                <Binding RelativeSource="{RelativeSource Self}"/>
-                                                <Binding Path="UsernameBorderStyle"/>
+                                                <Binding RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="UsernameBorderStyle" />
                                             </MultiBinding.Bindings>
                                         </MultiBinding>
                                     </Border.Style>
-                                        <TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
+                                    <TextBox Style="{DynamicResource FlatTextBox}" Tag="Username"
 											 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
-								</Border>
-                                <TextBlock  Grid.Row="2" Style="{StaticResource ValidationText}" 
-                                            Visibility="{Binding UsernameErrorTextVisibility, Converter={utilities:BooleanToVisiblityConverter}}" >
+                                </Border>
+                                <TextBlock  Grid.Row="2" Style="{StaticResource ValidationText}"
+                                            Visibility="{Binding UsernameErrorTextVisibility, Converter={utilities:BooleanToVisiblityConverter}}">
                                     Please, Enter your Username
                                 </TextBlock>
-							</Grid>
+                            </Grid>
 
-							<Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="auto"></RowDefinition>
-									<RowDefinition Height="auto"></RowDefinition>
-									<RowDefinition Height="auto"></RowDefinition>
-								</Grid.RowDefinitions>
-								<Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
-								<Border Grid.Row="1" Style="{DynamicResource InputBorder}" Name="loginBorder">
-									<PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword" KeyDown="userPassword_KeyDown" PasswordChanged="userPassword_PasswordChanged"
+                            <Grid Grid.Row="1" Style="{DynamicResource FormGroup}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Style="{DynamicResource FormLabel}" Content="Operator Password" />
+                                <Border Grid.Row="1" Style="{DynamicResource InputBorder}" Name="loginBorder">
+                                    <PasswordBox Style="{DynamicResource PasswordBox}" x:Name="userPassword" KeyDown="userPassword_KeyDown" PasswordChanged="userPassword_PasswordChanged"
 												 x:FieldModifier="public" Tag="Password">
-										<PasswordBox.InputBindings>
-											<KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
-										</PasswordBox.InputBindings>
-									</PasswordBox>
-								</Border>
+                                        <PasswordBox.InputBindings>
+                                            <KeyBinding Key="Enter" Command="{Binding LoginCommand}" />
+                                        </PasswordBox.InputBindings>
+                                    </PasswordBox>
+                                </Border>
                                 <TextBlock Name="notificationText" Grid.Row="2" Style="{StaticResource ValidationText}" ></TextBlock>
-							</Grid>
+                            </Grid>
 
-							<Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
+                            <Button Grid.Row="2" Template="{StaticResource ButtonPrimary}"
 									Command="{Binding NextPageCommand}" CommandParameter="{Binding ElementName=loginWindow}" Content="Login Me In" />
-						</Grid>
-					</Border>
-				</Grid>
-			</Border>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
 
-			<loader:LoaderSpinner SpinnerColor="Black" SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"
+            <loader:LoaderSpinner SpinnerColor="Black" SpinnerVisibility="{Binding LoaderVisibility, Converter={utilities:BooleanToVisiblityConverter}}"
 								  VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-			<Grid Grid.Column="1" Style="{StaticResource welcome}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="auto" />
-					<RowDefinition Height="auto" />
-				</Grid.RowDefinitions>
+            <Grid Grid.Column="1" Style="{StaticResource welcome}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
 
-				<TextBlock Grid.Row="0" Style="{StaticResource welcome__title}"><Run Text="Your Space To A Smart Connected World." /></TextBlock>
-				<TextBlock Grid.Row="1" Style="{StaticResource welcome__message}" ><Run Text="Welcome! We are happy to see you again. Enjoy the benefits of a smart connected world." /></TextBlock>
-			</Grid>
-		</Grid>
-	</Grid>
+                <TextBlock Grid.Row="0" Style="{StaticResource welcome__title}"><Run Text="Your Space To A Smart Connected World." /></TextBlock>
+                <TextBlock Grid.Row="1" Style="{StaticResource welcome__message}" ><Run Text="Welcome! We are happy to see you again. Enjoy the benefits of a smart connected world." /></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
 </Window>

@@ -2,12 +2,9 @@
 using GalaSoft.MvvmLight.Ioc;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
-using SCMSClient.ToastNotification;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
@@ -20,7 +17,7 @@ namespace SCMSClient.ViewModel
         #region Default Constructor
 
         public CardholdersVM(ICardholderService _cardholderService, IEmployeeService _empService,
-            ITenantService _tenantService) : base(_service: _cardholderService)
+            ITenantService _tenantService, IDinkeyDongleService _dongleService) : base(_service: _cardholderService, _dongleService: _dongleService)
         {
             empService = _empService;
             tenantService = _tenantService;
@@ -28,12 +25,9 @@ namespace SCMSClient.ViewModel
             AddCardholderCommand = new RelayCommand(OpenCardholderRegistrationPage);
         }
 
-
-        #endregion
-
+        #endregion Default Constructor
 
         public ICommand AddCardholderCommand { get; set; }
-
 
         #region Private Methods
 
@@ -50,8 +44,7 @@ namespace SCMSClient.ViewModel
             return false;
         }
 
-        #endregion
-
+        #endregion Private Methods
 
         #region Command Methods
 
@@ -78,13 +71,14 @@ namespace SCMSClient.ViewModel
             var filter = obj as string;
 
             var cardholders = AllObjects
-                .Where(ch => ch.Cards
-                                .Any(c => c.CardType.IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0))
+                .Where(ch => ch.UserType.ToString().IndexOf(filter, StringComparison.OrdinalIgnoreCase) >= 0)
                                 .ToList();
 
             FilteredCollection = new ObservableCollection<Cardholder>(cardholders);
+
+            ChangeStyle(filter);
         }
 
-        #endregion
+        #endregion Command Methods
     }
 }

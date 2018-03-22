@@ -53,7 +53,7 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource FormLabel}">Plate Number</Label>
-                                <Border Grid.Column="1" >
+                                <Border Grid.Column="1">
                                     <Border.Style>
                                         <MultiBinding Converter="{StaticResource StyleConverter}">
                                             <MultiBinding.Bindings>
@@ -62,7 +62,7 @@
                                             </MultiBinding.Bindings>
                                         </MultiBinding>
                                     </Border.Style>
-                                    <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding PlateNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding PlateNumber, UpdateSourceTrigger=PropertyChanged}" />
                                 </Border>
                             </Grid>
 
@@ -77,7 +77,7 @@
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <Border >
+                                    <Border>
                                         <Border.Style>
                                             <MultiBinding Converter="{StaticResource StyleConverter}">
                                                 <MultiBinding.Bindings>
@@ -86,7 +86,7 @@
                                                 </MultiBinding.Bindings>
                                             </MultiBinding>
                                         </Border.Style>
-                                        <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CarModel, UpdateSourceTrigger=PropertyChanged}"/>
+                                        <TextBox Style="{StaticResource FlatTextBox}" Text="{Binding CarModel, UpdateSourceTrigger=PropertyChanged}" />
                                     </Border>
                                 </Grid>
                             </Grid>

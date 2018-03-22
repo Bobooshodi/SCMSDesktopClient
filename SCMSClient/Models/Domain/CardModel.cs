@@ -13,6 +13,9 @@ namespace SCMSClient.Models
         public string MifareId { set; get; }
         public string CardTypeId { set; get; }
         public string CardType { set; get; }
+        public HolderType AssignedToType { get; set; }
+        public string AssignedTo { get; set; }
+        public string AssignedToId { get; set; }
         public CardVendor CardVendor { get; set; }
         public CardStatus? Status { set; get; }
         public DateTime? PersonalizedDate { get; set; }
@@ -27,6 +30,8 @@ namespace SCMSClient.Models
         public string PersonalizedBy { get; set; }
         public string PersonalizedById { get; set; }
         public bool IsSelected { get; set; }
+        public string BusinessUnitId { get; set; }
+        public string BusinessUnit { get; set; }
     }
 
     public enum CardStatus
@@ -37,5 +42,11 @@ namespace SCMSClient.Models
         Active,
         Detached,
         Renewal
+    }
+
+    public enum HolderType
+    {
+        Vehicle,
+        Cardholder
     }
 }

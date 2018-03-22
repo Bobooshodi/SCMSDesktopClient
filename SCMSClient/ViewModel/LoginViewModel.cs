@@ -16,7 +16,7 @@ namespace SCMSClient.ViewModel
         #region Private Members
 
         private string username;
-        private readonly Toaster toastManager = Toaster.Instance;
+        private readonly Toaster toastManager;
         private readonly IAuthenticationService authService;
 
         private readonly IDinkeyDongleService dongleService;
@@ -33,8 +33,13 @@ namespace SCMSClient.ViewModel
             dongleService = _dongleService;
             authService = _authService;
 
+            // CheckPCValidity();
+            Toaster.Refresh();
+
             LoginCommand = new RelayCommand<object>(async (object obj) => await Login(obj), (obj) => CanLogin);
             NextPageCommand = new RelayCommand<object>(OpenNextPage);
+
+            toastManager = Toaster.Instance;
         }
 
         #endregion Default Constructor
@@ -90,27 +95,16 @@ namespace SCMSClient.ViewModel
         {
             try
             {
-                var mutexName = "";
-
                 if (dongleService.IsDonglePresent())
                 {
-                    var allowedPc = false;
-
                     var data = dongleService.GetDongleData();
 
-                    foreach (var pc in data.PCToBoind)
+                    if (data == null)
                     {
-                        if (pc.Uid == mutexName)
-                        {
-                            allowedPc = true;
-                            break;
-                        }
+                        throw new Exception("Card Keys could not be read from the Dongle, Please make sure you are using the Dongle shipped with SCMS");
                     }
 
-                    if (!allowedPc)
-                    {
-                        throw new Exception("SCMS is not configured to work on this PC");
-                    }
+                    LoadSettings();
                 }
                 else
                 {
@@ -123,6 +117,10 @@ namespace SCMSClient.ViewModel
 
                 Application.Current.Shutdown(0);
             }
+        }
+
+        private void LoadSettings()
+        {
         }
 
         private bool DisplayError()

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using SCMSClient.Models;
+﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
+using System.Collections.Generic;
 
 namespace SCMSClient.Services.Implementation
 {

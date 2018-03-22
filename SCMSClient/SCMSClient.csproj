@@ -246,11 +246,14 @@
     <Compile Include="Utilities\SecureStringUtility.cs" />
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
     <Compile Include="Utilities\ValueConverters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Utilities\ValueConverters\ForeGroundConverter.cs" />
     <Compile Include="Utilities\ValueConverters\IdentificationNumberConverter.cs" />
     <Compile Include="Utilities\ValueConverters\StyleConverter.cs" />
     <Compile Include="ViewModel\CardholderDetailsVM.cs" />
+    <Compile Include="ViewModel\CardsListVM.cs" />
     <Compile Include="ViewModel\Modals\AddBuildingVM.cs" />
     <Compile Include="ViewModel\Modals\AddCarParkVM.cs" />
+    <Compile Include="ViewModel\Modals\VerifyCardVM.cs" />
     <Compile Include="ViewModel\Registration\BaseRegistrationVM.cs" />
     <Compile Include="ViewModel\Registration\CardholderRegistrationVM.cs" />
     <Compile Include="ViewModel\CardholdersVM.cs" />

@@ -50,7 +50,7 @@ namespace SCMSClient.Services.Implementation
         }
 
         /// <summary>
-        /// Refreshes the LoggedIn User's Expired AccessToken and 
+        /// Refreshes the LoggedIn User's Expired AccessToken and
         /// requests for a new one from the server
         /// </summary>
         /// <param name="refreshToken">
@@ -82,6 +82,5 @@ namespace SCMSClient.Services.Implementation
                 throw;
             }
         }
-
     }
 }

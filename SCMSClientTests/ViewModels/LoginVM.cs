@@ -1,10 +1,4 @@
-﻿using Moq;
-using NUnit.Framework;
-using SCMSClient.Models;
-using SCMSClient.Services.Interfaces;
-using SCMSClient.Utilities;
-using SCMSClient.ViewModel;
-using System.Security;
+﻿using NUnit.Framework;
 
 namespace SCMSClientTests.ViewModels
 {

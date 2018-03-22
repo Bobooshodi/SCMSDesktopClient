@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using SCMSClient.Views;
 using System;
 using System.Windows;
@@ -16,18 +17,20 @@ namespace SCMSClient.ViewModel
         private Uri activePage;
         private UIElement activeModal;
         private User loggedInUser;
+        private readonly Toaster toastManager;
         private readonly ISettingsService settingsService;
+        private readonly IDinkeyDongleService dongleService;
 
-        #endregion
-
+        #endregion Private Members
 
         #region Default Constructor
 
-        public MainWindowVM(ISettingsService _settingsService)
+        public MainWindowVM(ISettingsService _settingsService, IDinkeyDongleService _dongleService)
         {
             settingsService = _settingsService;
+            dongleService = _dongleService;
 
-            ToastNotification.Toaster.Refresh();
+            Toaster.Refresh();
 
             if (Application.Current?.Properties?["loggedInUser"] != null)
                 loggedInUser = Application.Current.Properties["loggedInUser"] as User;
@@ -39,10 +42,11 @@ namespace SCMSClient.ViewModel
             LogOutCommand = new RelayCommand(LogOut);
             NavigationCommand = new RelayCommand<object>(Navigate);
             ChangePasswordCommand = new RelayCommand(ChangePassword);
+
+            toastManager = Toaster.Instance;
         }
 
-        #endregion
-
+        #endregion Default Constructor
 
         #region Commands
 
@@ -50,8 +54,7 @@ namespace SCMSClient.ViewModel
         public ICommand NavigationCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
 
-        #endregion
-
+        #endregion Commands
 
         #region Public Properties
 
@@ -71,33 +74,53 @@ namespace SCMSClient.ViewModel
             set => Set(ref activeModal, value, true);
         }
 
-        #endregion
-
+        #endregion Public Properties
 
         #region Private Methods
 
         private void Navigate(object obj)
         {
-            switch (obj as string)
+            try
             {
-                case "dashboard":
-                    ActivePage = new Uri("/Views/Dashboard.xaml", UriKind.RelativeOrAbsolute);
-                    break;
-                case "requests":
-                    ActivePage = new Uri("/Views/MainRequestPage.xaml", UriKind.RelativeOrAbsolute);
-                    break;
-                case "inventory":
-                    ActivePage = new Uri("/Views/CardInventory.xaml", UriKind.RelativeOrAbsolute);
-                    break;
-                case "cardholders":
-                    ActivePage = new Uri("/Views/CardholderList.xaml", UriKind.RelativeOrAbsolute);
-                    break;
-                case "cardholder-details":
-                    ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
-                    break;
-                case "options":
-                    ShowOptions = !ShowOptions;
-                    break;
+                if (obj.ToString() != "options" && !dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
+                switch (obj as string)
+                {
+                    case "dashboard":
+                        ActivePage = new Uri("/Views/Dashboard.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "requests":
+                        ActivePage = new Uri("/Views/MainRequestPage.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "inventory":
+                        ActivePage = new Uri("/Views/CardInventory.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "cards":
+                        ActivePage = new Uri("/Views/CardList.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "cardholders":
+                        ActivePage = new Uri("/Views/CardholderList.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "cardholder-details":
+                        ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
+                        break;
+
+                    case "options":
+                        ShowOptions = !ShowOptions;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
             }
         }
 
@@ -108,11 +131,22 @@ namespace SCMSClient.ViewModel
 
         private void ChangePassword()
         {
-            ActiveModal = new Modals.ChangePassword();
+            try
+            {
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
+                ActiveModal = new Modals.ChangePassword();
+            }
+            catch (Exception ex)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
         }
 
-        #endregion
-
+        #endregion Private Methods
 
         #region Messenger Methods
 
@@ -123,9 +157,22 @@ namespace SCMSClient.ViewModel
 
         private void OpenCardholderDetails(CardholderDetails obj)
         {
-            Navigate("cardholder-details");
+            try
+            {
+                if (!dongleService.IsDonglePresent())
+                {
+                    toastManager.ShowErrorToast(Toaster.ErrorTitle, "Please, Check the Dongle and try again");
+                    return;
+                }
+
+                Navigate("cardholder-details");
+            }
+            catch (Exception ex)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
         }
 
-        #endregion
+        #endregion Messenger Methods
     }
 }

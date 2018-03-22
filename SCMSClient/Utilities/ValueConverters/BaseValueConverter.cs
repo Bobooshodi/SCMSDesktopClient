@@ -19,12 +19,12 @@ namespace SCMSClient.Utilities
         /// </summary>
         private static T Converter;
 
-        #endregion
+        #endregion Private Members
 
         #region Markup Extension Methods
 
         /// <summary>
-        /// Provides a static instance of the value converter 
+        /// Provides a static instance of the value converter
         /// </summary>
         /// <param name="serviceProvider">The service provider</param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace SCMSClient.Utilities
             return Converter ?? (Converter = new T());
         }
 
-        #endregion
+        #endregion Markup Extension Methods
 
         #region Value Converter Methods
 
@@ -57,6 +57,6 @@ namespace SCMSClient.Utilities
         /// <returns></returns>
         public abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
 
-        #endregion
+        #endregion Value Converter Methods
     }
 }

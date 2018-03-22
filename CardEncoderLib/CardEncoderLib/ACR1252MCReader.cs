@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardEncoderLib
 {
-    class ACR1252MCReader: CardReader
+    internal class ACR1252MCReader : CardReader
     {
-
-
         public bool Connect()
         {
             throw new NotImplementedException();

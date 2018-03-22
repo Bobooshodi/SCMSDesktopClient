@@ -52,7 +52,6 @@ namespace SCMSClient.Models
             return null;
         }
 
-        #endregion
-
+        #endregion Methods
     }
 }

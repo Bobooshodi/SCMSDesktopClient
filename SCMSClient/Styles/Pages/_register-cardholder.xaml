@@ -4,13 +4,10 @@
 
     <!-- CARDHOLDER REGISTRATION FORM-->
 
-
     <Style x:Key="c-registration" TargetType="Grid">
-
     </Style>
 
     <Style x:Key="c-registration__image" TargetType="Border">
-
     </Style>
 
     <Style x:Key="c-registration__form" TargetType="Border" BasedOn="{StaticResource main_section}">
@@ -28,13 +25,11 @@
         <Setter Property="Margin" Value="5 10 5 15"></Setter>
     </Style>
 
-
     <Style x:Key="process__line" TargetType="Border">
-        
+
         <Setter Property="Height" Value="1"></Setter>
         <Setter Property="Background" Value="#ddd"></Setter>
         <Setter Property="Margin" Value="0 -13 0 0"></Setter>
- 
     </Style>
 
     <Style x:Key="process__text" TargetType="TextBlock">
@@ -90,8 +85,6 @@
         <Setter Property="Background" Value="{StaticResource SuccessColor}"></Setter>
     </Style>
 
-    
-
     <Style x:Key="process__counter__text" TargetType="TextBlock">
         <Setter Property="Width" Value="30"></Setter>
         <Setter Property="TextAlignment" Value="Center"></Setter>
@@ -101,5 +94,4 @@
         <Setter Property="Foreground" Value="#fff"></Setter>
         <Setter Property="TextAlignment" Value="Center"></Setter>
     </Style>
-
 </ResourceDictionary>

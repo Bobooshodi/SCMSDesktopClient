@@ -6,6 +6,7 @@
 
         //Card Service
         public static string FindCardById = "cards";
+
         public static string AllCards = "cards";
         public static string CreateCard = "cards";
         public static string UpdateCard = "cards";
@@ -13,6 +14,7 @@
 
         // Card Type Service
         public static string FindCardTypeById = "card-types";
+
         public static string AllCardTypes = "card-types";
         public static string CreateCardType = "card-types";
         public static string UpdateCardType = "card-types";
@@ -20,6 +22,7 @@
 
         // Card Vendor Service
         public static string FindCardVendorById = "vendors";
+
         public static string AllCardVendors = "vendors";
         public static string CreateCardVendor = "vendors";
         public static string UpdateCardVendor = "vendors";
@@ -27,6 +30,7 @@
 
         // Card Request Service
         public static string FindCardRequestById = "card-requests";
+
         public static string AllCardRequests = "card-requests";
         public static string CreateCardRequest = "card-requests";
         public static string UpdateCardRequest = "card-requests";
@@ -34,6 +38,7 @@
 
         // Cardholders
         public static string FindCardholderById = "cardholders";
+
         public static string AllCardholders = "cardholders";
         public static string CreateCardholder = "cardholders";
         public static string UpdateCardholder = "cardholders";
@@ -41,6 +46,7 @@
 
         // Employees
         public static string FindEmployeeById = "employees";
+
         public static string AllEmployees = "employees";
         public static string CreateEmployee = "employees";
         public static string UpdateEmployee = "employees";
@@ -48,6 +54,7 @@
 
         // Tenants
         public static string FindTenantById = "tenants";
+
         public static string AllTenants = "tenants";
         public static string CreateTenant = "tenants";
         public static string UpdateTenant = "tenants";
@@ -55,6 +62,7 @@
 
         // Card Replacement Service
         public static string FindCardReplacementRequestById = "card-replacement-requests";
+
         public static string AllCardReplacementRequests = "card-replacement-requests";
         public static string CreateCardReplacementRequest = "card-replacement-requests";
         public static string UpdateCardReplacementRequest = "card-replacement-requests";
@@ -62,6 +70,7 @@
 
         // Personalization Requests Service
         public static string FindPersonalizationRequestById = "personalization-requests";
+
         public static string AllPersonalizationRequests = "personalization-requests";
         public static string CreatePersonalizationRequest = "personalization-requests";
         public static string UpdatePersonalizationRequest = "personalization-requests";

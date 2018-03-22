@@ -13,7 +13,7 @@ namespace SCMSClientTests.ViewModels
 
         public CardRequests()
         {
-            vmToTest = new CardRequestsVM(fakeCardRequestService.Object);
+            //vmToTest = new CardRequestsVM(fakeCardRequestService.Object);
         }
 
         [Test]

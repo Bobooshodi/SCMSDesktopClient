@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Newtonsoft.Json;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using System;
@@ -324,7 +325,7 @@ namespace SCMSClient.Services.Implementation
             var loginPage = new Windows.Login { WindowState = WindowState.Maximized };
             loginPage.Show();
 
-            Application.Current.MainWindow.Close();
+            Messenger.Default.Send(ApplicationCommands.SHUT_DOWN);
         }
 
         public void Dispose()

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardEncoderLib
 {
@@ -16,21 +12,25 @@ namespace CardEncoderLib
     public class MiFareKey
     {
         #region Instance Variable
+
         public string[] KeyA { get; set; }
         public string[] KeyB { get; set; }
         public string[] UseKey { get; set; }
 
         public bool Loaded = false;
-        #endregion
+
+        #endregion Instance Variable
 
         #region Constructor
+
         public MiFareKey()
         {
             KeyA = new string[40];
             KeyB = new string[40];
             UseKey = new string[40];
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Class Methods
 
@@ -146,6 +146,6 @@ namespace CardEncoderLib
             return this;
         }
 
-        #endregion
+        #endregion Class Methods
     }
 }

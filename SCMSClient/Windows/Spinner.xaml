@@ -6,7 +6,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="Loading..." Height="100" Width="100"
-        WindowStartupLocation="CenterScreen" Topmost="True" 
+        WindowStartupLocation="CenterScreen" Topmost="True"
         ShowInTaskbar="False" ResizeMode="NoResize" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent">
     <Grid>

@@ -10,12 +10,13 @@ namespace SCMSClient.Modals
     /// </summary>
     public partial class PersonaliseCard : UserControl
     {
-        public PersonaliseCard(SOAPersonalizationRequest selectedRequest)
+        public PersonaliseCard(SOAPersonalizationRequest selectedRequest, bool isSupplementary = false)
         {
             InitializeComponent();
 
             var dc = SimpleIoc.Default.GetInstance<CardPersonalizationVM>();
             dc.SelectedItem = selectedRequest;
+            dc.PageHeader = isSupplementary ? "Supplement Card" : "Personalise Card";
 
             DataContext = dc;
         }

@@ -17,6 +17,11 @@ namespace SCMSClient.Models
         public DateTime LockedOutTime { get; set; }
     }
 
+    public enum ApplicationCommands
+    {
+        SHUT_DOWN
+    }
+
     public enum ApplicationTheme
     {
         LIGHT_THEME,
