@@ -72,7 +72,7 @@ namespace SCMSClient.Services.Implementation
                 client.Timeout = new TimeSpan(0, 10, 0);
                 // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.BaseAddress = new Uri("http://localhost:3000/");
+                client.BaseAddress = new Uri("http://localhost:49677/");
             }
             catch
             {

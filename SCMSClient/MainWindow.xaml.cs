@@ -15,13 +15,6 @@ namespace SCMSClient
             InitializeComponent();
 
             Application.Current.MainWindow = this;
-
-            Messenger.Default.Register<ApplicationCommands>(this, ApplicationCommands.SHUT_DOWN, CloseWindow);
-        }
-
-        private void CloseWindow(ApplicationCommands command)
-        {
-            Close();
         }
     }
 }

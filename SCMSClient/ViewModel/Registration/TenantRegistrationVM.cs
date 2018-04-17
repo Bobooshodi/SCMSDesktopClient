@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight.Ioc;
+using SCMSClient.Models;
 using SCMSClient.ToastNotification;
 using SCMSClient.Utilities;
 using System;
@@ -13,6 +14,8 @@ namespace SCMSClient.ViewModel
         {
             LoadAll().ConfigureAwait(false);
         }
+
+        protected override bool CanPerformAction => ValidateFields();
 
         public string ContractId { get; set; }
 
@@ -82,12 +85,21 @@ namespace SCMSClient.ViewModel
 
         protected override void ProcessAction()
         {
+            var dc = SimpleIoc.Default.GetInstance<VehicleRegistrationVM>("new");
+            dc.Cardholder = CoupleCardholderDetails();
             MainWindowVM.ActivePage = new Uri("/Views/VehicleRegistration.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        private Tenant CoupleCardholderDetails()
+        {
+            var tenant = Cardholder as Tenant;
+
+            return tenant;
         }
 
         protected override bool ValidateFields()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

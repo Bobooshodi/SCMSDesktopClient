@@ -42,6 +42,7 @@ namespace SCMSClient.ViewModel
             LogOutCommand = new RelayCommand(LogOut);
             NavigationCommand = new RelayCommand<object>(Navigate);
             ChangePasswordCommand = new RelayCommand(ChangePassword);
+            OpenServerSettingsCommand = new RelayCommand(OpenServerSettings);
 
             toastManager = Toaster.Instance;
         }
@@ -53,6 +54,7 @@ namespace SCMSClient.ViewModel
         public ICommand LogOutCommand { get; set; }
         public ICommand NavigationCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
+        public ICommand OpenServerSettingsCommand { get; set; }
 
         #endregion Commands
 
@@ -126,7 +128,26 @@ namespace SCMSClient.ViewModel
 
         private void LogOut()
         {
+            ShowOptions = false;
+
             settingsService.LogOutUser();
+        }
+
+        private void OpenServerSettings()
+        {
+            try
+            {
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
+                ActiveModal = new Modals.ServerSettings(true);
+            }
+            catch (Exception ex)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
         }
 
         private void ChangePassword()

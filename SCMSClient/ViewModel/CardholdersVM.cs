@@ -59,9 +59,6 @@ namespace SCMSClient.ViewModel
 
         private void OpenCardholderRegistrationPage()
         {
-            var regVM = SimpleIoc.Default.GetInstance<CardholderRegistrationVM>();
-            regVM.CreateSeparateVM = true;
-
             var mainWindowVm = SimpleIoc.Default.GetInstance<MainWindowVM>();
             mainWindowVm.ActivePage = new Uri("/Views/RegisterCardholder.xaml", UriKind.RelativeOrAbsolute);
         }

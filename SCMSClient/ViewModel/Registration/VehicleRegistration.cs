@@ -15,13 +15,18 @@ namespace SCMSClient.ViewModel
         public VehicleRegistrationVM()
         {
             AddVehicleCommand = new RelayCommand(AddVehicle);
+            RemoveVehicleCommand = new RelayCommand(RemoveVehicle);
 
             LoadAll().ConfigureAwait(false);
         }
 
         public ICommand AddVehicleCommand { get; set; }
+        public ICommand RemoveVehicleCommand { get; set; }
+
+        protected override bool CanPerformAction => ValidateFields();
 
         public List<Vehicle> Vehicles { get; set; }
+        public Vehicle SelectedVehicle { get; set; }
 
         private async Task LoadAll()
         {
@@ -44,6 +49,11 @@ namespace SCMSClient.ViewModel
             MessengerInstance.Send<UIElement>(modal);
         }
 
+        private void RemoveVehicle()
+        {
+            Vehicles.Remove(SelectedVehicle);
+        }
+
         protected override void ProcessAction()
         {
             Cleanup();
@@ -51,9 +61,13 @@ namespace SCMSClient.ViewModel
             MainWindowVM.ActivePage = new Uri("/Views/CardholderList.xaml", UriKind.RelativeOrAbsolute);
         }
 
+        private void CoupleCardholderDetails()
+        {
+        }
+
         protected override bool ValidateFields()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

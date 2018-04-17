@@ -1,9 +1,14 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.Win32;
+using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
 {
@@ -16,10 +21,37 @@ namespace SCMSClient.ViewModel
             cardTypeService = _cardTypeService;
             DateOfBirth = DateTime.Now;
 
+            ChooseFileCommand = new RelayCommand(ChooseFile);
+
             LoadAll().ConfigureAwait(false);
         }
 
-        public bool CreateSeparateVM { get; set; }
+        private void ChooseFile()
+        {
+            try
+            {
+                // Displays an OpenFileDialog so the user can select a Cursor.
+                var dialog = new OpenFileDialog
+                {
+                    Filter = "PNG Files|*.png|All files (*.*)|*.*|JPG Files|*.jpg|JPEG Files|*.jpeg",
+                    Title = "Select an image for this Employee"
+                };
+
+                if (dialog.ShowDialog().Value)
+                {
+                    ImagePath = dialog.FileName;
+                    GetImageFromPath(dialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
+        }
+
+        public ICommand ChooseFileCommand { get; set; }
+
+        public string ImagePath { get; set; }
 
         public string FirstName { get; set; }
 
@@ -238,14 +270,24 @@ namespace SCMSClient.ViewModel
             }
         }
 
+        private void GetImageFromPath(string path)
+        {
+            var imageBytes = File.ReadAllBytes(path);
+            var imageString = Convert.ToBase64String(imageBytes);
+        }
+
         protected override void ProcessAction()
         {
             if (UserType == SHCCardType.Employee)
             {
+                var dc = SimpleIoc.Default.GetInstance<EmployeeRegistrationVM>("new");
+                dc.Cardholder = CoupleEmployeeDetails();
                 MainWindowVM.ActivePage = new Uri("/Views/EmployeeRegistration.xaml", UriKind.RelativeOrAbsolute);
             }
             if (UserType == SHCCardType.Tenant)
             {
+                var dc = SimpleIoc.Default.GetInstance<TenantRegistrationVM>("new");
+                dc.Cardholder = CoupleTenantDetails();
                 MainWindowVM.ActivePage = new Uri("/Views/TenantRegistration.xaml", UriKind.RelativeOrAbsolute);
             }
         }
@@ -256,6 +298,50 @@ namespace SCMSClient.ViewModel
             && !PrefferedNameErrorTextVisibility && !DOBErrorTextVisibility && !IdNumberErrorTextVisibility
             && !AddressErrorTextVisibility && !StateErrorTextVisibility && !CityErrorTextVisibility
             && !EmailErrorTextVisibility && !PhoneErrorTextVisibility;
+        }
+
+        private Employee CoupleEmployeeDetails()
+        {
+            return new Employee
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                IdentificationNo = IdNumber,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                City = City,
+                State = State,
+                UserType = UserType,
+                Phone = Phone,
+                Address = Address,
+                Gender = Cardholder.Gender,
+                IdentificationType = Cardholder.IdentificationType,
+                Country = Cardholder.Country,
+                WorkEmail = Cardholder.WorkEmail,
+                WorkPhone = Cardholder.WorkPhone
+            };
+        }
+
+        private Tenant CoupleTenantDetails()
+        {
+            return new Tenant
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                IdentificationNo = IdNumber,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                City = City,
+                State = State,
+                UserType = UserType,
+                Phone = Phone,
+                Address = Address,
+                Gender = Cardholder.Gender,
+                IdentificationType = Cardholder.IdentificationType,
+                Country = Cardholder.Country,
+                WorkEmail = Cardholder.WorkEmail,
+                WorkPhone = Cardholder.WorkPhone
+            };
         }
     }
 }

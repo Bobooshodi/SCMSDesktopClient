@@ -15,15 +15,5 @@ namespace SCMSClient.Services.Implementation
             createUrl = ApiEndpoints.CreateCardReplacementRequest;
             deleteUrl = ApiEndpoints.DeleteCardReplacementRequest;
         }
-
-        public override List<SOAReplaceCardRequest> GetAll()
-        {
-            return allObjects ?? (allObjects = RandomDataGenerator.ReplaceCardRequests(50));
-        }
-
-        public override SOAReplaceCardRequest Get(string parameter)
-        {
-            return allObjects.Find(c => c.ID == parameter);
-        }
     }
 }

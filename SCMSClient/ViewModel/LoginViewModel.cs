@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Ioc;
+using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.ToastNotification;
 using SCMSClient.Utilities;
@@ -8,6 +10,7 @@ using System.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace SCMSClient.ViewModel
 {
@@ -17,7 +20,9 @@ namespace SCMSClient.ViewModel
 
         private string username;
         private readonly Toaster toastManager;
-        private readonly IAuthenticationService authService;
+        private ApplicationSettings appSetting;
+        private IAuthenticationService authService;
+        private readonly ISettingsService settingsService;
 
         private readonly IDinkeyDongleService dongleService;
         private bool loaderVisibility;
@@ -28,10 +33,28 @@ namespace SCMSClient.ViewModel
 
         #region Default Constructor
 
-        public LoginViewModel(IAuthenticationService _authService, IDinkeyDongleService _dongleService)
+        public LoginViewModel(IDinkeyDongleService _dongleService, ISettingsService _settingsService)
         {
             dongleService = _dongleService;
-            authService = _authService;
+            settingsService = _settingsService;
+
+            try
+            {
+                authService = SimpleIoc.Default.GetInstance<IAuthenticationService>();
+            }
+            catch
+            {
+                const string message = "No Server Settings Were found in the System \r\n Do you want to Create These Settings Now?";
+                const string caption = "Attention";
+                var result = MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                    OpenServerSettings();
+                else
+                    Application.Current.Shutdown();
+            }
+
+            LoadSettings();
 
             // CheckPCValidity();
             Toaster.Refresh();
@@ -40,6 +63,16 @@ namespace SCMSClient.ViewModel
             NextPageCommand = new RelayCommand<object>(OpenNextPage);
 
             toastManager = Toaster.Instance;
+
+            MessengerInstance.Register<UIElement>(this, ChangeModal);
+            MessengerInstance.Register<ApplicationSettings>(this, UpdateServerSettings);
+        }
+
+        private void UpdateServerSettings(ApplicationSettings settings)
+        {
+            appSetting = settings;
+
+            authService = SimpleIoc.Default.GetInstance<IAuthenticationService>();
         }
 
         #endregion Default Constructor
@@ -52,6 +85,12 @@ namespace SCMSClient.ViewModel
         #endregion Button Commands for the View
 
         #region Public Properties
+
+        public UIElement ActiveModal { get; set; }
+
+        public int LoginAttempts { get; set; }
+
+        public string TxtTimer { get; set; }
 
         /// <summary>
         /// Public Property to hold The User's
@@ -91,6 +130,59 @@ namespace SCMSClient.ViewModel
 
         #region Private Methods
 
+        private void OpenServerSettings()
+        {
+            try
+            {
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
+                ActiveModal = new Modals.ServerSettings(false);
+            }
+            catch (Exception ex)
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
+        }
+
+        private void ChangeModal(UIElement modal)
+        {
+            try
+            {
+                if (appSetting == null)
+                {
+                    throw new InvalidOperationException("Seems like you did not save the Server Setting, Do you want to Save now?");
+                }
+
+                ActiveModal = modal;
+            }
+            catch (InvalidOperationException ex)
+            {
+                var result = MessageBox.Show(ex.Message, "Aert", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    ActiveModal = new Modals.ServerSettings(false);
+                }
+                else
+                {
+                    MessageBox.Show("You failed to set the Remote Server, The Application will now Shut Down");
+
+                    ActiveModal = null;
+                    Application.Current.Shutdown(0);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You failed to set the Remote Server, The Application will now Shut Down");
+
+                ActiveModal = null;
+                Application.Current.Shutdown(0);
+            }
+        }
+
         private void CheckPCValidity()
         {
             try
@@ -121,6 +213,38 @@ namespace SCMSClient.ViewModel
 
         private void LoadSettings()
         {
+            appSetting = settingsService.LoadSettings();
+
+            //_settingsService.DeleteSettings();
+
+            if (appSetting.RemoteServer == null)
+                throw new Exception("Remote Server not Set Yet");
+
+            if (appSetting.SelectedTheme != null)
+                ThemesManager.ChangeTheme(appSetting.SelectedTheme.Value);
+
+            Application.Current.Properties["appSettings"] = appSetting ?? throw new Exception("No Settings Found in this System");
+        }
+
+        private void ClearAppSettings()
+        {
+            bool completed = settingsService.DeleteSettings();
+
+            if (completed)
+            {
+                toastManager.ShowSuccessToast(Toaster.SuccessTitle, "Application Settings have been Reset Successfully");
+
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                toastManager.ShowErrorToast(Toaster.ErrorTitle, "Unable to Reset Application Settings");
+            }
+        }
+
+        private bool AppSettingsLoaded()
+        {
+            return Application.Current.Properties["appSettings"] != null;
         }
 
         private bool DisplayError()
@@ -129,6 +253,45 @@ namespace SCMSClient.ViewModel
                 return false;
 
             return true;
+        }
+
+        private void UnlockUser()
+        {
+            appSetting.UserLockedOut = null;
+            settingsService.SaveSettings(appSetting);
+
+            LoginAttempts = 0;
+        }
+
+        private void LockOutUser()
+        {
+            var lockOut = new LockedOutModel
+            {
+                IsLockedOut = true,
+                LockedOutTime = DateTime.Now
+            };
+
+            appSetting.UserLockedOut = lockOut;
+            settingsService.SaveSettings(appSetting);
+
+            toastManager.ShowInformationToast(Toaster.InformationTitle, "You have been Locked out, please try again after 5 minutes");
+
+            DisplayTimer(new TimeSpan(0, 0, 20));
+        }
+
+        private void DisplayTimer(TimeSpan _time)
+        {
+            TxtTimer = string.Empty;
+            DispatcherTimer _timer = null;
+
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                TxtTimer = _time.ToString(@"hh\:mm\:ss");
+                if (_time <= TimeSpan.Zero) _timer.Stop();
+                _time = _time.Add(TimeSpan.FromSeconds(-1));
+            }, Application.Current.Dispatcher);
+
+            _timer.Start();
         }
 
         /// <summary>
@@ -163,6 +326,35 @@ namespace SCMSClient.ViewModel
         /// <returns></returns>
         private async Task Login(object obj)
         {
+            if (appSetting?.UserLockedOut != null)
+            {
+                var totalLockOutTime = new TimeSpan(0, 0, 20);
+                var lockOutTimeLeft = DateTime.Now - appSetting.UserLockedOut.LockedOutTime;
+
+                if (lockOutTimeLeft < totalLockOutTime)
+                {
+                    var time = totalLockOutTime - lockOutTimeLeft;
+
+                    toastManager.ShowInformationToast(Toaster.InformationTitle, string.Format("You have been Locked out, please try again after {0} minutes", time.ToString(@"hh\:mm\:ss")));
+
+                    DisplayTimer(time);
+
+                    return;
+                }
+
+                UnlockUser();
+            }
+
+            if (LoginAttempts > 4)
+            {
+                if (appSetting != null && appSetting.UserLockedOut == null)
+                    LockOutUser();
+
+                return;
+            }
+
+            TxtTimer = string.Empty;
+
             if (obj == null)
             {
                 toastManager.ShowInformationToast(Toaster.InformationTitle, "Page is Initializing, Please wait a moment and try again");
@@ -178,6 +370,7 @@ namespace SCMSClient.ViewModel
 
                 LoaderVisibility = true;
 
+                LoginAttempts++;
                 var loggedInUser = await Task.Run(() => authService.Login(Username, loginWindow.UserPassword.Unsecure()));
 
                 LoaderVisibility = false;

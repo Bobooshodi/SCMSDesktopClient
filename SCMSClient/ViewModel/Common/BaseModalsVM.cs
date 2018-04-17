@@ -79,6 +79,9 @@ namespace SCMSClient.ViewModel
 
         #region Public Properties
 
+        /// <summary>
+        /// This Represents the UserControl Showing the Status of Card Reader
+        /// </summary>
         public UIElement Feedback
         {
             get => feedback ?? (feedback = defaultFeedback);

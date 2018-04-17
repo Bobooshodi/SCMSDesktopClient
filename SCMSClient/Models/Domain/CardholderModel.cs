@@ -14,7 +14,9 @@ namespace SCMSClient.Models
         [Required(ErrorMessage = "Please, Enter the First Name of this Cardholder")]
         public string LastName { get; set; }
 
-        public string FullName => $"{FirstName} {LastName}";
+        public string MiddleName { get; set; }
+
+        public string FullName => $"{FirstName} {MiddleName} {LastName}";
 
         [Required(ErrorMessage = "Please, Enter the Date of Birth of this Cardholder")]
         public DateTime DateOfBirth { get; set; }

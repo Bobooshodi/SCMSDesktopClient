@@ -18,7 +18,7 @@ namespace SCMSClient.Services.Implementation
         #region Private Members
 
         private HttpClient client;
-        private ISettingsService _sSettings;
+        private ISettingsService sSettings;
         private User appUser = (User)Application.Current.Properties["activeUser"];
 
         private ApplicationSettings appSettings =
@@ -28,20 +28,16 @@ namespace SCMSClient.Services.Implementation
 
         #region Default Constructor
 
-        public HTTPRequestService(ISettingsService sSettings)
+        public HTTPRequestService(ISettingsService _sSettings)
         {
-            _sSettings = sSettings;
-            //userService = _userService;
+            sSettings = _sSettings;
 
-            //TODO: Uncomment Later
-
-            /**
             try
             {
                 if (appSettings == null)
-                    appSettings = _sSettings.LoadSettings();
+                    appSettings = sSettings.LoadSettings();
 
-                if (string.IsNullOrEmpty(appSettings.RemoteServer.FullUrl))
+                if (appSettings == null || string.IsNullOrEmpty(appSettings.RemoteServer.FullUrl))
                     throw new Exception("Remote Server not Set Yet For HTTP Client to use");
             }
             catch (Exception e)
@@ -50,7 +46,6 @@ namespace SCMSClient.Services.Implementation
 
                 throw;
             }
-    */
 
             InitialiseClient();
         }
@@ -74,12 +69,13 @@ namespace SCMSClient.Services.Implementation
                 }
 
                 client.Timeout = new TimeSpan(0, 10, 0);
-                // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
+                client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.BaseAddress = new Uri("http://localhost:3000/");
+                // client.BaseAddress = new Uri("http://localhost:3000/");
             }
-            catch
+            catch (Exception ex)
             {
+                ErrorLogger.LogError(ex.ToString(), ErrorType.SERVER_ERROR);
             }
         }
 
@@ -176,9 +172,9 @@ namespace SCMSClient.Services.Implementation
                 }
 
                 client.Timeout = new TimeSpan(0, 10, 0);
-                // client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
+                client.BaseAddress = new Uri(appSettings.RemoteServer.FullUrl);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.BaseAddress = new Uri("http://localhost:2020/");
+                // client.BaseAddress = new Uri("http://localhost:2020/");
             }
             catch (Exception e)
             {
@@ -664,7 +660,7 @@ namespace SCMSClient.Services.Implementation
             if (ex is RefreshTokenException)
             {
                 MessageBox.Show(ex.Message);
-                _sSettings.LogOutUser();
+                sSettings.LogOutUser();
             }
 
             throw ex.GetBaseException();
@@ -677,7 +673,7 @@ namespace SCMSClient.Services.Implementation
 
             if (disposing)
             {
-                _sSettings = null;
+                sSettings = null;
                 appUser = null;
                 appSettings = null;
             }

@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="SCMSClient.Modals.ServerSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             DataContext="{Binding Source={StaticResource Locator}, Path=ServerSettings}"
+             mc:Ignorable="d"
+             HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    HorizontalContentAlignment="Stretch"
+    VerticalContentAlignment="Stretch">
+    <StackPanel x:Name="ModalContainer">
+        <StackPanel.Background>
+            <SolidColorBrush Color="#262c36" Opacity="0.95"></SolidColorBrush>
+        </StackPanel.Background>
+
+        <Border Style="{StaticResource modal}"  Width="460">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource modal__header}">Server Settings</TextBlock>
+
+                <Border Grid.Row="1" Style="{StaticResource modal__body}">
+
+                    <Grid VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Style="{StaticResource FormGroup}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Full Address</Label>
+                                <Border Grid.Column="1"  Style="{StaticResource InputBorder}">
+                                    <TextBox Style="{StaticResource FlatTextBox}" IsReadOnly="True" Text="{Binding MainObject.FullUrl, UpdateSourceTrigger=PropertyChanged}" />
+                                </Border>
+                            </Grid>
+
+                            <Grid  Grid.Row="1" Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Server URL</Label>
+                                <Border Grid.Column="1" Style="{StaticResource InputBorder}">
+                                    <TextBox  Style="{StaticResource FlatTextBox}" Text="{Binding MainObject.IpAddress, UpdateSourceTrigger=PropertyChanged}" />
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Port Number</Label>
+                                <Border Grid.Column="1"  Style="{StaticResource InputBorder}">
+                                    <TextBox  Style="{StaticResource FlatTextBox}" Text="{Binding MainObject.Port, UpdateSourceTrigger=PropertyChanged}" />
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Row="3" Style="{StaticResource FormGroup}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140" ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource FormLabel}">Protocol</Label>
+                                <Border Grid.Column="1" Style="{StaticResource InputBorder}">
+                                    <ComboBox Style="{StaticResource ComboBox}" SelectedIndex="{Binding ProtocolIndex, UpdateSourceTrigger=PropertyChanged}">
+                                        <ComboBoxItem>HTTP</ComboBoxItem>
+                                        <ComboBoxItem>HTTPS</ComboBoxItem>
+                                    </ComboBox>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                        <Border Grid.Row="1" Style="{StaticResource modal__footer}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Template="{StaticResource ButtonEmpty}" Command="{Binding CloseModalCommand}">Cancel</Button>
+                                <Button Grid.Column="2" Template="{StaticResource ButtonPrimary}" Command="{Binding ProcessCommand}">Save Settings</Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </StackPanel>
+</UserControl>

@@ -139,6 +139,9 @@
     <Compile Include="Modals\ReplaceCard.xaml.cs">
       <DependentUpon>ReplaceCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modals\ServerSettings.xaml.cs">
+      <DependentUpon>ServerSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modals\SuccessFeedback.xaml.cs">
       <DependentUpon>SuccessFeedback.xaml</DependentUpon>
     </Compile>
@@ -244,6 +247,7 @@
     <Compile Include="Utilities\ExpressionsUtility.cs" />
     <Compile Include="Utilities\RandomDataGenerator.cs" />
     <Compile Include="Utilities\SecureStringUtility.cs" />
+    <Compile Include="Utilities\ThemesManager.cs" />
     <Compile Include="Utilities\ValueConverters\BaseValueConverter.cs" />
     <Compile Include="Utilities\ValueConverters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\ValueConverters\ForeGroundConverter.cs" />
@@ -251,8 +255,10 @@
     <Compile Include="Utilities\ValueConverters\StyleConverter.cs" />
     <Compile Include="ViewModel\CardholderDetailsVM.cs" />
     <Compile Include="ViewModel\CardsListVM.cs" />
+    <Compile Include="ViewModel\Common\BaseSettingsVM.cs" />
     <Compile Include="ViewModel\Modals\AddBuildingVM.cs" />
     <Compile Include="ViewModel\Modals\AddCarParkVM.cs" />
+    <Compile Include="ViewModel\Modals\ServerSettingsVM.cs" />
     <Compile Include="ViewModel\Modals\VerifyCardVM.cs" />
     <Compile Include="ViewModel\Registration\BaseRegistrationVM.cs" />
     <Compile Include="ViewModel\Registration\CardholderRegistrationVM.cs" />
@@ -385,6 +391,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modals\ReplaceCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modals\ServerSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

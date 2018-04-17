@@ -28,7 +28,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Button Template="{StaticResource ButtonEmpty}">
+                    <Button Template="{StaticResource ButtonEmpty}" Command="{Binding GotoFirstPage}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>

@@ -15,15 +15,5 @@ namespace SCMSClient.Services.Implementation
             createUrl = ApiEndpoints.CreateCard;
             deleteUrl = ApiEndpoints.DeleteCard;
         }
-
-        public override List<Card> GetAll()
-        {
-            return allObjects ?? (allObjects = RandomDataGenerator.Cards(100));
-        }
-
-        public override Card Get(string parameter)
-        {
-            return GetAll().Find(c => c.ID == parameter);
-        }
     }
 }

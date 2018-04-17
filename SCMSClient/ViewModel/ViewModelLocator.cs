@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using SCMSClient.Services.Implementation;
@@ -32,60 +33,17 @@ namespace SCMSClient.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            if (ViewModelBase.IsInDesignModeStatic)
             {
                 // Create design time view services and models
+                RegisterDesigntimeServices();
             }
             else
             {
                 // Create run time view services and models
-                SimpleIoc.Default.Register<IUserService, UserService>();
-                SimpleIoc.Default.Register<ICardService, CardService>();
-                SimpleIoc.Default.Register<ITenantService, TenantService>();
-                SimpleIoc.Default.Register<ICarParkService, CarParkService>();
-                SimpleIoc.Default.Register<IVehicleService, VehicleService>();
-                SimpleIoc.Default.Register<IBuildingService, BuildingService>();
-                SimpleIoc.Default.Register<IEmployeeService, EmployeeService>();
-                SimpleIoc.Default.Register<ISettingsService, SettingsService>();
-                SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
-                SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>(); //TODO: Change Back to the Original with Refreshing ablilities
-                SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
-                SimpleIoc.Default.Register<ICardholderService, CardholderService>();
-                SimpleIoc.Default.Register<ICardReaderService, SL600ReaderService>();
-                SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
-                SimpleIoc.Default.Register<IDinkeyDongleService, DinkeyDongleService>();
-                SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
-                SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
-                SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
+                RegisterRuntimeServices();
             }
-
-            SimpleIoc.Default.Register<RequestsVM>();
-            SimpleIoc.Default.Register<DashboardVM>();
-            SimpleIoc.Default.Register<CardsListVM>();
-            SimpleIoc.Default.Register<VerifyCardVM>();
-            SimpleIoc.Default.Register<AddCarParkVM>();
-            SimpleIoc.Default.Register<MainWindowVM>();
-            SimpleIoc.Default.Register<AddVehicleVM>();
-            SimpleIoc.Default.Register<CardholdersVM>();
-            SimpleIoc.Default.Register<AddBuildingVM>();
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<CardRequestsVM>();
-            SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<CardInventoryVM>();
-            SimpleIoc.Default.Register<ChangePasswordVM>();
-            SimpleIoc.Default.Register<CardReplacementVM>();
-            SimpleIoc.Default.Register<SystemOperatorsVM>();
-            SimpleIoc.Default.Register<CardRegistrationVM>();
-            SimpleIoc.Default.Register<CardDistributionVM>();
-            SimpleIoc.Default.Register<BlacklistRequestVM>();
-            SimpleIoc.Default.Register<CardholderDetailsVM>();
-            SimpleIoc.Default.Register<TenantRegistrationVM>();
-            SimpleIoc.Default.Register<ReplaceCardRequestVM>();
-            SimpleIoc.Default.Register<CardPersonalizationVM>();
-            SimpleIoc.Default.Register<VehicleRegistrationVM>();
-            SimpleIoc.Default.Register<EmployeeRegistrationVM>();
-            SimpleIoc.Default.Register<CardholderRegistrationVM>();
-            SimpleIoc.Default.Register<PersonalizationRequestVM>();
+            RegisterAllViewModels();
         }
 
         public MainViewModel Main
@@ -269,9 +227,75 @@ namespace SCMSClient.ViewModel
             get => ServiceLocator.Current.GetInstance<ChangePasswordVM>();
         }
 
+        /// <summary>
+        /// The DataContext of the Server Settings Modal
+        /// </summary>
+        public ServerSettingsVM ServerSettings
+        {
+            get => ServiceLocator.Current.GetInstance<ServerSettingsVM>();
+        }
+
         public static void Cleanup()
         {
             SimpleIoc.Default.Reset();
+        }
+
+        public static void RegisterAllViewModels()
+        {
+            SimpleIoc.Default.Register<RequestsVM>();
+            SimpleIoc.Default.Register<DashboardVM>();
+            SimpleIoc.Default.Register<CardsListVM>();
+            SimpleIoc.Default.Register<VerifyCardVM>();
+            SimpleIoc.Default.Register<AddCarParkVM>();
+            SimpleIoc.Default.Register<MainWindowVM>();
+            SimpleIoc.Default.Register<AddVehicleVM>();
+            SimpleIoc.Default.Register<CardholdersVM>();
+            SimpleIoc.Default.Register<AddBuildingVM>();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CardRequestsVM>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<CardInventoryVM>();
+            SimpleIoc.Default.Register<ServerSettingsVM>();
+            SimpleIoc.Default.Register<ChangePasswordVM>();
+            SimpleIoc.Default.Register<CardReplacementVM>();
+            SimpleIoc.Default.Register<SystemOperatorsVM>();
+            SimpleIoc.Default.Register<CardRegistrationVM>();
+            SimpleIoc.Default.Register<CardDistributionVM>();
+            SimpleIoc.Default.Register<BlacklistRequestVM>();
+            SimpleIoc.Default.Register<CardholderDetailsVM>();
+            SimpleIoc.Default.Register<TenantRegistrationVM>();
+            SimpleIoc.Default.Register<ReplaceCardRequestVM>();
+            SimpleIoc.Default.Register<CardPersonalizationVM>();
+            SimpleIoc.Default.Register<VehicleRegistrationVM>();
+            SimpleIoc.Default.Register<EmployeeRegistrationVM>();
+            SimpleIoc.Default.Register<CardholderRegistrationVM>();
+            SimpleIoc.Default.Register<PersonalizationRequestVM>();
+        }
+
+        public static void RegisterRuntimeServices()
+        {
+            SimpleIoc.Default.Register<IUserService, UserService>();
+            SimpleIoc.Default.Register<ICardService, CardService>();
+            SimpleIoc.Default.Register<ITenantService, TenantService>();
+            SimpleIoc.Default.Register<ICarParkService, CarParkService>();
+            SimpleIoc.Default.Register<IVehicleService, VehicleService>();
+            SimpleIoc.Default.Register<IBuildingService, BuildingService>();
+            SimpleIoc.Default.Register<IEmployeeService, EmployeeService>();
+            SimpleIoc.Default.Register<ISettingsService, SettingsService>();
+            SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
+            SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+            SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
+            SimpleIoc.Default.Register<ICardholderService, CardholderService>();
+            SimpleIoc.Default.Register<ICardReaderService, SL600ReaderService>();
+            SimpleIoc.Default.Register<ICardRequestService, CardRequestService>();
+            SimpleIoc.Default.Register<IDinkeyDongleService, DinkeyDongleService>();
+            SimpleIoc.Default.Register<IAuthenticationService, AuthenticationService>();
+            SimpleIoc.Default.Register<ICardReplacementService, CardReplacementService>();
+            SimpleIoc.Default.Register<IPersonalizationRequestService, PersonalizationRequestService>();
+        }
+
+        public static void RegisterDesigntimeServices()
+        {
         }
     }
 }

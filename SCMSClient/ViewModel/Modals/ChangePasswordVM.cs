@@ -1,40 +1,25 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using SCMSClient.Services.Interfaces;
+﻿using SCMSClient.Services.Interfaces;
 using System.Security;
-using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
 {
-    public class ChangePasswordVM : ViewModelBase
+    public class ChangePasswordVM : BaseSettingsVM<IChangePasswordM>
     {
         private readonly IUserService userService;
-        private readonly IDinkeyDongleService dongleService;
 
-        public ChangePasswordVM(IUserService _userService, IDinkeyDongleService _dongleService)
+        public ChangePasswordVM(IUserService _userService, IDinkeyDongleService _dongleService, ISettingsService _settingsService) :
+            base(_settingsService, _dongleService)
         {
             userService = _userService;
-            dongleService = _dongleService;
-
-            CloseModalCommand = new RelayCommand(CloseModal);
-            ChangePasswordCommand = new RelayCommand<object>(ChangePassword);
         }
-
-        public ICommand CloseModalCommand { get; set; }
-        public ICommand ChangePasswordCommand { get; set; }
 
         public string OldPassword { get; set; }
 
         #region Command Methods
 
-        private void ChangePassword(object page)
+        protected override void Process(object obj)
         {
-            var model = page as IChangePasswordM;
-        }
-
-        private void CloseModal()
-        {
-            MessengerInstance.Send<System.Windows.UIElement>(null);
+            MainObject = obj as IChangePasswordM;
         }
 
         #endregion Command Methods

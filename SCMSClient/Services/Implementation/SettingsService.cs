@@ -1,7 +1,9 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using Newtonsoft.Json;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using SCMSClient.ViewModel;
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -321,11 +323,14 @@ namespace SCMSClient.Services.Implementation
         public void LogOutUser()
         {
             Application.Current.Properties.Clear();
+            SimpleIoc.Default.Reset();
+            ViewModelLocator.RegisterRuntimeServices();
+            ViewModelLocator.RegisterAllViewModels();
 
             var loginPage = new Windows.Login { WindowState = WindowState.Maximized };
             loginPage.Show();
 
-            Messenger.Default.Send(ApplicationCommands.SHUT_DOWN);
+            Application.Current.Shutdown();
         }
 
         public void Dispose()

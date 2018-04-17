@@ -10,15 +10,5 @@ namespace SCMSClient.Services.Implementation
         public VehicleService(IHTTPService _service) : base(_httpService: _service)
         {
         }
-
-        public override List<Vehicle> GetAll()
-        {
-            return allObjects ?? (allObjects = RandomDataGenerator.Vehicles(3));
-        }
-
-        public override Vehicle Get(string parameter)
-        {
-            return allObjects.Find(c => c.ID == parameter);
-        }
     }
 }

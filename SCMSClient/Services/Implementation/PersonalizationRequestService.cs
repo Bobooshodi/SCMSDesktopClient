@@ -15,15 +15,5 @@ namespace SCMSClient.Services.Implementation
             createUrl = ApiEndpoints.CreatePersonalizationRequest;
             deleteUrl = ApiEndpoints.DeletePersonalizationRequest;
         }
-
-        public override List<SOAPersonalizationRequest> GetAll()
-        {
-            return allObjects ?? (allObjects = RandomDataGenerator.PersonalizationRequests(50));
-        }
-
-        public override SOAPersonalizationRequest Get(string parameter)
-        {
-            return allObjects.Find(c => c.ID == parameter);
-        }
     }
 }

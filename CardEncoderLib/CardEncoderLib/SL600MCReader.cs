@@ -184,10 +184,8 @@ namespace CardEncoderLib
                     connected = false;
                 }
             }
-            catch (Exception)
+            catch
             {
-                int x;
-                x = 0;
                 throw;
             }
 

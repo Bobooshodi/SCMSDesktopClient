@@ -1,4 +1,5 @@
-﻿using SCMSClient.Models;
+﻿using GalaSoft.MvvmLight.Ioc;
+using SCMSClient.Models;
 using SCMSClient.ToastNotification;
 using SCMSClient.Utilities;
 using System;
@@ -13,6 +14,8 @@ namespace SCMSClient.ViewModel
         {
             LoadAll().ConfigureAwait(false);
         }
+
+        protected override bool CanPerformAction => ValidateFields();
 
         public string EmployeeId { get; set; }
 
@@ -79,12 +82,26 @@ namespace SCMSClient.ViewModel
 
         protected override void ProcessAction()
         {
+            var dc = SimpleIoc.Default.GetInstance<VehicleRegistrationVM>("new");
+            dc.Cardholder = CoupleCardholderDetails();
             MainWindowVM.ActivePage = new Uri("/Views/VehicleRegistration.xaml", UriKind.RelativeOrAbsolute);
+        }
+
+        private Employee CoupleCardholderDetails()
+        {
+            var employee = Cardholder as Employee;
+
+            employee.EmployeeId = EmployeeId;
+            // employee.Company = Company;
+            employee.Designation = Designation;
+            employee.Buildings = Buildings;
+
+            return employee;
         }
 
         protected override bool ValidateFields()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         private async Task LoadAll()

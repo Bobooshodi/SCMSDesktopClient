@@ -79,7 +79,8 @@
 
                 <Button Template="{StaticResource ButtonPrimary}" MaxWidth="140" HorizontalAlignment="Right" Command="{Binding AddVehicleCommand}">Add a vehicle</Button>
 
-                <DataGrid Grid.Row="1" Style="{DynamicResource DatGrid}" VerticalAlignment="Top" ItemsSource="{Binding Vehicles}">
+                <DataGrid Grid.Row="1" Style="{DynamicResource DatGrid}" VerticalAlignment="Top" ItemsSource="{Binding Vehicles}"
+                          SelectedItem="{Binding SelectedVehicle}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Plate Number" Width="*">
                             <DataGridTemplateColumn.CellTemplate>

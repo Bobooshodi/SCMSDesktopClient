@@ -9,7 +9,7 @@
         {
             get
             {
-                return fullUrl;
+                return fullUrl ?? (fullUrl = BuildCamerUrl());
             }
             set
             {

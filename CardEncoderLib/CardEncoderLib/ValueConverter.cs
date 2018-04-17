@@ -2,7 +2,7 @@
 
 namespace CardEncoderLib
 {
-    internal class ValueConverter
+    internal static class ValueConverter
     {
         public static string addTrailingBits(string hex)
         {
@@ -30,7 +30,7 @@ namespace CardEncoderLib
                 }
                 return asciiString.TrimEnd(new char[] { '\0' });
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -54,7 +54,7 @@ namespace CardEncoderLib
                     return 0;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return 0;
             }
@@ -74,7 +74,7 @@ namespace CardEncoderLib
                 }
                 return hex;
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -92,7 +92,7 @@ namespace CardEncoderLib
                 }
                 return asciiString.TrimEnd(new char[] { '\0' });
             }
-            catch (Exception ex)
+            catch
             {
                 return "";
             }
@@ -110,9 +110,9 @@ namespace CardEncoderLib
                 ob[1] = Digit[ib & 0X0F];
                 _str = new String(ob);
             }
-            catch (Exception)
+            catch
             {
-                new Exception("Error converting HEX characters");
+                throw new Exception("Error converting HEX characters");
             }
             return _str;
         }

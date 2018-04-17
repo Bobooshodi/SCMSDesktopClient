@@ -8,8 +8,6 @@ namespace SCMSClient.Services.Implementation
     {
         #region Inheritable Members
 
-        protected List<Model> allObjects;
-
         protected string getUrl;
         protected string getAllUrl;
         protected string updateUrl;

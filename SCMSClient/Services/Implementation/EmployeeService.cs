@@ -20,17 +20,5 @@ namespace SCMSClient.Services.Implementation
             createUrl = ApiEndpoints.CreateEmployee;
             deleteUrl = ApiEndpoints.DeleteEmployee;
         }
-
-        public override List<Employee> GetAll()
-        {
-            return cardholderService.GetAll().Cast<Employee>().Where(c => c.UserType == SHCCardType.Employee).ToList();
-        }
-
-        public override Employee Get(string parameter)
-        {
-            var selectedCardholder = cardholderService.Get(parameter);
-
-            return (Employee)selectedCardholder;
-        }
     }
 }

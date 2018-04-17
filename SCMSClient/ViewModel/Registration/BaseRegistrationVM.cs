@@ -38,7 +38,7 @@ namespace SCMSClient.ViewModel
             set => Set(ref loaderVisibility, value, true);
         }
 
-        public Cardholder Cardholder
+        public virtual Cardholder Cardholder
         {
             get
             {

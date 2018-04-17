@@ -20,15 +20,5 @@ namespace SCMSClient.Services.Implementation
             createUrl = ApiEndpoints.CreateTenant;
             deleteUrl = ApiEndpoints.DeleteTenant;
         }
-
-        public override List<Tenant> GetAll()
-        {
-            return cardholderService.GetAll().Cast<Tenant>().Where(c => c.UserType == SHCCardType.Tenant).ToList();
-        }
-
-        public override Tenant Get(string parameter)
-        {
-            return cardholderService.GetAll().Cast<Tenant>().SingleOrDefault(c => c.ID == parameter);
-        }
     }
 }

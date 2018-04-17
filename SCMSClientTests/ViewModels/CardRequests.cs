@@ -9,7 +9,7 @@ namespace SCMSClientTests.ViewModels
     public class CardRequests
     {
         private static Mock<ICardRequestService> fakeCardRequestService = new Mock<ICardRequestService>();
-        private CardRequestsVM vmToTest;
+        //private CardRequestsVM vmToTest;
 
         public CardRequests()
         {

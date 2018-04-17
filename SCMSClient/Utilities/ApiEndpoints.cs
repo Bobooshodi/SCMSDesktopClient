@@ -5,44 +5,44 @@
         public static string login = "api/oauth/token";
 
         //Card Service
-        public static string FindCardById = "cards";
+        public static string FindCardById = "api/cards/get/";
 
-        public static string AllCards = "cards";
-        public static string CreateCard = "cards";
-        public static string UpdateCard = "cards";
-        public static string DeleteCard = "cards";
+        public static string AllCards = "api/cards/get/all";
+        public static string CreateCard = "api/cards/create";
+        public static string UpdateCard = "api/cards/update";
+        public static string DeleteCard = "api/cards/delete/";
 
         // Card Type Service
-        public static string FindCardTypeById = "card-types";
+        public static string FindCardTypeById = "api/card-types/get/";
 
-        public static string AllCardTypes = "card-types";
-        public static string CreateCardType = "card-types";
-        public static string UpdateCardType = "card-types";
-        public static string DeleteCardType = "card-types";
+        public static string AllCardTypes = "api/card-types/get/all";
+        public static string CreateCardType = "api/card-types/create";
+        public static string UpdateCardType = "api/card-types/update";
+        public static string DeleteCardType = "api/card-types/delete/";
 
         // Card Vendor Service
-        public static string FindCardVendorById = "vendors";
+        public static string FindCardVendorById = "api/card-vendors/get/";
 
-        public static string AllCardVendors = "vendors";
-        public static string CreateCardVendor = "vendors";
-        public static string UpdateCardVendor = "vendors";
-        public static string DeleteCardVendor = "vendors";
+        public static string AllCardVendors = "api/card-vendors/get/all";
+        public static string CreateCardVendor = "api/card-vendors/create";
+        public static string UpdateCardVendor = "api/card-vendors/update";
+        public static string DeleteCardVendor = "api/card-vendors/delete/";
 
         // Card Request Service
-        public static string FindCardRequestById = "card-requests";
+        public static string FindCardRequestById = "api/card-requests/get/";
 
-        public static string AllCardRequests = "card-requests";
-        public static string CreateCardRequest = "card-requests";
-        public static string UpdateCardRequest = "card-requests";
-        public static string DeleteCardRequest = "card-requests";
+        public static string AllCardRequests = "api/card-requests/get/all";
+        public static string CreateCardRequest = "api/card-requests/create";
+        public static string UpdateCardRequest = "api/card-requests/update";
+        public static string DeleteCardRequest = "api/card-requests/delete/";
 
         // Cardholders
-        public static string FindCardholderById = "cardholders";
+        public static string FindCardholderById = "api/cardholders/get/";
 
-        public static string AllCardholders = "cardholders";
-        public static string CreateCardholder = "cardholders";
-        public static string UpdateCardholder = "cardholders";
-        public static string DeleteCardholder = "cardholders";
+        public static string AllCardholders = "api/cardholders/get/all";
+        public static string CreateCardholder = "api/cardholders/create";
+        public static string UpdateCardholder = "api/cardholders/update";
+        public static string DeleteCardholder = "api/cardholders/delete/";
 
         // Employees
         public static string FindEmployeeById = "employees";
@@ -61,19 +61,19 @@
         public static string DeleteTenant = "tenants";
 
         // Card Replacement Service
-        public static string FindCardReplacementRequestById = "card-replacement-requests";
+        public static string FindCardReplacementRequestById = "api/card-replacements/";
 
-        public static string AllCardReplacementRequests = "card-replacement-requests";
-        public static string CreateCardReplacementRequest = "card-replacement-requests";
-        public static string UpdateCardReplacementRequest = "card-replacement-requests";
-        public static string DeleteCardReplacementRequest = "card-replacement-requests";
+        public static string AllCardReplacementRequests = "api/card-replacements/get/all";
+        public static string CreateCardReplacementRequest = "api/card-replacements/create";
+        public static string UpdateCardReplacementRequest = "api/card-replacement/updte";
+        public static string DeleteCardReplacementRequest = "api/card-replacement/delete/";
 
         // Personalization Requests Service
-        public static string FindPersonalizationRequestById = "personalization-requests";
+        public static string FindPersonalizationRequestById = "api/personalization-requests/get/";
 
-        public static string AllPersonalizationRequests = "personalization-requests";
-        public static string CreatePersonalizationRequest = "personalization-requests";
-        public static string UpdatePersonalizationRequest = "personalization-requests";
-        public static string DeletePersonalizationRequest = "personalization-requests";
+        public static string AllPersonalizationRequests = "api/personalization-requests/get/all";
+        public static string CreatePersonalizationRequest = "api/personalization-requests/create";
+        public static string UpdatePersonalizationRequest = "api/personalization-requests/update";
+        public static string DeletePersonalizationRequest = "api/personalization-requests/delete/";
     }
 }
