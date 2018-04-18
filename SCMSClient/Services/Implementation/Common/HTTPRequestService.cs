@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows;
@@ -514,7 +515,7 @@ namespace SCMSClient.Services.Implementation
             {
                 if (UserClaimsExpired())
                 {
-                    Task.Run(RefreshClient).Wait();
+                    RefreshClient().Wait();
                 }
 
                 HttpResponseMessage response = client.GetAsync(url).Result;
@@ -605,6 +606,9 @@ namespace SCMSClient.Services.Implementation
                 appUser = Application.Current.Properties["loggedInUser"] as User;
             }
 
+            if (appUser == null)
+                sSettings.LogOutUser();
+
             try
             {
                 if (appUser.Access_token != null)
@@ -659,8 +663,16 @@ namespace SCMSClient.Services.Implementation
         {
             if (ex is RefreshTokenException)
             {
-                MessageBox.Show(ex.Message);
-                sSettings.LogOutUser();
+                ThreadStart ts = () =>
+                {
+                    Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        MessageBox.Show(ex.Message);
+                        sSettings.LogOutUser();
+                    }));
+                };
+                Thread t = new Thread(ts);
+                t.Start();
             }
 
             throw ex.GetBaseException();

@@ -6,6 +6,8 @@ namespace SCMSClient.Services.Interfaces
     {
         bool IsDonglePresent();
 
+        bool CheckProtection();
+
         bool WriteDongleData(DongleData data);
 
         DongleData GetDongleData();

@@ -327,8 +327,26 @@ namespace SCMSClient.Services.Implementation
             ViewModelLocator.RegisterRuntimeServices();
             ViewModelLocator.RegisterAllViewModels();
 
+            var window = Application.Current.MainWindow;
+
             var loginPage = new Windows.Login { WindowState = WindowState.Maximized };
             loginPage.Show();
+
+            window.Close();
+
+            // Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Clears all Settings and configuration held in Memory and
+        /// Closes the Application
+        /// </summary>
+        public void CloseApplication()
+        {
+            Application.Current.Properties.Clear();
+            SimpleIoc.Default.Reset();
+            ViewModelLocator.RegisterRuntimeServices();
+            ViewModelLocator.RegisterAllViewModels();
 
             Application.Current.Shutdown();
         }

@@ -1,7 +1,6 @@
 ﻿using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
 using SCMSClient.Utilities;
-using System.Collections.Generic;
 
 namespace SCMSClient.Services.Implementation
 {
@@ -9,8 +8,8 @@ namespace SCMSClient.Services.Implementation
     {
         public PersonalizationRequestService(IHTTPService _httpService) : base(_httpService)
         {
-            getUrl = ApiEndpoints.AllPersonalizationRequests;
-            getAllUrl = ApiEndpoints.FindPersonalizationRequestById;
+            getUrl = ApiEndpoints.FindPersonalizationRequestById;
+            getAllUrl = ApiEndpoints.AllPersonalizationRequests;
             updateUrl = ApiEndpoints.UpdatePersonalizationRequest;
             createUrl = ApiEndpoints.CreatePersonalizationRequest;
             deleteUrl = ApiEndpoints.DeletePersonalizationRequest;

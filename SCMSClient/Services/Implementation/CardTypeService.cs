@@ -8,8 +8,8 @@ namespace SCMSClient.Services.Implementation
     {
         public CardTypeService(IHTTPService httpService) : base(httpService)
         {
-            getUrl = ApiEndpoints.AllCardTypes;
-            getAllUrl = ApiEndpoints.FindCardTypeById;
+            getUrl = ApiEndpoints.FindCardTypeById;
+            getAllUrl = ApiEndpoints.AllCardTypes;
             updateUrl = ApiEndpoints.UpdateCardType;
             createUrl = ApiEndpoints.CreateCardType;
             deleteUrl = ApiEndpoints.DeleteCardType;

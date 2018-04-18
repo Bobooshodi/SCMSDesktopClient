@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:SCMSClient.Views"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Dashboard}"
+      xmlns:utilities="clr-namespace:SCMSClient.Utilities"
+      xmlns:loader="clr-namespace:SCMSClient.Spinner"
       mc:Ignorable="d"
       Title="Dashboard">
 
@@ -14,105 +16,6 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Style="{StaticResource SubMenu}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <Button Template="{StaticResource ButtonNavEmpty}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Viewbox Width="40" Height="17">
-                            <Canvas Width="24" Height="24">
-                                <Path Data="M3,13H7V23H3V13M10,14H14V23H10V14M17,9H21V23H17V9M17,1H21V5H20V3.06L11.97,11.09L8,7.12L3.4,11.72L2.34,10.66L8,5L11.97,8.97L18.94,2H17V1Z" Fill="{StaticResource ComplementaryBrush}" />
-                            </Canvas>
-                        </Viewbox>
-
-                        <Grid Grid.Column="1">
-
-                            <TextBlock Foreground="{StaticResource ComplementaryBrush}" VerticalAlignment="Center" FontSize="14" FontWeight="SemiBold">Card Request</TextBlock>
-                        </Grid>
-                    </Grid>
-                </Button>
-
-                <Button x:Name="btnRequest" Template="{StaticResource ButtonEmpty}" Grid.Column="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Viewbox Width="40" Height="17">
-                            <Canvas Width="24" Height="24">
-                                <Path Data="M16,12V16A1,1 0 0,1 15,17C14.83,17 14.67,17 14.06,16.5C13.44,16 12.39,15 11.31,14.5C10.31,14.04 9.28,14 8.26,14L9.47,17.32L9.5,17.5A0.5,0.5 0 0,1 9,18H7C6.78,18 6.59,17.86 6.53,17.66L5.19,14H5A1,1 0 0,1 4,13A2,2 0 0,1 2,11A2,2 0 0,1 4,9A1,1 0 0,1 5,8H8C9.11,8 10.22,8 11.31,7.5C12.39,7 13.44,6 14.06,5.5C14.67,5 14.83,5 15,5A1,1 0 0,1 16,6V10A1,1 0 0,1 17,11A1,1 0 0,1 16,12M21,11C21,12.38 20.44,13.63 19.54,14.54L18.12,13.12C18.66,12.58 19,11.83 19,11C19,10.17 18.66,9.42 18.12,8.88L19.54,7.46C20.44,8.37 21,9.62 21,11Z" Fill="{StaticResource MarkerBrush}" />
-                            </Canvas>
-                        </Viewbox>
-
-                        <Grid Grid.Column="1">
-
-                            <TextBlock Foreground="{StaticResource MarkerBrush}" VerticalAlignment="Center" FontSize="14" >Personalization Request</TextBlock>
-                        </Grid>
-                    </Grid>
-                </Button>
-
-                <Button Template="{StaticResource ButtonEmpty}" Grid.Column="4">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Viewbox Width="40" Height="17">
-                            <Canvas Width="24" Height="24">
-                                <Path Data="M16,12V16A1,1 0 0,1 15,17C14.83,17 14.67,17 14.06,16.5C13.44,16 12.39,15 11.31,14.5C10.31,14.04 9.28,14 8.26,14L9.47,17.32L9.5,17.5A0.5,0.5 0 0,1 9,18H7C6.78,18 6.59,17.86 6.53,17.66L5.19,14H5A1,1 0 0,1 4,13A2,2 0 0,1 2,11A2,2 0 0,1 4,9A1,1 0 0,1 5,8H8C9.11,8 10.22,8 11.31,7.5C12.39,7 13.44,6 14.06,5.5C14.67,5 14.83,5 15,5A1,1 0 0,1 16,6V10A1,1 0 0,1 17,11A1,1 0 0,1 16,12M21,11C21,12.38 20.44,13.63 19.54,14.54L18.12,13.12C18.66,12.58 19,11.83 19,11C19,10.17 18.66,9.42 18.12,8.88L19.54,7.46C20.44,8.37 21,9.62 21,11Z" Fill="{StaticResource MarkerBrush}" />
-                            </Canvas>
-                        </Viewbox>
-
-                        <Grid Grid.Column="1">
-
-                            <TextBlock Foreground="{StaticResource MarkerBrush}" VerticalAlignment="Center" FontSize="14" >Blacklist Request</TextBlock>
-                        </Grid>
-                    </Grid>
-                </Button>
-
-                <Button Grid.Column="5" Template="{StaticResource ButtonEmpty}" Margin="0 5" Background="#32a55e">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Viewbox Width="40" Height="17">
-                            <Canvas Width="24" Height="24">
-                                <Path Data="M21.47,4.35L20.13,3.79V12.82L22.56,6.96C22.97,5.94 22.5,4.77 21.47,4.35M1.97,8.05L6.93,20C7.24,20.77 7.97,21.24 8.74,21.26C9,21.26 9.27,21.21 9.53,21.1L16.9,18.05C17.65,17.74 18.11,17 18.13,16.26C18.14,16 18.09,15.71 18,15.45L13,3.5C12.71,2.73 11.97,2.26 11.19,2.25C10.93,2.25 10.67,2.31 10.42,2.4L3.06,5.45C2.04,5.87 1.55,7.04 1.97,8.05M18.12,4.25A2,2 0 0,0 16.12,2.25H14.67L18.12,10.59"  Fill="{StaticResource MarkerBrush}" />
-                            </Canvas>
-                        </Viewbox>
-
-                        <Grid Grid.Column="1">
-
-                            <TextBlock Foreground="{StaticResource MarkerBrush}" VerticalAlignment="Center" FontSize="14" >Replace Card Request</TextBlock>
-                        </Grid>
-                    </Grid>
-                </Button>
-            </Grid>
-        </Border>
-
         <Grid Margin="30 0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -120,10 +23,320 @@
                 <ColumnDefinition MaxWidth="300"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Style="{StaticResource page-title}">Dashboard</TextBlock>
         </Grid>
 
-        <Border  Grid.Row="2" Style="{StaticResource main_section}">
+        <Border  Grid.Row="2">
+            <Grid Margin="40 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource dashboard-panel}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Margin="15">
+                                <TextBlock Style="{StaticResource request-panel__header}" Text="{Binding Cardholders.Count}"> <Label Style="{StaticResource request-panel__header--small}">cardholders</Label></TextBlock>
+                            </Grid>
+                            <Border Grid.Row="1" Style="{StaticResource request-panel__graph}">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{Binding EmployeeCardholdersGridLength}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding IndividualCardholdersGridLength}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding TenantCardholdersGridLength}"></ColumnDefinition>
+                                        <ColumnDefinition Width="{Binding StrataCardholdersGridLength}"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Style="{StaticResource legend--employee}"></Border>
+                                    <Border Style="{StaticResource legend--individual}" Grid.Column="1"></Border>
+                                    <Border Style="{StaticResource legend--tenant}" Grid.Column="2"></Border>
+                                    <Border Style="{StaticResource legend--strata}" Grid.Column="3" ></Border>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Border Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--employee}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Employee</TextBlock>
+                                        <TextBlock Grid.Column="2" Text="{Binding EmployeeCardholders.Count}" />
+                                        <Border Grid.Column="3">
+                                            <TextBlock Text="{Binding Path=EmployeeCardholdersPercentage, StringFormat={}{0}%}" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="1" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--individual}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Individual</TextBlock>
+                                        <TextBlock Grid.Column="2" Text="{Binding IndividualCardholders.Count}" />
+                                        <Border Grid.Column="3">
+                                            <TextBlock Text="{Binding Path=IndividualCardholdersPercentage, StringFormat={}{0}%}" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="2" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--tenant}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Tenants</TextBlock>
+                                        <TextBlock Grid.Column="2" Text="{Binding TenantCardholders.Count}" />
+                                        <Border Grid.Column="3">
+                                            <TextBlock Text="{Binding Path=TenantCardholdersPercentage, StringFormat={}{0}%}" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="3" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--strata}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Strata</TextBlock>
+                                        <TextBlock Grid.Column="2" Text="{Binding StrataCardholders.Count}" />
+                                        <Border Grid.Column="3">
+                                            <TextBlock Text="{Binding Path=StrataCardholdersPercentage, StringFormat={}{0}%}" />
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <loader:LoaderSpinner loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsCardholdersBusy, Converter={utilities:BooleanToVisiblityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+                    <Border Grid.Row="1" Style="{StaticResource dashboard-panel}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid Margin="15">
+                                <TextBlock Style="{StaticResource request-panel__header}">25,311 <Label Style="{StaticResource request-panel__header--small}">Cards</Label></TextBlock>
+                            </Grid>
+                            <Border Grid.Row="1" Style="{StaticResource request-panel__graph}">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                        <ColumnDefinition Width="70*"></ColumnDefinition>
+                                        <ColumnDefinition Width="10*"></ColumnDefinition>
+                                        <ColumnDefinition Width="10*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Style="{StaticResource legend--employee}"></Border>
+                                    <Border Style="{StaticResource legend--individual}" Grid.Column="1"></Border>
+                                    <Border Style="{StaticResource legend--tenant}" Grid.Column="2"></Border>
+                                    <Border Style="{StaticResource legend--strata}" Grid.Column="3" ></Border>
+                                </Grid>
+                            </Border>
+
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Border Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--employee}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Employee</TextBlock>
+                                        <TextBlock Grid.Column="2">897</TextBlock>
+                                        <Border Grid.Column="3">
+                                            <TextBlock>99%</TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="1" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--individual}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Employee</TextBlock>
+                                        <TextBlock Grid.Column="2">897</TextBlock>
+                                        <Border Grid.Column="3">
+                                            <TextBlock>99%</TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="2" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--tenant}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Employee</TextBlock>
+                                        <TextBlock Grid.Column="2">897</TextBlock>
+                                        <Border Grid.Column="3">
+                                            <TextBlock>99%</TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="3" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--strata}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Employee</TextBlock>
+                                        <TextBlock Grid.Column="2">897</TextBlock>
+                                        <Border Grid.Column="3">
+                                            <TextBlock>99%</TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <Border Grid.Row="4" Style="{StaticResource request-panel__item}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Style="{StaticResource legend--phantom}" ></Border>
+                                        <TextBlock Grid.Column="1" Margin="10 0 0 0">Phantom</TextBlock>
+                                        <TextBlock Grid.Column="2">897</TextBlock>
+                                        <Border Grid.Column="3">
+                                            <TextBlock>99%</TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <loader:LoaderSpinner Grid.Row="1" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsCardBusy, Converter={utilities:BooleanToVisiblityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Grid>
+                <Border Grid.Column="1" Style="{StaticResource request-panel}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Border Padding="15 10 15 5">
+                            <TextBlock FontSize="23" FontWeight="Light">Pending Request</TextBlock>
+                        </Border>
+
+                        <Border Grid.Row="1" Style="{StaticResource request-panel__tabs}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Template="{StaticResource ButtonEmpty}">Card</Button>
+                                <Button Grid.Column="2" Template="{StaticResource ButtonEmpty}">Blacklist</Button>
+                                <Button Grid.Column="3" Template="{StaticResource ButtonEmpty}">Personalization</Button>
+                                <Button Grid.Column="4" Template="{StaticResource ButtonEmpty}">Replacement</Button>
+                                <Button Grid.Column="1" Template="{StaticResource ButtonEmpty}">Collection</Button>
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="2" Style="{StaticResource request-panel__search}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock FontSize="16" VerticalAlignment="Center" FontWeight="Light">Pending Card Request (254)</TextBlock>
+
+                                <Border Grid.Column="1" Style="{DynamicResource InputBorder}">
+                                    <TextBox Style="{DynamicResource FlatTextBox}" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+                <loader:LoaderSpinner Grid.Column="1" loader:SpinnerColor="Black" loader:SpinnerVisibility="{Binding IsRequestsBusy, Converter={utilities:BooleanToVisiblityConverter}}"
+                              VerticalAlignment="Center" HorizontalAlignment="Center" />
+            </Grid>
         </Border>
     </Grid>
 </Page>

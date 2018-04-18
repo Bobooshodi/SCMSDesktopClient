@@ -478,6 +478,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Pages\_dashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Pages\_login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

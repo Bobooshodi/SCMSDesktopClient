@@ -165,9 +165,32 @@ namespace SCMSClient.ViewModel
                     throw new Exception("Please, check the dongle and try again");
                 }
 
-                await Task.Delay(5000);
-
                 await Task.Run(action);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                // Set the property flag back to false now it's finished
+                isRunning?.SetPropertyValue(false);
+            }
+        }
+
+        protected async Task<Tresult> RunMethodAsync<Tresult>(Func<Tresult> action, Expression<Func<bool>> isRunning = null)
+        {
+            try
+            {
+                // Set the property flag to true to indicate we are running
+                isRunning?.SetPropertyValue(true);
+
+                if (!dongleService.IsDonglePresent())
+                {
+                    throw new Exception("Please, Check the Dongle and try again");
+                }
+
+                return await Task.Run(action);
             }
             catch
             {
@@ -228,6 +251,11 @@ namespace SCMSClient.ViewModel
         {
             get
             {
+                if (allObjects?.Count < 1)
+                {
+                    LoadAll().ConfigureAwait(false);
+                }
+
                 if (allObjects != null)
                 {
                     AllObjectsCollection = CollectionViewSource.GetDefaultView(allObjects);

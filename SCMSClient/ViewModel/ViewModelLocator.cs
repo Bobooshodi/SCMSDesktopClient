@@ -283,7 +283,7 @@ namespace SCMSClient.ViewModel
             SimpleIoc.Default.Register<IEmployeeService, EmployeeService>();
             SimpleIoc.Default.Register<ISettingsService, SettingsService>();
             SimpleIoc.Default.Register<ICardTypeService, CardTypeService>();
-            SimpleIoc.Default.Register<IHTTPService, HTTPRequestService>();
+            SimpleIoc.Default.Register<IHTTPService, HTTPRequestServiceDev>();
             SimpleIoc.Default.Register<ICardVendorService, CardVendorService>();
             SimpleIoc.Default.Register<ICardholderService, CardholderService>();
             SimpleIoc.Default.Register<ICardReaderService, SL600ReaderService>();

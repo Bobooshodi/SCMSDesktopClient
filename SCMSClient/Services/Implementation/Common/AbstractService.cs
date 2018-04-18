@@ -175,18 +175,6 @@ namespace SCMSClient.Services.Implementation
             }
         }
 
-        public virtual void Dispose()
-        {
-            getAllUrl = null;
-            getAllUrl = null;
-            createUrl = null;
-            deleteUrl = null;
-            updateUrl = null;
-
-            httpService.Dispose();
-            httpService = null;
-        }
-
         #endregion Public Methods
     }
 }

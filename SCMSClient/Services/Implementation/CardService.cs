@@ -9,8 +9,8 @@ namespace SCMSClient.Services.Implementation
     {
         public CardService(IHTTPService httpService) : base(httpService)
         {
-            getUrl = ApiEndpoints.AllCards;
-            getAllUrl = ApiEndpoints.FindCardById;
+            getUrl = ApiEndpoints.FindCardById;
+            getAllUrl = ApiEndpoints.AllCards;
             updateUrl = ApiEndpoints.UpdateCard;
             createUrl = ApiEndpoints.CreateCard;
             deleteUrl = ApiEndpoints.DeleteCard;

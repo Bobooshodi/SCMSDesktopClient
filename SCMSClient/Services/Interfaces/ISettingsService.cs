@@ -21,5 +21,7 @@ namespace SCMSClient.Services.Interfaces
         bool DeleteSettings(string fileName);
 
         void LogOutUser();
+
+        void CloseApplication();
     }
 }

@@ -92,9 +92,7 @@ namespace SCMSClient.ViewModel
 
         private Tenant CoupleCardholderDetails()
         {
-            var tenant = Cardholder as Tenant;
-
-            return tenant;
+            return Cardholder as Tenant;
         }
 
         protected override bool ValidateFields()

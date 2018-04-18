@@ -1,8 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
+
     <SolidColorBrush x:Key="BackgroundBrush" Color="#333333" />
     <SolidColorBrush x:Key="InputBackround" Color="#f1f6fa" />
+
 
     <SolidColorBrush x:Key="BorderColor" Color="#e7ebf3"></SolidColorBrush>
     <SolidColorBrush x:Key="ErrorColor" Color="#FFD50000"></SolidColorBrush>
@@ -26,4 +29,5 @@
     <SolidColorBrush x:Key="SelectedBrush" Color="#FFEBEBEB"></SolidColorBrush>
     <SolidColorBrush x:Key="ReadOnlyBackgroundBrush" Color="#FFFFFFFF"></SolidColorBrush>
     <SolidColorBrush x:Key="ReadOnlyBorderBrush" Color="#FFABABAB"></SolidColorBrush>
+
 </ResourceDictionary>

@@ -2,9 +2,11 @@
 using GalaSoft.MvvmLight.Ioc;
 using SCMSClient.Models;
 using SCMSClient.Services.Interfaces;
+using SCMSClient.ToastNotification;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SCMSClient.ViewModel
@@ -48,13 +50,20 @@ namespace SCMSClient.ViewModel
 
         #region Command Methods
 
-        protected override void Process()
+        protected async override void Process()
         {
-            var detailsVm = SimpleIoc.Default.GetInstance<CardholderDetailsVM>();
-            detailsVm.SelectedItem = SelectedObject;
+            try
+            {
+                var detailsVm = SimpleIoc.Default.GetInstance<CardholderDetailsVM>();
+                detailsVm.SelectedItem = await LoadCardholderInfo();
 
-            var mainWindowVm = SimpleIoc.Default.GetInstance<MainWindowVM>();
-            mainWindowVm.ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
+                var mainWindowVm = SimpleIoc.Default.GetInstance<MainWindowVM>();
+                mainWindowVm.ActivePage = new Uri("/Views/CardholderDetails.xaml", UriKind.RelativeOrAbsolute);
+            }
+            catch (Exception ex)
+            {
+                toaster.ShowErrorToast(Toaster.ErrorTitle, ex.Message);
+            }
         }
 
         private void OpenCardholderRegistrationPage()
@@ -74,6 +83,20 @@ namespace SCMSClient.ViewModel
             FilteredCollection = new ObservableCollection<Cardholder>(cardholders);
 
             ChangeStyle(filter);
+        }
+
+        private async Task<Cardholder> LoadCardholderInfo()
+        {
+            if (SelectedObject?.UserType == SHCCardType.Employee)
+            {
+                return await RunMethodAsync(() => empService.Get(SelectedObject.ID), () => IsBusy);
+            }
+            if (SelectedObject?.UserType == SHCCardType.Tenant)
+            {
+                return await RunMethodAsync(() => tenantService.Get(SelectedObject.ID), () => IsBusy);
+            }
+
+            return null;
         }
 
         #endregion Command Methods

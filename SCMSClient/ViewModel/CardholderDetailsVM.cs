@@ -38,37 +38,6 @@ namespace SCMSClient.ViewModel
             AddParkingCommand = new RelayCommand(OpenAddParkingModal);
             AddBuildingCommand = new RelayCommand(OpenAddBuildingModal);
             SupplementaryCommand = new RelayCommand(ProcessSupplementary);
-
-            LoadCardholderInfo().ConfigureAwait(false);
-        }
-
-        private async Task LoadCardholderInfo()
-        {
-            if (SelectedItem?.UserType == SHCCardType.Employee)
-            {
-                using (empService)
-                {
-                    SelectedItem = await RunMethodAsync(() => empService.Get(SelectedItem.ID), () => IsProcessing);
-                }
-            }
-            if (SelectedItem?.UserType == SHCCardType.Tenant)
-            {
-                using (tenantService)
-                {
-                    SelectedItem = await RunMethodAsync(() => tenantService.Get(SelectedItem.ID), () => IsProcessing);
-                }
-            }
-        }
-
-        public override Cardholder SelectedItem
-        {
-            get => base.SelectedItem;
-            set
-            {
-                base.SelectedItem = value;
-
-                LoadCardholderInfo().ConfigureAwait(false);
-            }
         }
 
         public ICommand SupplementaryCommand { get; set; }

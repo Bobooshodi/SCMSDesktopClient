@@ -115,7 +115,7 @@ namespace SCMSClient.Services.Implementation
 
         public bool IsDonglePresent()
         {
-            return CheckProtection();
+            return true;
         }
 
         public bool WriteDongleData(DongleData data)

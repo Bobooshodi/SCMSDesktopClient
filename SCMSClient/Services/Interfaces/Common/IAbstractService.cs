@@ -1,6 +1,6 @@
 ﻿namespace SCMSClient.Services.Interfaces
 {
-    public interface IAbstractService<Model> : System.IDisposable
+    public interface IAbstractService<Model>
     {
         Model Get(string parameter);
 

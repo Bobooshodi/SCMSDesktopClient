@@ -56,14 +56,14 @@ namespace SCMSClient.ViewModel
         {
             try
             {
+                if (AllObjects?.Count > 0)
+                    AllObjects.Clear();
+
+                if (FilteredCollection?.Count > 0)
+                    FilteredCollection.Clear();
+
                 await RunMethodAsync(() =>
                 {
-                    if (AllObjects?.Count > 0)
-                        AllObjects.Clear();
-
-                    if (FilteredCollection?.Count > 0)
-                        FilteredCollection.Clear();
-
                     var allObjects = service.GetAll() ?? new List<T>();
                     AllObjects = FilteredCollection = new ObservableCollection<T>(allObjects);
                 }, () => IsBusy);

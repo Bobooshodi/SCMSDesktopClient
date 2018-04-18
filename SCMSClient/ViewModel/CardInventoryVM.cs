@@ -3,6 +3,7 @@ using SCMSClient.Services.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SCMSClient.ViewModel
@@ -42,7 +43,7 @@ namespace SCMSClient.ViewModel
         /// This Method is called when the RegisterCommand Action is invoked
         /// The Method Opens a new page to create the Card
         /// </summary>
-        protected override void Process()
+        protected async override void Process()
         {
             var modal = new Modals.CardRegistration(SelectedObject);
             MessengerInstance.Send<UIElement>(modal);

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
     <!-- CHECK BOX -->
 
     <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
@@ -52,7 +53,7 @@
                                   Grid.Column="1" Grid.ColumnSpan="5"
                                   Grid.Row="2" Grid.RowSpan="5"
                                   Data="M31,5 L19.5,5 19.5,19.5 34.5,19.5 34.5,11.75"
-                                  Stretch="Fill" Stroke="#808080" />
+                                  Stretch="Fill" Stroke="#808080"/>
 
                                 <Path Name="CheckMark"
                                   Grid.Column="2" Grid.ColumnSpan="5"
@@ -81,7 +82,7 @@
                                              Storyboard.TargetName="CheckMark" Duration="0:0:0.2" To="1" />
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Unchecked">
+                                <VisualState x:Name="Unchecked" >
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                              Storyboard.TargetName="CheckMark" Duration="0:0:0.2" To="0" />
@@ -120,4 +121,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
+
 </ResourceDictionary>
